@@ -15,6 +15,24 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
+        <!-- Left column -->
+        <StackPanel Grid.Column="0" Background="LightBlue"
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch">
+            <!-- your content -->
+        </StackPanel>
+
+        <!-- Right column -->
+        <StackPanel Grid.Column="1" Background="LightYellow"
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch">
+            <!-- your content -->
+        </StackPanel>
+    </Grid>
 </Window>

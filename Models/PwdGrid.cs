@@ -1,0 +1,218 @@
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Media;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+
+namespace CYaPass_Avalonia.Models;
+
+public class PwdGrid : Control
+{
+    private const int NumCells = 6;
+    private const int CellSize = 50;
+    private const int PostRadius = 6;
+
+    private readonly List<Point> _userPoints = new();
+    private readonly HashSet<string> _usedSegments = new();   // prevent duplicates
+    private readonly List<(Point A, Point B)> _segments = new();
+
+    public string? GeneratedPassword { get; private set; }
+
+    public PwdGrid()
+    {
+        PointerPressed += OnPointerPressed;
+    }
+
+    public override void Render(DrawingContext ctx)
+    {
+        base.Render(ctx);
+
+        DrawBackground(ctx);
+        DrawGridLines(ctx);
+        DrawPosts(ctx);
+        DrawUserShape(ctx);
+    }
+
+    // -----------------------------
+    // Drawing
+    // -----------------------------
+
+    private void DrawBackground(DrawingContext ctx)
+    {
+        ctx.FillRectangle(Brushes.White, new Rect(0, 0, Bounds.Width, Bounds.Height));
+    }
+
+    private void DrawGridLines(DrawingContext ctx)
+    {
+        var pen = new Pen(Brushes.Black, 1);
+
+        for (int i = 0; i <= NumCells; i++)
+        {
+            ctx.DrawLine(pen, new Point(0, i * CellSize), new Point(NumCells * CellSize, i * CellSize));
+            ctx.DrawLine(pen, new Point(i * CellSize, 0), new Point(i * CellSize, NumCells * CellSize));
+        }
+    }
+
+    private void DrawPosts(DrawingContext ctx)
+    {
+        var brush = Brushes.OrangeRed;
+
+        for (int x = 0; x < NumCells; x++)
+        {
+            for (int y = 0; y < NumCells; y++)
+            {
+                var px = x * CellSize;
+                var py = y * CellSize;
+
+                ctx.DrawEllipse(
+                    brush,
+                    new Pen(brush, 1),
+                    new Point(px, py),
+                    PostRadius,
+                    PostRadius);
+            }
+        }
+    }
+
+    private void DrawUserShape(DrawingContext ctx)
+    {
+        var pen = new Pen(Brushes.Green, 4);
+
+        foreach (var seg in _segments)
+        {
+            ctx.DrawLine(pen, seg.A, seg.B);
+        }
+    }
+
+    // -----------------------------
+    // Pointer Input
+    // -----------------------------
+
+    private void OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        var pos = e.GetPosition(this);
+
+        if (TryHitPost(pos, out var snapped))
+        {
+            AddUserPoint(snapped);
+            InvalidateVisual();
+        }
+    }
+
+    // -----------------------------
+    // Hit Testing
+    // -----------------------------
+
+    private bool TryHitPost(Point p, out Point snapped)
+    {
+        for (int x = 0; x < NumCells; x++)
+        {
+            for (int y = 0; y < NumCells; y++)
+            {
+                var px = x * CellSize;
+                var py = y * CellSize;
+
+                var dx = p.X - px;
+                var dy = p.Y - py;
+
+                if (Math.Sqrt(dx * dx + dy * dy) <= PostRadius * 2)
+                {
+                    snapped = new Point(px, py);
+                    return true;
+                }
+            }
+        }
+
+        snapped = default;
+        return false;
+    }
+
+    // -----------------------------
+    // User Path Logic
+    // -----------------------------
+
+    private void AddUserPoint(Point p)
+    {
+        if (_userPoints.Count > 0)
+        {
+            var last = _userPoints[^1];
+
+            // Prevent duplicate segments (in either direction)
+            string key1 = $"{last.X},{last.Y}-{p.X},{p.Y}";
+            string key2 = $"{p.X},{p.Y}-{last.X},{last.Y}";
+
+            if (!_usedSegments.Contains(key1) && !_usedSegments.Contains(key2))
+            {
+                _segments.Add((last, p));
+                _usedSegments.Add(key1);
+                _usedSegments.Add(key2);
+            }
+        }
+
+        _userPoints.Add(p);
+
+        // Optional: auto-generate password when path is long enough
+        if (_segments.Count >= 3)
+            GeneratedPassword = GeneratePassword();
+    }
+
+    // -----------------------------
+    // Password Generation
+    // -----------------------------
+
+    private string GeneratePassword()
+    {
+        // Convert each segment into a direction code
+        var codes = _segments.Select(seg => EncodeDirection(seg.A, seg.B));
+
+        // Combine into a single string
+        string combined = string.Join("-", codes);
+
+        // Hash it for security
+        return Sha256(combined);
+    }
+
+    private string EncodeDirection(Point a, Point b)
+    {
+        int dx = Math.Sign(b.X - a.X);
+        int dy = Math.Sign(b.Y - a.Y);
+
+        return (dx, dy) switch
+        {
+            (1, 0) => "R",
+            (-1, 0) => "L",
+            (0, 1) => "D",
+            (0, -1) => "U",
+            (1, 1) => "DR",
+            (1, -1) => "UR",
+            (-1, 1) => "DL",
+            (-1, -1) => "UL",
+            _ => "?"
+        };
+    }
+
+    private string Sha256(string input)
+    {
+        using var sha = SHA256.Create();
+        var bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(input));
+        return Convert.ToHexString(bytes);
+    }
+
+    // -----------------------------
+    // Reset
+    // -----------------------------
+
+    public void Reset()
+    {
+        _userPoints.Clear();
+        _segments.Clear();
+        _usedSegments.Clear();
+        GeneratedPassword = null;
+        InvalidateVisual();
+    }
+}
+

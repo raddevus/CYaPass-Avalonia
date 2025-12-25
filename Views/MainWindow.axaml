@@ -25,7 +25,38 @@
         <StackPanel Grid.Column="0" Background="LightBlue"
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch">
-            <!-- your content -->
+
+      <Grid HorizontalAlignment="Left" VerticalAlignment="Top" 
+         RowDefinitions="Auto,Auto,Auto,Auto,300,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" 
+         ColumnDefinitions="" Width="500">
+            <Label Target="siteKeyLabel" Grid.Row="0" Grid.Column="0">1. Select (or Add) Site/Key</Label>
+            <ListBox Grid.Row="1" Grid.Column="0" Grid.RowSpan="4" />
+            
+            
+            <StackPanel Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right">
+              <Button IsCancel="True" >Add</Button>
+              <Button IsDefault="True" >Edit</Button>
+              <Button IsDefault="True" >Delete</Button>
+            </StackPanel>
+            <CheckBox Grid.Column="0" Grid.Row="7" >Use Multi-Hash</CheckBox>
+            <CheckBox Grid.Column="0" Grid.Row="8" >Add Uppercase</CheckBox>
+            <StackPanel Grid.Column="0" Grid.Row="9" Orientation="Horizontal">
+               <CheckBox  >Add Special Chars</CheckBox>
+               <TextBox Width="200"></TextBox>
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="10" Orientation="Horizontal">
+               <CheckBox>Max Length</CheckBox>
+               <TextBox Width="200"></TextBox>
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Left">
+              <Button>Export SiteKeys</Button>
+              <Button>Import SiteKeys</Button>
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="12" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Left">
+              <Button>Set Transfer URL</Button>
+              <Button>Remove All SiteKeys</Button>
+            </StackPanel>
+          </Grid>
         </StackPanel>
 
         <!-- Right column -->

@@ -48,7 +48,7 @@ public class PwdGrid : Control
 
     private void DrawGridLines(DrawingContext ctx)
     {
-        var pen = new Pen(Brushes.Black, 1);
+        var pen = new Pen(Brushes.DarkGray, 2);
 
         for (int i = 0; i < NumCells; i++)
         {

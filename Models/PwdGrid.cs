@@ -43,17 +43,17 @@ public class PwdGrid : Control
 
     private void DrawBackground(DrawingContext ctx)
     {
-        ctx.FillRectangle(Brushes.White, new Rect(0, 0, Bounds.Width, Bounds.Height));
+        ctx.FillRectangle(Brushes.WhiteSmoke, new Rect(0, 0, Bounds.Width, Bounds.Height));
     }
 
     private void DrawGridLines(DrawingContext ctx)
     {
         var pen = new Pen(Brushes.Black, 1);
 
-        for (int i = 0; i <= NumCells; i++)
+        for (int i = 0; i < NumCells; i++)
         {
-            ctx.DrawLine(pen, new Point(0, i * CellSize), new Point(NumCells * CellSize, i * CellSize));
-            ctx.DrawLine(pen, new Point(i * CellSize, 0), new Point(i * CellSize, NumCells * CellSize));
+            ctx.DrawLine(pen, new Point(0, i * CellSize), new Point((NumCells-1) * CellSize, i * CellSize));
+            ctx.DrawLine(pen, new Point(i * CellSize, 0), new Point(i * CellSize, (NumCells-1) * CellSize));
         }
     }
 

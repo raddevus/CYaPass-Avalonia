@@ -64,7 +64,18 @@
         <StackPanel Grid.Column="1" Background="LightYellow"
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch">
-            <local:PwdGrid Width="300" Height="300"/>
+            
+      <Grid HorizontalAlignment="Left" VerticalAlignment="Top" 
+         RowDefinitions="Auto,Auto,Auto,Auto,300,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" 
+         ColumnDefinitions="" Width="500">
+            
+            <Label Target="PwdGridLabel" Grid.Row="0" Grid.Column="0">2. Draw a pattern</Label>
+            <local:PwdGrid Name="PwdGrid" Width="300" Height="300" Grid.Row="1" Grid.Column="0" Grid.RowSpan="4"/>
+            <StackPanel Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right">
+              <CheckBox>Hide Pattern</CheckBox>
+              <Button Click="ClearHandler">Clear</Button>
+            </StackPanel>
+         </Grid>
         </StackPanel>
     </Grid>
 </Window>

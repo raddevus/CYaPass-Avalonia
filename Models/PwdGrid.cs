@@ -222,6 +222,7 @@ public class PwdGrid : Control
 
     public void Reset()
     {
+        firstPoint = null; 
         _userPoints.Clear();
         _segments.Clear();
         _usedSegments.Clear();

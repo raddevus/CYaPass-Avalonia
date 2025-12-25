@@ -75,6 +75,7 @@
               <CheckBox>Hide Pattern</CheckBox>
               <Button Click="ClearHandler">Clear</Button>
             </StackPanel>
+            <TextBox Grid.Row="12" Grid.Column="0" Height="100" AcceptsReturn="True" TextWrapping="Wrap"/>
          </Grid>
         </StackPanel>
     </Grid>

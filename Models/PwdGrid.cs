@@ -16,6 +16,8 @@ public class PwdGrid : Control
     private const int CellSize = 50;
     private const int PostRadius = 6;
 
+    private Point? firstPoint = null;
+
     private readonly List<Point> _userPoints = new();
     private readonly HashSet<string> _usedSegments = new();   // prevent duplicates
     private readonly List<(Point A, Point B)> _segments = new();
@@ -35,6 +37,9 @@ public class PwdGrid : Control
         DrawGridLines(ctx);
         DrawPosts(ctx);
         DrawUserShape(ctx);
+        if (firstPoint != null){
+            DrawHighlightCircle(ctx, firstPoint?.X ?? 0D, firstPoint?.Y ?? 0D);
+        }
     }
 
     // -----------------------------
@@ -67,7 +72,6 @@ public class PwdGrid : Control
             {
                 var px = x * CellSize;
                 var py = y * CellSize;
-
                 ctx.DrawEllipse(
                     brush,
                     new Pen(brush, 1),
@@ -77,7 +81,17 @@ public class PwdGrid : Control
             }
         }
     }
+   private void DrawHighlightCircle(DrawingContext ctx, double px, double py){
+      var brush = Brushes.Orange;
+      System.Console.WriteLine($"px: {px} py: {py}");
+      ctx.DrawEllipse(
+            null,
+            new Pen(brush, 3),
+            new Point(px, py),
+            12,
+            12);
 
+   }
     private void DrawUserShape(DrawingContext ctx)
     {
         var pen = new Pen(Brushes.Green, 4);
@@ -95,9 +109,9 @@ public class PwdGrid : Control
     private void OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
         var pos = e.GetPosition(this);
-
         if (TryHitPost(pos, out var snapped))
         {
+            if (firstPoint == null) { firstPoint = snapped;}
             AddUserPoint(snapped);
             InvalidateVisual();
         }

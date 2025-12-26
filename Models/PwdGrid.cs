@@ -22,7 +22,17 @@ public class PwdGrid : Control
     private readonly HashSet<string> _usedSegments = new();   // prevent duplicates
     private readonly List<(Point A, Point B)> _segments = new();
 
-    public string? GeneratedPassword { get; private set; }
+    public static readonly DirectProperty<PwdGrid, string?> GeneratedPasswordProperty =
+        AvaloniaProperty.RegisterDirect<PwdGrid, string?>(
+            nameof(GeneratedPassword),
+            o => o.GeneratedPassword);
+
+    private string? _generatedPassword;
+    public string? GeneratedPassword
+    {
+        get => _generatedPassword;
+        private set => SetAndRaise(GeneratedPasswordProperty, ref _generatedPassword, value);
+    }
 
     public PwdGrid()
     {

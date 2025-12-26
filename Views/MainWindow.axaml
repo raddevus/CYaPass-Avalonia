@@ -8,7 +8,9 @@
         x:DataType="vm:MainWindowViewModel"
         xmlns:local="clr-namespace:CYaPass_Avalonia.Models"
         Icon="/Assets/avalonia-logo.ico"
-        Title="CYaPass_Avalonia">
+        Title="CYaPass"
+        Padding="20"
+        Background="WhiteSmoke">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,

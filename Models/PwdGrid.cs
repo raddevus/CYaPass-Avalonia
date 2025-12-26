@@ -180,7 +180,7 @@ public class PwdGrid : Control
         _userPoints.Add(p);
 
         // Optional: auto-generate password when path is long enough
-        if (_segments.Count >= 3)
+        if (_segments.Count >= 1)
             GeneratedPassword = GeneratePassword();
     }
 

@@ -17,7 +17,7 @@ public class PwdGrid : Control
     private const int PostRadius = 6;
     private int pointTrack = 0;
     private HashSet<int> postIndexes = new();
-    private String siteKey = "";
+    private String siteKey = "supersite";
     private Point? firstPoint = null;
     private UserPath up = new();
    private int loopCount = 0;
@@ -205,7 +205,7 @@ public class PwdGrid : Control
         var codes = _segments.Select(seg => EncodeDirection(seg.A, seg.B));
 
         // Combine into a single string
-        string combined = $"{pointTrack}{siteKey}"; //string.Join("-", codes);
+        string combined = $"{up.PointValue}{siteKey}"; //string.Join("-", codes);
 
         // Hash it for security
         return Sha256(combined).ToLower();

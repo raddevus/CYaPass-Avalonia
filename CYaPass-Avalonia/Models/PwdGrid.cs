@@ -19,7 +19,8 @@ public class PwdGrid : Control
     private HashSet<int> postIndexes = new();
     private String siteKey = "";
     private Point? firstPoint = null;
-
+    private UserPath up = new();
+   private int loopCount = 0;
     private readonly List<Point> _userPoints = new();
     private readonly HashSet<string> _usedSegments = new();   // prevent duplicates
     private readonly List<(Point A, Point B)> _segments = new();
@@ -135,7 +136,7 @@ public class PwdGrid : Control
 
     private bool TryHitPost(Point p, out Point snapped)
     {
-       var loopCount = 0;
+       loopCount = 0;
         for (int x = 0; x < NumCells; x++)
         {
            
@@ -152,7 +153,6 @@ public class PwdGrid : Control
                 {
                     snapped = new Point(px, py);
                     postIndexes.Add(loopCount);
-                    calculatePoints();
                     return true;
                 }
                 loopCount++;
@@ -184,8 +184,11 @@ public class PwdGrid : Control
                 _usedSegments.Add(key2);
             }
         }
-
+         up.append(new System.Drawing.Point((int)p.X, (int)p.Y), calculatePoints());
+         up.CalculateGeometricValue();
+         Console.WriteLine($"Userpath points: {up.PointValue}");
         _userPoints.Add(p);
+
 
         // Optional: auto-generate password when path is long enough
         if (_segments.Count >= 1)
@@ -208,20 +211,8 @@ public class PwdGrid : Control
         return Sha256(combined).ToLower();
     }
 
-    private void calculatePoints(){
-         pointTrack = 0;
-         int currentValue = 0;
-         //List<int> allIndexes = postIndexes.ToList();
-         foreach (int pIdx in postIndexes){ 
-            Console.Write($"{pIdx},");
-             currentValue = (int) (pIdx + (pIdx * Math.Truncate((decimal)(pIdx / 6) * 10)));
-            pointTrack += currentValue;
-         }
-
-        // pointTrack += (int) (allIndexes[allIndexes.Count()-1] + ( allIndexes[allIndexes.Count()-1]* Math.Truncate((decimal)( allIndexes[allIndexes.Count()-1]/ 6) * 10)));
-;
-         Console.WriteLine();
-         System.Console.WriteLine($"Calc points are: {pointTrack}");
+    private int calculatePoints(){
+      return (int) (loopCount + (loopCount * Math.Truncate((decimal)(loopCount / 6) * 10)));
     }
 
     private string EncodeDirection(Point a, Point b)
@@ -256,6 +247,7 @@ public class PwdGrid : Control
 
     public void Reset()
     {
+       up = new();
        pointTrack = 0;
        postIndexes = new();
         firstPoint = null; 

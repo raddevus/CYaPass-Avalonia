@@ -5,7 +5,7 @@ using System.Text;
 using System.Drawing;
 
 namespace CYaPass_Avalonia.Models;
-class Segment
+public class Segment
 {
   public Point Begin;
   public Point End;

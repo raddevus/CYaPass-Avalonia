@@ -5,7 +5,7 @@ using System.Drawing;
 
 namespace CYaPass_Avalonia.Models;
 
-class UserPath
+public class UserPath
 {
   public List<Point> allPoints = new List<Point>();
   public HashSet<Segment> allSegments = new HashSet<Segment>();

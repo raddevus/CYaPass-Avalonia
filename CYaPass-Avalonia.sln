@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CYaPass-Avalonia", "CYaPass-Avalonia.csproj", "{54C83AD8-390A-0AD9-7ED2-D537B1A4C320}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CYaPass-Avalonia", "./CYaPass-Avalonia/CYaPass-Avalonia.csproj", "{54C83AD8-390A-0AD9-7ED2-D537B1A4C320}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

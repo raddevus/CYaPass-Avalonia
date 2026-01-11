@@ -20,6 +20,7 @@ public class PwdGrid : Control
     private String siteKey = "supersite";
     private Point? firstPoint = null;
     private UserPath up = new();
+   public bool IsPatternHidden{get;set;} = false;
    private int loopCount = 0;
     private readonly List<Point> _userPoints = new();
     private readonly HashSet<string> _usedSegments = new();   // prevent duplicates
@@ -41,6 +42,10 @@ public class PwdGrid : Control
     {
         PointerPressed += OnPointerPressed;
     }
+   
+    public void ForceRender(){
+       InvalidateVisual();
+    }
 
     public override void Render(DrawingContext ctx)
     {
@@ -49,9 +54,12 @@ public class PwdGrid : Control
         DrawBackground(ctx);
         DrawGridLines(ctx);
         DrawPosts(ctx);
-        DrawUserShape(ctx);
-        if (firstPoint != null){
-            DrawHighlightCircle(ctx, firstPoint?.X ?? 0D, firstPoint?.Y ?? 0D);
+        if (!IsPatternHidden){
+            DrawUserShape(ctx);
+
+           if (firstPoint != null){
+               DrawHighlightCircle(ctx, firstPoint?.X ?? 0D, firstPoint?.Y ?? 0D);
+           }
         }
     }
 
@@ -121,6 +129,10 @@ public class PwdGrid : Control
 
     private void OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
+       // If the pattern is hidden then the user cannot
+       // draw on the control - just return
+       if (IsPatternHidden){return;}
+
         var pos = e.GetPosition(this);
         if (TryHitPost(pos, out var snapped))
         {
@@ -247,6 +259,7 @@ public class PwdGrid : Control
 
     public void Reset()
     {
+       IsPatternHidden = false;
        up = new();
        pointTrack = 0;
        postIndexes = new();

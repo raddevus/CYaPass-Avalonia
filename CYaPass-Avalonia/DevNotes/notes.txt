@@ -1,0 +1,4 @@
+// Following URLs are used to hit two public LibreStore webAPIs to get encrypted data back
+"https://actionmobile.app/Cya/GetData?key=";
+"https://newlibre.com/LibreStore/cya/GetData?key=";
+

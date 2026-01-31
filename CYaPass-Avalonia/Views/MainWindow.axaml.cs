@@ -24,13 +24,13 @@ public partial class MainWindow : Window
     }
 
    private async void OnAddSiteKeyClick(object? sender, RoutedEventArgs e){
-       var msg = new SiteKeyMsgBox("Do you want to continue?");
+      var msg = new SiteKeyMsgBox("Do you want to continue?");
     bool result =  await msg.ShowDialog<bool>(this);
 
     if (result)
     {
         // User clicked OK
-         System.Console.WriteLine("User selected OK");
+         System.Console.WriteLine($"User selected OK: {msg.SiteKey}");
 
     }
     else

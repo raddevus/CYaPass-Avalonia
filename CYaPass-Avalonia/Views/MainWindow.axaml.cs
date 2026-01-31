@@ -22,4 +22,22 @@ public partial class MainWindow : Window
       System.Console.WriteLine($"isPatternHidden: {PwdGrid.IsPatternHidden}");
       PwdGrid.ForceRender();
     }
+
+   private async void OnAddSiteKeyClick(object? sender, RoutedEventArgs e){
+       var msg = new SiteKeyMsgBox("Do you want to continue?");
+    bool result =  await msg.ShowDialog<bool>(this);
+
+    if (result)
+    {
+        // User clicked OK
+         System.Console.WriteLine("User selected OK");
+
+    }
+    else
+    {
+        // User clicked Cancel
+        System.Console.WriteLine("User cancelled");
+    }
+    }
+
 }

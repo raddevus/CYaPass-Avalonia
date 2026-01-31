@@ -37,7 +37,7 @@
             
             
             <StackPanel Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right">
-              <Button IsCancel="True" >Add</Button>
+              <Button Click="OnAddSiteKeyClick" IsCancel="True" >Add</Button>
               <Button IsDefault="True" >Edit</Button>
               <Button IsDefault="True" >Delete</Button>
             </StackPanel>

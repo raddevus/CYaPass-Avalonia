@@ -7,7 +7,7 @@ namespace CYaPass_Avalonia.Views;
 
 public partial class MainWindow : Window
 {
-    List<string> allSiteKeys = new();
+    HashSet<string> allSiteKeys = new();
     public MainWindow()
     {
         InitializeComponent();

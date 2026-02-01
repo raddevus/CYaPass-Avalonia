@@ -17,7 +17,7 @@ public class PwdGrid : Control
     private const int PostRadius = 6;
     private int pointTrack = 0;
     private HashSet<int> postIndexes = new();
-    private String siteKey = "supersite";
+    public String siteKey{get;set;}
     private Point? firstPoint = null;
     private UserPath up = new();
    public bool IsPatternHidden{get;set;} = false;

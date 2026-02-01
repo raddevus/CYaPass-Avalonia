@@ -17,8 +17,10 @@ public partial class SiteKeyMsgBox : Window
 
     private void Ok_Click(object? sender, RoutedEventArgs e)
     {
-       SiteKey = System.IO.Path.GetRandomFileName();
-        Close(true);
+       SiteKey = SiteKeyText.Text;
+       //SiteKey = System.IO.Path.GetRandomFileName();
+
+       Close(true);
     }
 
     private void Cancel_Click(object? sender, RoutedEventArgs e)

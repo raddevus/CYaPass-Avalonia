@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 
@@ -5,6 +7,7 @@ namespace CYaPass_Avalonia.Views;
 
 public partial class MainWindow : Window
 {
+    List<string> allSiteKeys = new();
     public MainWindow()
     {
         InitializeComponent();
@@ -31,6 +34,10 @@ public partial class MainWindow : Window
     {
         // User clicked OK
          System.Console.WriteLine($"User selected OK: {msg.SiteKey}");
+         if (!string.IsNullOrEmpty(msg.SiteKey)){
+            allSiteKeys.Add(msg.SiteKey);
+         }
+         SiteKeys.ItemsSource = allSiteKeys.ToArray().OrderBy(x => x);
 
     }
     else

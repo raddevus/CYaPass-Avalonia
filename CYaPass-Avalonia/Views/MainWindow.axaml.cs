@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using TextCopy;
 
 namespace CYaPass_Avalonia.Views;
 
@@ -38,6 +39,11 @@ public partial class MainWindow : Window
        }
 
    }
+
+   private async void PasswordTextChanged(object? sender, RoutedEventArgs e){
+         ClipboardService.SetText(PwdTextBox.Text);      
+   }
+
    private async void OnAddSiteKeyClick(object? sender, RoutedEventArgs e){
       var msg = new SiteKeyMsgBox("Please type the SiteKey you'd like to add.");
     bool result =  await msg.ShowDialog<bool>(this);

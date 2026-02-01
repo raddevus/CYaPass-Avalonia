@@ -17,7 +17,7 @@ public partial class SiteKeyMsgBox : Window
 
     private void Ok_Click(object? sender, RoutedEventArgs e)
     {
-       SiteKey = SiteKeyText.Text;
+       SiteKey = SiteKeyText.Text.Replace(" ", ""); // replace all white-space anywhere in string
        //SiteKey = System.IO.Path.GetRandomFileName();
 
        Close(true);

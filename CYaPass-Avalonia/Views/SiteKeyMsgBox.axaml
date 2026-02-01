@@ -6,9 +6,10 @@
         CanResize="False">
     <StackPanel Margin="10">
         <TextBlock x:Name="MessageText" TextWrapping="Wrap" Margin="0,0,0,10"/>
+
+         <TextBlock Margin="10">SiteKey</TextBlock>
+         <TextBox Name="SiteKeyText" Margin="0 5" Text=""/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10">
-            <TextBlock Margin="10">Celsius</TextBlock>
-            <TextBox Name="SiteKeyText" Margin="0 5" Text=""/>
             <Button Content="OK" Click="Ok_Click"/>
             <Button Content="Cancel" Click="Cancel_Click"/>
         </StackPanel>

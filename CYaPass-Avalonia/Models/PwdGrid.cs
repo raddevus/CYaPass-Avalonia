@@ -17,7 +17,7 @@ public class PwdGrid : Control
     private const int PostRadius = 6;
     private int pointTrack = 0;
     private HashSet<int> postIndexes = new();
-    public String siteKey{get;set;}
+    public String SiteKey{get;set;}
     private Point? firstPoint = null;
     private UserPath up = new();
    public bool IsPatternHidden{get;set;} = false;
@@ -207,6 +207,11 @@ public class PwdGrid : Control
             GeneratedPassword = GeneratePassword();
     }
 
+
+    public void UpdatePassword(){
+       GeneratedPassword = GeneratePassword();
+    }
+
     // -----------------------------
     // Password Generation
     // -----------------------------
@@ -217,7 +222,7 @@ public class PwdGrid : Control
         var codes = _segments.Select(seg => EncodeDirection(seg.A, seg.B));
 
         // Combine into a single string
-        string combined = $"{up.PointValue}{siteKey}"; //string.Join("-", codes);
+        string combined = $"{up.PointValue}{SiteKey}"; //string.Join("-", codes);
 
         // Hash it for security
         return Sha256(combined).ToLower();

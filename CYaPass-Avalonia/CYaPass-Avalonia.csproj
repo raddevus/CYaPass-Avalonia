@@ -26,5 +26,8 @@
     <Reference Include="TextCopy">
       <HintPath>.\External\TextCopy.dll</HintPath>
     </Reference>
+    <Reference Include="AES_Complete">
+      <HintPath>.\External\AES_Complete.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

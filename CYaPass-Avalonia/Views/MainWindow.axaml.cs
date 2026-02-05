@@ -4,6 +4,7 @@ using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using TextCopy;
+using NewLibre.Services;
 
 namespace CYaPass_Avalonia.Views;
 
@@ -49,8 +50,12 @@ public partial class MainWindow : Window
          }
    }
 
-    public void ImportSiteKeys(object? sender, RoutedEventArgs e){
+    async public void ImportSiteKeys(object? sender, RoutedEventArgs e){
       Console.WriteLine("Importing SiteKeys...");
+      var cyasvc = new CyaService("demoKeys2022","https://newlibre.com/LibreStore/");
+      var encryptedSiteKeys = await cyasvc.GetCyaData();
+      Console.WriteLine($"{encryptedSiteKeys.CyaBucket.Data}");
+      
     }
 
    private async void OnAddSiteKeyClick(object? sender, RoutedEventArgs e){

@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using TextCopy;
 using NewLibre.Services;
+using NewLibre.Models;
 
 namespace CYaPass_Avalonia.Views;
 
@@ -53,8 +54,19 @@ public partial class MainWindow : Window
     async public void ImportSiteKeys(object? sender, RoutedEventArgs e){
       Console.WriteLine("Importing SiteKeys...");
       var cyasvc = new CyaService("demoKeys2022","https://newlibre.com/LibreStore/");
-      var encryptedSiteKeys = await cyasvc.GetCyaData();
-      Console.WriteLine($"{encryptedSiteKeys.CyaBucket.Data}");
+      var result = await cyasvc.GetCyaData();
+      var encryptedSiteKeys = result.CyaBucket.Data;
+      var iv = result.CyaBucket.Iv;
+      Console.WriteLine($"{encryptedSiteKeys}");
+      Crypton c = new();
+      string decryptedData = string.Empty;
+      var isSuccessDecrypt = c.Decrypt(encryptedSiteKeys, PwdTextBox.Text, iv, out decryptedData);
+      if (isSuccessDecrypt){
+         Console.WriteLine($"{decryptedData}"); 
+      }
+      else{
+         Console.WriteLine("The data couldn't be decrypted. You may have used an incorrect password key or the data may be corrupted.");
+      }
       
     }
 

@@ -41,7 +41,12 @@ public partial class MainWindow : Window
    }
 
    private async void PasswordTextChanged(object? sender, RoutedEventArgs e){
-         ClipboardService.SetText(PwdTextBox.Text);      
+         try{
+            ClipboardService.SetText(PwdTextBox.Text);
+         }
+         catch (Exception ex){
+            Console.WriteLine("Couldn't copy to clipboard.");
+         }
    }
 
    private async void OnAddSiteKeyClick(object? sender, RoutedEventArgs e){

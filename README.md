@@ -11,3 +11,8 @@
    - That project is located [here on github](https://github.com/raddevus/AES_Complete).
 2. CYaPass only uses the DLL assembly from that project (though it does produce an EXE used for driving functionality / testing
 
+### Backlog Items
+- Remove hard-coded values, in ImportSiteKey method & read them from the user
+  - demoKeys2022 - read maintoken from user
+  - base url to LibreStore api (add config stored with the app)
+- 

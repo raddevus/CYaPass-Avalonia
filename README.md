@@ -15,4 +15,5 @@
 - Remove hard-coded values, in ImportSiteKey method & read them from the user
   - demoKeys2022 - read maintoken from user
   - base url to LibreStore api (add config stored with the app)
+- Calculate HMAC & compare to transfered value before attempting to decrypt data
 - 

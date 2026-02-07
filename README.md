@@ -16,8 +16,8 @@
      -  [ - ] demoKeys2022 - read maintoken from user
      -  [ - ] base url to LibreStore api (add config stored with the app)
 -  [ - ] Calculate HMAC & compare to transfered value before attempting to decrypt data
--  [ - ] Change MaxLength control from TextBox to NumericUpDown
--  [ - ] Add NumericUpDown to Multi-hash
+-  [ X ] Change MaxLength control from TextBox to NumericUpDown - 2026-02-07
+-  [ X ] Add NumericUpDown to Multi-hash - 2026-02-07
 -  [ - ] Save SiteKeys as JSON in local file (make sure JSON format matches current CYaPass versions exactly)
 -  [ - ] Fill SiteKeys list box from values read from local file (if exists)
 -  [ - ] Implement Export SiteKeys button
@@ -27,3 +27,6 @@
 -  [ - ] Clean up UI - various padding, margins etc.
 -  [ - ] Implement Edit (SiteKey) button
 -  [ - ] Implement Delete (SiteKey) button
+-  [ - ] App Config - Save Multi-hash value to config when user changes it - keep track of value for user
+-  [ - ] App Config - Insure that the last selected SiteKey is always saved so that when user starts app again it is selected
+-  [ - ]

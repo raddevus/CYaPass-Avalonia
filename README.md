@@ -11,9 +11,19 @@
    - That project is located [here on github](https://github.com/raddevus/AES_Complete).
 2. CYaPass only uses the DLL assembly from that project (though it does produce an EXE used for driving functionality / testing
 
-### Backlog Items
-- Remove hard-coded values, in ImportSiteKey method & read them from the user
-  - demoKeys2022 - read maintoken from user
-  - base url to LibreStore api (add config stored with the app)
-- Calculate HMAC & compare to transfered value before attempting to decrypt data
-- 
+## Backlog Items
+-  [ - ] Remove hard-coded values, in ImportSiteKey method & read them from the user
+     -  [ - ] demoKeys2022 - read maintoken from user
+     -  [ - ] base url to LibreStore api (add config stored with the app)
+-  [ - ] Calculate HMAC & compare to transfered value before attempting to decrypt data
+-  [ - ] Change MaxLength control from TextBox to NumericUpDown
+-  [ - ] Add NumericUpDown to Multi-hash
+-  [ - ] Save SiteKeys as JSON in local file (make sure JSON format matches current CYaPass versions exactly)
+-  [ - ] Fill SiteKeys list box from values read from local file (if exists)
+-  [ - ] Implement Export SiteKeys button
+-  [ - ] Implement Add Uppercase
+-  [ - ] Implement Add Special Char
+-  [ - ] Implement Max Length
+-  [ - ] Clean up UI - various padding, margins etc.
+-  [ - ] Implement Edit (SiteKey) button
+-  [ - ] Implement Delete (SiteKey) button

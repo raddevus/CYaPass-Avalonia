@@ -272,7 +272,7 @@ public class PwdGrid : Control
         _userPoints.Clear();
         _segments.Clear();
         _usedSegments.Clear();
-        GeneratedPassword = null;
+        GeneratedPassword = String.Empty;
         InvalidateVisual();
     }
 }

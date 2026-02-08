@@ -70,6 +70,10 @@ public partial class MainWindow : Window
       
     }
 
+   private async void DeleteSiteKey(object? sender, RoutedEventArgs e){
+     Console.WriteLine($"{SiteKeys.SelectedItem}");
+   }
+
    private async void OnAddSiteKeyClick(object? sender, RoutedEventArgs e){
       var msg = new SiteKeyMsgBox("Please type the SiteKey you'd like to add.");
     bool result =  await msg.ShowDialog<bool>(this);

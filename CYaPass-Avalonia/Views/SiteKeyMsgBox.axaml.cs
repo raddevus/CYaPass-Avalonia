@@ -12,7 +12,8 @@ public partial class SiteKeyMsgBox : Window
     {
         InitializeComponent();
         MessageText.Text = message;
-       
+        // Sets Focus to the SiteKey text box
+        this.Opened += (_, __) => { SiteKeyText.Focus(); };
     }
 
     private void Ok_Click(object? sender, RoutedEventArgs e)

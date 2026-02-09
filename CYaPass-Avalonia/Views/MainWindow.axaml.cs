@@ -6,12 +6,12 @@ using Avalonia.Interactivity;
 using TextCopy;
 using NewLibre.Services;
 using NewLibre.Models;
+using CYaPass_Avalonia.ViewModels;
 
 namespace CYaPass_Avalonia.Views;
 
 public partial class MainWindow : Window
 {
-    HashSet<string> allSiteKeys = new();
     public MainWindow()
     {
         InitializeComponent();
@@ -70,35 +70,46 @@ public partial class MainWindow : Window
       
     }
 
+    private async void AddTestSiteKeys(object? sender, RoutedEventArgs e){
+         var vm = (MainWindowViewModel)DataContext;
+        vm.allSiteKeys.Items.Add("test1");
+        vm.allSiteKeys.Items.Add("test2");
+        vm.allSiteKeys.Items.Add("test3");
+    }
+
    private async void DeleteSiteKey(object? sender, RoutedEventArgs e){
+      var vm = (MainWindowViewModel)DataContext;
      Console.WriteLine($"{SiteKeys.SelectedItem}");
+     bool isDeleted = vm.allSiteKeys.Items.Remove($"{SiteKeys.SelectedItem}");
+     Console.WriteLine($"isDeleted: ${isDeleted}");
+     // SiteKeys.ItemsSource = vm.allSiteKeys.Items; 
+
    }
 
    private async void OnAddSiteKeyClick(object? sender, RoutedEventArgs e){
+      var vm = (MainWindowViewModel)DataContext;
       var msg = new SiteKeyMsgBox("Please type the SiteKey you'd like to add.");
-    bool result =  await msg.ShowDialog<bool>(this);
-
-    if (result)
-    {
-        // User clicked OK
-         Console.WriteLine($"User selected OK: {msg.SiteKey}");
-         if (!string.IsNullOrEmpty(msg.SiteKey)){
-            allSiteKeys.Add(msg.SiteKey);
-         }
-         SiteKeys.ItemsSource = allSiteKeys.ToArray().OrderBy(x => x);
-         // Control has has one item selected so we make sure the
-         // initial value gets set
-         if (allSiteKeys.Count == 1){
-            PwdGrid.SiteKey = allSiteKeys.ToArray()[0];
-            PwdGrid.UpdatePassword();
-         }
-
-    }
-    else
-    {
-        // User clicked Cancel
-        Console.WriteLine("User cancelled");
-    }
+       bool result =  await msg.ShowDialog<bool>(this);
+       if (result)
+       {
+           // User clicked OK
+            Console.WriteLine($"User selected OK: {msg.SiteKey}");
+            if (!string.IsNullOrEmpty(msg.SiteKey)){
+               vm.allSiteKeys.Items.Add(msg.SiteKey);
+            }
+            //SiteKeys.ItemsSource = vm.allSiteKeys.Items.ToArray().OrderBy(x => x);
+            // Control has has one item selected so we make sure the
+            // initial value gets set
+            if (vm.allSiteKeys.Items.Count == 1){
+               PwdGrid.SiteKey = SiteKeys.SelectedItem.ToString();
+               PwdGrid.UpdatePassword();
+            }
+       }
+       else
+       {
+           // User clicked Cancel
+           Console.WriteLine("User cancelled");
+       }
     }
 
 }

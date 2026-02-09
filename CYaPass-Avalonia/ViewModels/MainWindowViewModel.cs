@@ -1,6 +1,10 @@
-﻿namespace CYaPass_Avalonia.ViewModels;
+﻿using CYaPass_Avalonia.Models;
+using System.Collections.Generic;
 
-public partial class MainWindowViewModel : ViewModelBase
+namespace CYaPass_Avalonia.ViewModels;
+
+public class MainWindowViewModel : ViewModelBase
 {
     public string Greeting { get; } = "Welcome to Avalonia!";
+    public SiteKeySet<string> allSiteKeys{get;}  = new();
 }

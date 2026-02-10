@@ -37,7 +37,7 @@ public partial class MainWindow : Window
        {
            Console.WriteLine($"Selected text: {text}");
            PwdGrid.SiteKey = text;
-           PwdGrid.UpdatePassword();
+           PwdGrid.UpdatePassword((int)MultiHashUD.Value);
        }
 
    }
@@ -101,7 +101,7 @@ public partial class MainWindow : Window
             // initial value gets set
             if (!string.IsNullOrEmpty(SiteKeys.SelectedItem?.ToString())){
                PwdGrid.SiteKey = SiteKeys.SelectedItem.ToString();
-               PwdGrid.UpdatePassword();
+               PwdGrid.UpdatePassword((int)MultiHashUD.Value);
             }
        }
        else

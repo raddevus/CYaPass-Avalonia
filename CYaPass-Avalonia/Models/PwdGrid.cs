@@ -208,15 +208,15 @@ public class PwdGrid : Control
     }
 
 
-    public void UpdatePassword(){
-       GeneratedPassword = GeneratePassword();
+    public void UpdatePassword(int multiHash){
+       GeneratedPassword = GeneratePassword(multiHash);
     }
 
     // -----------------------------
     // Password Generation
     // -----------------------------
 
-    private string GeneratePassword()
+    private string GeneratePassword(int multiHash = 0)
     {
         // Convert each segment into a direction code
         var codes = _segments.Select(seg => EncodeDirection(seg.A, seg.B));
@@ -225,7 +225,12 @@ public class PwdGrid : Control
         string combined = $"{up.PointValue}{SiteKey}"; //string.Join("-", codes);
 
         // Hash it for security
-        return Sha256(combined).ToLower();
+        var hashResult = Sha256(combined).ToLower();
+         for (int counter = 1; counter <= multiHash; counter++){
+            hashResult = Sha256(hashResult.ToLower()).ToLower();
+            Console.WriteLine($"hashResult: {hashResult}");
+         }
+        return hashResult;
     }
 
     private int calculatePoints(){

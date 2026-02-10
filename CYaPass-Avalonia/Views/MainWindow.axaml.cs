@@ -72,15 +72,15 @@ public partial class MainWindow : Window
 
     private async void AddTestSiteKeys(object? sender, RoutedEventArgs e){
          var vm = (MainWindowViewModel)DataContext;
-        vm.allSiteKeys.Items.Add("test1");
-        vm.allSiteKeys.Items.Add("test2");
-        vm.allSiteKeys.Items.Add("test3");
+        vm.allSiteKeys.Add("test1");
+        vm.allSiteKeys.Add("test2");
+        vm.allSiteKeys.Add("test3");
     }
 
    private async void DeleteSiteKey(object? sender, RoutedEventArgs e){
       var vm = (MainWindowViewModel)DataContext;
      Console.WriteLine($"{SiteKeys.SelectedItem}");
-     bool isDeleted = vm.allSiteKeys.Items.Remove($"{SiteKeys.SelectedItem}");
+     bool isDeleted = vm.allSiteKeys.Remove($"{SiteKeys.SelectedItem}");
      Console.WriteLine($"isDeleted: ${isDeleted}");
      // SiteKeys.ItemsSource = vm.allSiteKeys.Items; 
 
@@ -95,12 +95,12 @@ public partial class MainWindow : Window
            // User clicked OK
             Console.WriteLine($"User selected OK: {msg.SiteKey}");
             if (!string.IsNullOrEmpty(msg.SiteKey)){
-               vm.allSiteKeys.Items.Add(msg.SiteKey);
+               vm.allSiteKeys.Add(msg.SiteKey);
             }
             //SiteKeys.ItemsSource = vm.allSiteKeys.Items.ToArray().OrderBy(x => x);
             // Control has has one item selected so we make sure the
             // initial value gets set
-            if (vm.allSiteKeys.Items.Count == 1){
+            if (!string.IsNullOrEmpty(SiteKeys.SelectedItem?.ToString())){
                PwdGrid.SiteKey = SiteKeys.SelectedItem.ToString();
                PwdGrid.UpdatePassword();
             }

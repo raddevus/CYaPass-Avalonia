@@ -8,13 +8,18 @@ public class SiteKeySet<T>
 {
     private readonly HashSet<T> _set = new();
     public ObservableCollection<T> Items{get;}  = new();
-
+    
     public bool Add(T item)
     {
         if (_set.Add(item))
         {
-            Items.Add(item);
-            Console.WriteLine($"got it: {item}");
+           // Find the correct insertion index 
+           int index = 0; 
+           while (index < Items.Count && 
+                 Comparer<T>.Default.Compare(Items[index], item) < 0){
+              index++;
+           }
+            Items.Insert(index, item);
             return true;
         }
         return false;

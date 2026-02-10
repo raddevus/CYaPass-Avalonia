@@ -10,8 +10,8 @@
          <TextBlock Margin="10">SiteKey</TextBlock>
          <TextBox Name="SiteKeyText" Margin="0 5" Text=""/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10">
-            <Button Content="OK" Click="Ok_Click"/>
-            <Button Content="Cancel" Click="Cancel_Click"/>
+            <Button Content="OK" IsDefault="True" Click="Ok_Click"/>
+            <Button Content="Cancel" IsCancel="True" Click="Cancel_Click"/>
         </StackPanel>
     </StackPanel>
 </Window>

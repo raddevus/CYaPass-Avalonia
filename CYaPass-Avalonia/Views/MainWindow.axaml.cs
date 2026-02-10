@@ -97,8 +97,7 @@ public partial class MainWindow : Window
             if (!string.IsNullOrEmpty(msg.SiteKey)){
                vm.allSiteKeys.Add(msg.SiteKey);
             }
-            //SiteKeys.ItemsSource = vm.allSiteKeys.Items.ToArray().OrderBy(x => x);
-            // Control has has one item selected so we make sure the
+            SiteKeys.SelectedItem = msg.SiteKey;
             // initial value gets set
             if (!string.IsNullOrEmpty(SiteKeys.SelectedItem?.ToString())){
                PwdGrid.SiteKey = SiteKeys.SelectedItem.ToString();

@@ -227,7 +227,7 @@ public class PwdGrid : Control
         // Hash it for security
         var hashResult = Sha256(combined).ToLower();
          for (int counter = 1; counter <= multiHash; counter++){
-            hashResult = Sha256(hashResult.ToLower()).ToLower();
+            hashResult = Sha256($"{up.PointValue}{hashResult}").ToLower();
             Console.WriteLine($"hashResult: {hashResult}");
          }
         return hashResult;

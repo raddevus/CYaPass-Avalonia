@@ -30,4 +30,4 @@
 -  [ - ] App Config - Save Multi-hash value to config when user changes it - keep track of value for user
 -  [ - ] App Config - Insure that the last selected SiteKey is always saved so that when user starts app again it is selected
 -  [ - ] TextCopy - Install on various Linux systems (via VirtualBox) test how it behaves (Fedora, Ubuntu, Debian, Manjaro, OMarchy)
--  
+-  [ - ] Need to insure that if MultiHash is turned on that the value is used when the grid is drawn (segments added)

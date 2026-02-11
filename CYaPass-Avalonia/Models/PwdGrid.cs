@@ -204,11 +204,11 @@ public class PwdGrid : Control
 
         // Optional: auto-generate password when path is long enough
         if (_segments.Count >= 1)
-            GeneratedPassword = GeneratePassword();
+            GeneratedPassword = GeneratePassword(0);
     }
 
 
-    public void UpdatePassword(int multiHash){
+    public void UpdatePassword(int multiHash = 0){
        GeneratedPassword = GeneratePassword(multiHash);
     }
 
@@ -216,7 +216,7 @@ public class PwdGrid : Control
     // Password Generation
     // -----------------------------
 
-    private string GeneratePassword(int multiHash = 0)
+    private string GeneratePassword(int multiHash)
     {
         // Convert each segment into a direction code
         var codes = _segments.Select(seg => EncodeDirection(seg.A, seg.B));

@@ -44,7 +44,7 @@
             </StackPanel>
             
             <StackPanel Grid.Column="0" Grid.Row="7" Orientation="Horizontal">
-               <CheckBox Name="MultiHashCB" IsThreeState="False" >Use Multi-Hash</CheckBox>
+               <CheckBox Name="MultiHashCB" IsCheckedChanged="MultiHashCheckChanged" IsThreeState="False" >Use Multi-Hash</CheckBox>
                <NumericUpDown ValueChanged="MultiHashChanged" Name="MultiHashUD" Width="200" Maximum="500" Value="0"
                Minimum="0" ParsingNumberStyle="Integer" FormatString="0"></NumericUpDown>
             </StackPanel>

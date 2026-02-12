@@ -30,6 +30,15 @@ public partial class MainWindow : Window
       PwdGrid.ForceRender();
     }
 
+   private async void MultiHashCheckChanged(object? sender, RoutedEventArgs e){
+      if (MultiHashCB.IsChecked ?? false){
+         PwdGrid.UpdatePassword((int)MultiHashUD.Value);
+      }
+      else{
+         PwdGrid.UpdatePassword(0);
+      }
+   }
+
    private async void MultiHashChanged(object? sender, RoutedEventArgs e){
       if (MultiHashCB?.IsChecked ?? false){
          PwdGrid.UpdatePassword((int)MultiHashUD.Value);

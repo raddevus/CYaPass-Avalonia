@@ -18,6 +18,8 @@ public class PwdGrid : Control
     private int pointTrack = 0;
     private HashSet<int> postIndexes = new();
     public String SiteKey{get;set;}
+    public bool IsUppercase {get;set;}
+    public int MultiHash{get;set;}
     private Point? firstPoint = null;
     private UserPath up = new();
    public bool IsPatternHidden{get;set;} = false;
@@ -204,19 +206,19 @@ public class PwdGrid : Control
 
         // Optional: auto-generate password when path is long enough
         if (_segments.Count >= 1)
-            GeneratedPassword = GeneratePassword(0);
+            GeneratedPassword = GeneratePassword();
     }
 
 
-    public void UpdatePassword(int multiHash = 0){
-       GeneratedPassword = GeneratePassword(multiHash);
+    public void UpdatePassword(){
+       GeneratedPassword = GeneratePassword();
     }
 
     // -----------------------------
     // Password Generation
     // -----------------------------
 
-    private string GeneratePassword(int multiHash)
+    private string GeneratePassword()
     {
         // Convert each segment into a direction code
         var codes = _segments.Select(seg => EncodeDirection(seg.A, seg.B));
@@ -226,12 +228,32 @@ public class PwdGrid : Control
 
         // Hash it for security
         var hashResult = Sha256(combined).ToLower();
-         for (int counter = 1; counter <= multiHash; counter++){
+         for (int counter = 1; counter <= MultiHash; counter++){
             hashResult = Sha256($"{up.PointValue}{hashResult}").ToLower();
             Console.WriteLine($"hashResult: {hashResult}");
          }
+        // If IsUppercase then we add an uppercase letter to final result
+        if (IsUppercase){
+           // find first char in hashResult
+           hashResult = MakeFirstCharUppercase(hashResult);
+        }
         return hashResult;
     }
+
+   private string MakeFirstCharUppercase(string source){
+      var chars = source.ToCharArray();
+
+      for (int i = 0; i < chars.Length; i++)
+      {
+          if (char.IsLetter(chars[i]))
+          {
+              chars[i] = char.ToUpper(chars[i]);
+              break;
+          }
+      }
+
+      return new string(chars);
+   }
 
     private int calculatePoints(){
       return (int) (loopCount + (loopCount * Math.Truncate((decimal)(loopCount / 6) * 10)));

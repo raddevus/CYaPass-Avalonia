@@ -30,18 +30,26 @@ public partial class MainWindow : Window
       PwdGrid.ForceRender();
     }
 
+   private async void AddUppercaseChanged(object? sender, RoutedEventArgs e){
+      
+      PwdGrid.IsUppercase = (sender as CheckBox).IsChecked ?? false;
+      PwdGrid.UpdatePassword();
+   }
+
    private async void MultiHashCheckChanged(object? sender, RoutedEventArgs e){
       if (MultiHashCB.IsChecked ?? false){
-         PwdGrid.UpdatePassword((int)MultiHashUD.Value);
+         PwdGrid.MultiHash = (int)MultiHashUD.Value;
       }
       else{
-         PwdGrid.UpdatePassword(0);
+         PwdGrid.MultiHash = 0;
       }
+      PwdGrid.UpdatePassword();
    }
 
    private async void MultiHashChanged(object? sender, RoutedEventArgs e){
       if (MultiHashCB?.IsChecked ?? false){
-         PwdGrid.UpdatePassword((int)MultiHashUD.Value);
+         PwdGrid.MultiHash = (int)MultiHashUD.Value;
+         PwdGrid.UpdatePassword();
       }
    }
 
@@ -53,14 +61,13 @@ public partial class MainWindow : Window
            Console.WriteLine($"Selected text: {text}");
            PwdGrid.SiteKey = text;
            if (MultiHashCB.IsChecked ?? false){
-              PwdGrid.UpdatePassword((int)MultiHashUD.Value);
+              PwdGrid.MultiHash = (int)MultiHashUD.Value;
            }
            else{
-              PwdGrid.UpdatePassword();
+              PwdGrid.MultiHash = 0;
            }
-
+           PwdGrid.UpdatePassword();
        }
-
    }
 
    private async void PasswordTextChanged(object? sender, RoutedEventArgs e){
@@ -123,11 +130,12 @@ public partial class MainWindow : Window
             if (!string.IsNullOrEmpty(SiteKeys.SelectedItem?.ToString())){
                PwdGrid.SiteKey = SiteKeys.SelectedItem.ToString();
                if (MultiHashCB.IsChecked ?? false){
-                  PwdGrid.UpdatePassword((int)MultiHashUD.Value);
+                  PwdGrid.MultiHash = (int)MultiHashUD.Value;
                  }
                  else{
-                    PwdGrid.UpdatePassword();
+                    PwdGrid.MultiHash = 0;
                  }
+               PwdGrid.UpdatePassword();
             }
        }
        else

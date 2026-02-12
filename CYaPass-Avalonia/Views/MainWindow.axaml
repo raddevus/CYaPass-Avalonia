@@ -48,7 +48,7 @@
                <NumericUpDown ValueChanged="MultiHashChanged" Name="MultiHashUD" Width="200" Maximum="500" Value="0"
                Minimum="0" ParsingNumberStyle="Integer" FormatString="0"></NumericUpDown>
             </StackPanel>
-            <CheckBox Grid.Column="0" Grid.Row="8" >Add Uppercase</CheckBox>
+            <CheckBox IsCheckedChanged="AddUppercaseChanged" Grid.Column="0" Grid.Row="8" >Add Uppercase</CheckBox>
             <StackPanel Grid.Column="0" Grid.Row="9" Orientation="Horizontal">
                <CheckBox  >Add Special Chars</CheckBox>
                <TextBox Width="200"></TextBox>

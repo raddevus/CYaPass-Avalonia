@@ -30,6 +30,12 @@ public partial class MainWindow : Window
       PwdGrid.ForceRender();
     }
 
+   private async void MultiHashChanged(object? sender, RoutedEventArgs e){
+      if (MultiHashCB?.IsChecked ?? false){
+         PwdGrid.UpdatePassword((int)MultiHashUD.Value);
+      }
+   }
+
    private async void SiteKeyChanged(object? sender, RoutedEventArgs e){
       //PwdGrid.SiteKey = (sender as ListBox).Text;
       Console.WriteLine($"{sender}  {(e as SelectionChangedEventArgs)}");

@@ -45,7 +45,7 @@
             
             <StackPanel Grid.Column="0" Grid.Row="7" Orientation="Horizontal">
                <CheckBox Name="MultiHashCB" IsThreeState="False" >Use Multi-Hash</CheckBox>
-               <NumericUpDown Name="MultiHashUD" Width="200" Maximum="500" Value="0"
+               <NumericUpDown ValueChanged="MultiHashChanged" Name="MultiHashUD" Width="200" Maximum="500" Value="0"
                Minimum="0" ParsingNumberStyle="Integer" FormatString="0"></NumericUpDown>
             </StackPanel>
             <CheckBox Grid.Column="0" Grid.Row="8" >Add Uppercase</CheckBox>

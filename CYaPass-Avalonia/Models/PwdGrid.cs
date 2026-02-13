@@ -220,6 +220,8 @@ public class PwdGrid : Control
 
     private string GeneratePassword()
     {
+       // If the SiteKey is empty then we don't generate pwd
+       if (string.IsNullOrEmpty(SiteKey)){ return string.Empty;} 
         // Convert each segment into a direction code
         var codes = _segments.Select(seg => EncodeDirection(seg.A, seg.B));
 

@@ -20,6 +20,8 @@ public class PwdGrid : Control
     public String SiteKey{get;set;}
     public bool IsUppercase {get;set;}
     public int MultiHash{get;set;}
+    public bool IsMaxLength{get;set;}
+    public int MaxLength{get;set;}
     private Point? firstPoint = null;
     private UserPath up = new();
    public bool IsPatternHidden{get;set;} = false;
@@ -238,6 +240,11 @@ public class PwdGrid : Control
         if (IsUppercase){
            // find first char in hashResult
            hashResult = MakeFirstCharUppercase(hashResult);
+        }
+        if (IsMaxLength){
+           // TODO: this is a quick fix & probably needs
+           // to disallow strings less than X length
+            hashResult = hashResult.Substring(0,MaxLength);
         }
         return hashResult;
     }

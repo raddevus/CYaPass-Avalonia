@@ -53,6 +53,15 @@ public partial class MainWindow : Window
       }
    }
 
+   private async void Abc(object? sender, RoutedEventArgs e){
+   }
+   private async void MaxLengthChanged(object? sender, RoutedEventArgs e){
+      PwdGrid.IsMaxLength = MaxLengthCB?.IsChecked ?? false;
+      PwdGrid.MaxLength = (int)MaxLengthUD.Value;
+      PwdGrid.UpdatePassword();
+      Console.WriteLine($"maxlength: {MaxLengthUD.Value}");
+   }
+
    private async void SiteKeyChanged(object? sender, RoutedEventArgs e){
       //PwdGrid.SiteKey = (sender as ListBox).Text;
       Console.WriteLine($"{sender}  {(e as SelectionChangedEventArgs)}");

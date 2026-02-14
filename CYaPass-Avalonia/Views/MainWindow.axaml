@@ -55,7 +55,7 @@
             </StackPanel>
             <StackPanel Grid.Column="0" Grid.Row="10" Orientation="Horizontal">
               <CheckBox IsCheckedChanged="MaxLengthChanged" Name="MaxLengthCB" >Max Length</CheckBox>
-               <NumericUpDown Name="MaxLengthUD" Width="200" Maximum="64" Value="0" ValueChanged="MaxLengthChanged" 
+               <NumericUpDown Name="MaxLengthUD" Width="200" Maximum="64" Value="64" ValueChanged="MaxLengthChanged" 
                Minimum="0" ParsingNumberStyle="Integer" FormatString="0"></NumericUpDown>
             </StackPanel>
             <StackPanel Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Left">

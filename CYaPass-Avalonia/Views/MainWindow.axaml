@@ -50,8 +50,8 @@
             </StackPanel>
             <CheckBox IsCheckedChanged="AddUppercaseChanged" Grid.Column="0" Grid.Row="8" >Add Uppercase</CheckBox>
             <StackPanel Grid.Column="0" Grid.Row="9" Orientation="Horizontal">
-               <CheckBox  >Add Special Chars</CheckBox>
-               <TextBox Width="200"></TextBox>
+               <CheckBox Name="SpecialCharsCB" IsCheckedChanged="SpecialCharsChanged" >Add Special Chars</CheckBox>
+               <TextBox Name="SpecialCharsTB" TextChanged="SpecialCharsChanged" Width="200"></TextBox>
             </StackPanel>
             <StackPanel Grid.Column="0" Grid.Row="10" Orientation="Horizontal">
               <CheckBox IsCheckedChanged="MaxLengthChanged" Name="MaxLengthCB" >Max Length</CheckBox>

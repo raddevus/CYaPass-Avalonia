@@ -53,7 +53,12 @@ public partial class MainWindow : Window
       }
    }
 
-   private async void Abc(object? sender, RoutedEventArgs e){
+   private async void SpecialCharsChanged(object? sender, RoutedEventArgs e){
+      PwdGrid.IsSpecialChars = SpecialCharsCB?.IsChecked ?? false;
+      if (PwdGrid.IsSpecialChars){
+        PwdGrid.SpecialChars = SpecialCharsTB.Text;
+      }
+      PwdGrid.UpdatePassword();
    }
    private async void MaxLengthChanged(object? sender, RoutedEventArgs e){
       PwdGrid.IsMaxLength = MaxLengthCB?.IsChecked ?? false;

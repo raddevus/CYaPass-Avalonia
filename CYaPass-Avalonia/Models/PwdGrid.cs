@@ -261,7 +261,7 @@ public class PwdGrid : Control
       var target = source.Substring(0,offset);
       target += SpecialChars;
       target += source.Substring(offset, source.Length - offset);
-      return target;
+      return target.Substring(0,64);
    }
 
    private string MakeFirstCharUppercase(string source){

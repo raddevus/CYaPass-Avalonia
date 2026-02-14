@@ -224,6 +224,8 @@ public class PwdGrid : Control
     {
        // If the SiteKey is empty then we don't generate pwd
        if (string.IsNullOrEmpty(SiteKey)){ return string.Empty;} 
+       // if user hasn't drawn a path we don't gen password
+       if (_segments.Count < 1){return string.Empty;}
         // Convert each segment into a direction code
         var codes = _segments.Select(seg => EncodeDirection(seg.A, seg.B));
 

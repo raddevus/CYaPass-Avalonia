@@ -21,13 +21,14 @@
 -  [ - ] Save SiteKeys as JSON in local file (make sure JSON format matches current CYaPass versions exactly)
 -  [ - ] Fill SiteKeys list box from values read from local file (if exists)
 -  [ - ] Implement Export SiteKeys button
--  [ - ] Implement Add Uppercase
+-  [ X ] Implement Add Uppercase - 2026-02-13
 -  [ - ] Implement Add Special Char
--  [ - ] Implement Max Length
+-  [ X ] Implement Max Length - 2026-02-13
 -  [ - ] Clean up UI - various padding, margins etc.
 -  [ - ] Implement Edit (SiteKey) button
 -  [ - ] Implement Delete (SiteKey) button
 -  [ - ] App Config - Save Multi-hash value to config when user changes it - keep track of value for user
 -  [ - ] App Config - Insure that the last selected SiteKey is always saved so that when user starts app again it is selected
 -  [ - ] TextCopy - Install on various Linux systems (via VirtualBox) test how it behaves (Fedora, Ubuntu, Debian, Manjaro, OMarchy)
--  [ - ] Need to insure that if MultiHash is turned on that the value is used when the grid is drawn (segments added)
+-  [ X ] Need to insure that if MultiHash is turned on that the value is used when the grid is drawn (segments added)
+   -  [ X ] 2026-02-13 This issue is resovled by moving properties to PwdGrid class

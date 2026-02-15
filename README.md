@@ -18,17 +18,23 @@
 -  [ - ] Calculate HMAC & compare to transfered value before attempting to decrypt data
 -  [ X ] Change MaxLength control from TextBox to NumericUpDown - 2026-02-07
 -  [ X ] Add NumericUpDown to Multi-hash - 2026-02-07
+-  [ - ] Alter SiteKey dialog to take all values from user
+   - [ - ] maxLength - int value > 0 (0 means no maxLength)
+   - [ - ] special chars - bool
+   - [ - ] uppercase - bool
 -  [ - ] Save SiteKeys as JSON in local file (make sure JSON format matches current CYaPass versions exactly)
 -  [ - ] Fill SiteKeys list box from values read from local file (if exists)
 -  [ - ] Implement Export SiteKeys button
 -  [ X ] Implement Add Uppercase - 2026-02-13
--  [ - ] Implement Add Special Char
+-  [ X ] Implement Add Special Char - 2026-02-14
 -  [ X ] Implement Max Length - 2026-02-13
 -  [ - ] Clean up UI - various padding, margins etc.
 -  [ - ] Implement Edit (SiteKey) button
 -  [ - ] Implement Delete (SiteKey) button
--  [ - ] App Config - Save Multi-hash value to config when user changes it - keep track of value for user
--  [ - ] App Config - Insure that the last selected SiteKey is always saved so that when user starts app again it is selected
+-  [ - ] App Config 
+   - [ - ] `multiHashIsOn`   `multiHashCount` Save Multi-hash value to config when user changes it - keep track of value for user
+   - [ - ] `lastSelectedKey` Insure that the last selected SiteKey is always saved so that when user starts app again it is selected
+   - [ - ] `transferUrl` Insure the transfer URL that is used is saved for next time
 -  [ - ] TextCopy - Install on various Linux systems (via VirtualBox) test how it behaves (Fedora, Ubuntu, Debian, Manjaro, OMarchy)
 -  [ X ] Need to insure that if MultiHash is turned on that the value is used when the grid is drawn (segments added)
    -  [ X ] 2026-02-13 This issue is resovled by moving properties to PwdGrid class

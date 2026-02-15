@@ -20,4 +20,17 @@ public class AppConfigTests{
       var output = JsonSerializer.Serialize(ac);
       Console.WriteLine(output);
    }
+
+   [Fact]
+   async void SaveBasicAppConfig(){
+
+      AppConfig ac = new(){ LastSelectedKey="lastOne", TransferUrl="https://actionmobile.app/", MultiHash = new AppConfig.MultiHashRecord(true,3)};
+      var targetDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+      var configFile = "cya.config";
+      var output = JsonSerializer.Serialize(ac);
+      await File.AppendAllTextAsync(Path.Combine(targetDir,configFile), output);
+     if (File.Exists(Path.Combine(targetDir, configFile))){
+        Console.WriteLine("Success! Wrote file.");
+     }
+   }
 }

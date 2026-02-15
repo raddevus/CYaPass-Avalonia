@@ -5,5 +5,6 @@ public class AppConfig{
 
    public string LastSelectedKey {get;set;}
    public string TransferUrl {get;set;}
-   public record MultiHash( bool MultiHashIsOn, int MultiHashCount);
+   public MultiHashRecord MultiHash{get; set;}
+   public record MultiHashRecord( bool MultiHashIsOn, int MultiHashCount);
 }

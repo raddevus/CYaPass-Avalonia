@@ -16,14 +16,15 @@ public class AppConfigTests{
    [Fact]
    void SetMultiHash(){
       AppConfig ac = new();
-      ac.MultiHash = new AppConfig.MultiHashRecord(true,5);
+      ac.MultiHashIsOn = true;
+      ac.MultiHashCount = 5;
       var output = JsonSerializer.Serialize(ac);
       Console.WriteLine(output);
    }
    
    [Fact]
    void DisplayAppConfigJson(){
-      AppConfig ac = new(){ LastSelectedKey="lastOne", TransferUrl="https://actionmobile.app/", MultiHash = new AppConfig.MultiHashRecord(true,3)};
+      AppConfig ac = new(){ LastSelectedKey="lastOne", TransferUrl="https://actionmobile.app/", MultiHashIsOn = true, MultiHashCount=7};
       
       var output = JsonSerializer.Serialize(ac);
       Console.WriteLine(output);
@@ -32,7 +33,7 @@ public class AppConfigTests{
    [Fact]
    async  Task SaveBasicAppConfig(){
 
-      AppConfig ac = new(){ LastSelectedKey="lastOne", TransferUrl="https://actionmobile.app/", MultiHash = new AppConfig.MultiHashRecord(true,3)};
+      AppConfig ac = new(){ LastSelectedKey="lastOne", TransferUrl="https://actionmobile.app/", MultiHashIsOn=true, MultiHashCount=3};
       var targetDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
       var configFile = "cya.config";
       File.Delete(Path.Combine(targetDir, configFile));

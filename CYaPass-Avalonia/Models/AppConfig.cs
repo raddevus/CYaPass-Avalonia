@@ -9,15 +9,12 @@ public class AppConfig{
 
    public string LastSelectedKey {get;set;} = string.Empty;
    public string TransferUrl {get;set;} = string.Empty;
-   public MultiHashRecord MultiHash{
-      get {return new MultiHashRecord(false,0);}
-      set {{MultiHash.MultiHashIsOn = value.MultiHashIsOn, MultiHash.MultiHashCount = value.MultiHashCount} ;}
-   }
-   public record MultiHashRecord( bool MultiHashIsOn, int MultiHashCount);
+   public bool MultiHashIsOn{get;set;}
+   public int MultiHashCount {get;set;}
 
    async public Task<bool> Save(){
 
-      AppConfig ac = new(){ LastSelectedKey="lastOne", TransferUrl="https://actionmobile.app/", MultiHash = new AppConfig.MultiHashRecord(true,3)};
+      AppConfig ac = new(){ LastSelectedKey="lastOne", TransferUrl="https://actionmobile.app/", MultiHashIsOn = true, MultiHashCount = 3};
       var targetDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
       var configFile = "cya.config";
       File.Delete(Path.Combine(targetDir, configFile));

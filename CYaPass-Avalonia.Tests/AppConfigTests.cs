@@ -14,6 +14,14 @@ public class AppConfigTests{
    }
 
    [Fact]
+   void SetMultiHash(){
+      AppConfig ac = new();
+      ac.MultiHash = new AppConfig.MultiHashRecord(true,5);
+      var output = JsonSerializer.Serialize(ac);
+      Console.WriteLine(output);
+   }
+   
+   [Fact]
    void DisplayAppConfigJson(){
       AppConfig ac = new(){ LastSelectedKey="lastOne", TransferUrl="https://actionmobile.app/", MultiHash = new AppConfig.MultiHashRecord(true,3)};
       

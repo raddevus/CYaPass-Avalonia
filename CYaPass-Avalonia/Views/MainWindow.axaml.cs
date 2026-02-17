@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using TextCopy;
@@ -16,6 +17,30 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        this.Closing += (s,e) => { 
+           SaveConfig();
+        };
+        LoadAppConfig();
+    }
+
+    public void LoadAppConfig(){
+
+    }
+    async private void SaveConfig(){
+
+      var vm = (MainWindowViewModel)DataContext;
+      Console.WriteLine($"vm : {vm == null}");
+     Console.WriteLine("I'm closing.");
+     Console.WriteLine($"CyaConfig : {vm.CyaConfig == null}");
+     vm.CyaConfig?.MultiHashIsOn = MultiHashCB?.IsChecked ?? false;
+     vm.CyaConfig?.MultiHashCount = (int)MultiHashUD?.Value;
+     vm.CyaConfig?.LastSelectedKey = "Rad-Test";
+     Console.WriteLine(CYaPass_Avalonia.Models.AppConfig.ConfigFile);
+     Console.WriteLine("going to save...");
+     
+     bool result = await vm.CyaConfig?.Save();
+     System.Threading.Thread.Sleep(500);
+     Console.WriteLine($"result: {result}");
     }
 
     public void ClearHandler(object? sender, RoutedEventArgs e){

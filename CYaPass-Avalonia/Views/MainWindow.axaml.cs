@@ -13,13 +13,9 @@ namespace CYaPass_Avalonia.Views;
 
 public partial class MainWindow : Window
 {
-    private string exePath;
-    private string configFile;
     public MainWindow()
     {
         InitializeComponent();
-        exePath = Path.GetDirectoryName(Environment.ProcessPath);
-        configFile = Path.Combine(exePath, "cya.config");
     }
 
     public void ClearHandler(object? sender, RoutedEventArgs e){

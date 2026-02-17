@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace CYaPass_Avalonia.Models;
@@ -9,13 +10,19 @@ public class AppConfig{
 
    private const string configFileName = "cya.config";
    private const string defaultTransferUrl = "https://newlibre.com/LibreStore/";
+   [JsonIgnore]
    public static string ConfigFile{get; set;} = Path.Combine(Path.GetDirectoryName(Environment.ProcessPath),configFileName);
-   public static string TransferUrl {get;set;} = defaultTransferUrl; 
+   [JsonIgnore]
+   private static string transferUrl {get;set;} = defaultTransferUrl;
 
+   public string TransferUrl {
+      get{ return transferUrl;}
+      set{ transferUrl = value;}
+   }
    public string LastSelectedKey {get;set;} = string.Empty;
    public bool MultiHashIsOn{get;set;}
    public int MultiHashCount {get;set;}
-
+// public AppConfig(){}
    public AppConfig(string configPath = "", string transferUrl = ""){
       Console.WriteLine("extra ctor is running...");
       if (configPath != string.Empty){

@@ -22,7 +22,7 @@ public class AppConfig{
    public string LastSelectedKey {get;set;} = string.Empty;
    public bool MultiHashIsOn{get;set;}
    public int MultiHashCount {get;set;}
-// public AppConfig(){}
+   
    public AppConfig(string configPath = "", string transferUrl = ""){
       Console.WriteLine("extra ctor is running...");
       if (configPath != string.Empty){

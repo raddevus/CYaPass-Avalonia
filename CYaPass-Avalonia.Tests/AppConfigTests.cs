@@ -24,7 +24,7 @@ public class AppConfigTests{
    
    [Fact]
    void DisplayAppConfigJson(){
-      AppConfig ac = new(){ LastSelectedKey="lastOne", TransferUrl="https://actionmobile.app/", MultiHashIsOn = true, MultiHashCount=7};
+      AppConfig ac = new(){ LastSelectedKey="lastOne", MultiHashIsOn = true, MultiHashCount=7};
       
       var output = JsonSerializer.Serialize(ac);
       Console.WriteLine(output);
@@ -33,7 +33,7 @@ public class AppConfigTests{
    [Fact]
    async  Task SaveBasicAppConfig(){
 
-      AppConfig ac = new(){ LastSelectedKey="lastOne", TransferUrl="https://actionmobile.app/", MultiHashIsOn=true, MultiHashCount=3};
+      AppConfig ac = new(){ LastSelectedKey="lastOne", MultiHashIsOn=true, MultiHashCount=3};
       var targetDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
       var configFile = "cya.config";
       File.Delete(Path.Combine(targetDir, configFile));
@@ -46,19 +46,18 @@ public class AppConfigTests{
    
    [Fact]
    async Task ReadBasicAppConfig(){
-      var targetDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-      var configFile = "cya.config";
-      if (File.Exists(Path.Combine(targetDir,configFile))){
-         var configJson = await File.ReadAllTextAsync(Path.Combine(targetDir,configFile));
+      AppConfig c = new();
+      if (File.Exists(AppConfig.ConfigFile)){
+         var configJson = await File.ReadAllTextAsync(AppConfig.ConfigFile);
          AppConfig? config = null;
          var ex = Record.Exception(() =>{
             config  = JsonSerializer.Deserialize<AppConfig>(configJson);
          });
          Assert.Null(ex);
-         Console.WriteLine($"last key: {config.LastSelectedKey} transferUrl: {config.TransferUrl}");
+         Console.WriteLine($"last key: {config.LastSelectedKey} transferUrl: {AppConfig.TransferUrl}");
       }
       else{
-         Console.WriteLine($"Couldn't do the work, because test file doesn't exist: {Path.Combine(targetDir, configFile)}");
+         Console.WriteLine($"Couldn't do the work, because test file doesn't exist: {AppConfig.ConfigFile}");
       }
    }
 }

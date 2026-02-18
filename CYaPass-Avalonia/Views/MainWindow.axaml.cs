@@ -19,8 +19,8 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        this.Closing += (s,e) => { 
-           SaveConfig();
+        this.Closing += async (s,e)  =>  { 
+           await SaveConfig();
         };
         
         LoadAppConfig();
@@ -57,21 +57,19 @@ public partial class MainWindow : Window
          Console.WriteLine($"Couldn't do the work, because test file doesn't exist: {cfile}");
       }
     }
-    async private void SaveConfig(){
+    async private Task<bool> SaveConfig(){
 
       var vm = (MainWindowViewModel)DataContext;
-      Console.WriteLine($"vm : {vm == null}");
-     Console.WriteLine("I'm closing.");
-     Console.WriteLine($"CyaConfig : {vm.CyaConfig == null}");
-     vm.CyaConfig?.MultiHashIsOn = MultiHashCB?.IsChecked ?? false;
-     vm.CyaConfig?.MultiHashCount = (int)MultiHashUD?.Value;
-     vm.CyaConfig?.LastSelectedKey = SiteKeys.SelectedItem.ToString();
+      vm.CyaConfig.MultiHashIsOn = MultiHashCB?.IsChecked ?? false;
+      vm.CyaConfig.MultiHashCount = (int)MultiHashUD?.Value;
+
+      vm.CyaConfig.LastSelectedKey = SiteKeys.SelectedItem?.ToString();
+
      Console.WriteLine(AppConfig.ConfigFile);
-     Console.WriteLine("going to save...");
-     
+   
      bool result = await vm.CyaConfig?.Save();
-     System.Threading.Thread.Sleep(500);
      Console.WriteLine($"result: {result}");
+     return true;
     }
 
     public void ClearHandler(object? sender, RoutedEventArgs e){

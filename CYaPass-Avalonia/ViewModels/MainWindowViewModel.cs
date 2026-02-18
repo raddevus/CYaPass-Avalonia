@@ -6,5 +6,5 @@ namespace CYaPass_Avalonia.ViewModels;
 public class MainWindowViewModel : ViewModelBase
 {
     public SiteKeySet<string> allSiteKeys{get;set;}  = new();
-    public AppConfig CyaConfig = new();
+    public AppConfig CyaConfig{get;set;} = new();
 }

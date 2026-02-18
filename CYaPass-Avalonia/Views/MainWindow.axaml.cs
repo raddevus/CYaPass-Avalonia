@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -9,6 +10,7 @@ using TextCopy;
 using NewLibre.Services;
 using NewLibre.Models;
 using CYaPass_Avalonia.ViewModels;
+using CYaPass_Avalonia.Models;
 
 namespace CYaPass_Avalonia.Views;
 
@@ -23,8 +25,28 @@ public partial class MainWindow : Window
         LoadAppConfig();
     }
 
-    public void LoadAppConfig(){
-
+    async public void LoadAppConfig(){
+      
+      var cfile = AppConfig.ConfigFile;  
+      var vm = (MainWindowViewModel)DataContext;
+      if (File.Exists(cfile)){
+         try{
+         var configJson = await File.ReadAllTextAsync(cfile);
+         Console.WriteLine($" got it!!!!! => {configJson}");
+         var lc = JsonSerializer.Deserialize<AppConfig>(configJson);
+         Console.WriteLine($"last key: {lc.LastSelectedKey} transferUrl: {lc.TransferUrl}"); 
+         MultiHashCB?.IsChecked = lc.MultiHashIsOn;
+         MultiHashUD?.Value = lc.MultiHashCount;
+         MultiHashCB.InvalidateVisual();
+         MultiHashUD.InvalidateVisual();
+         }
+         catch (Exception ex){
+            Console.WriteLine($"Coudn't read config file:{cfile} - {ex.Message}");
+         }
+      }
+      else{
+         Console.WriteLine($"Couldn't do the work, because test file doesn't exist: {cfile}");
+      }
     }
     async private void SaveConfig(){
 
@@ -35,7 +57,7 @@ public partial class MainWindow : Window
      vm.CyaConfig?.MultiHashIsOn = MultiHashCB?.IsChecked ?? false;
      vm.CyaConfig?.MultiHashCount = (int)MultiHashUD?.Value;
      vm.CyaConfig?.LastSelectedKey = "Rad-Test";
-     Console.WriteLine(CYaPass_Avalonia.Models.AppConfig.ConfigFile);
+     Console.WriteLine(AppConfig.ConfigFile);
      Console.WriteLine("going to save...");
      
      bool result = await vm.CyaConfig?.Save();
@@ -150,6 +172,7 @@ public partial class MainWindow : Window
      Console.WriteLine($"{SiteKeys.SelectedItem}");
      bool isDeleted = vm.allSiteKeys.Remove($"{SiteKeys.SelectedItem}");
      Console.WriteLine($"isDeleted: ${isDeleted}");
+     LoadAppConfig();
      // SiteKeys.ItemsSource = vm.allSiteKeys.Items; 
 
    }

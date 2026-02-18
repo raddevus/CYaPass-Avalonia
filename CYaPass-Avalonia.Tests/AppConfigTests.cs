@@ -50,10 +50,10 @@ public class AppConfigTests{
       if (File.Exists(AppConfig.ConfigFile)){
          var configJson = await File.ReadAllTextAsync(AppConfig.ConfigFile);
          Console.WriteLine($" got it!!!!! => {configJson}");
-/*         var ex = Record.Exception(() =>{
+         var ex = Record.Exception(() =>{
              ac = JsonSerializer.Deserialize<AppConfig>(configJson);
          });
-         Assert.Null(ex); */
+         Assert.Null(ex); 
          Console.WriteLine($"last key: {ac.LastSelectedKey} transferUrl: {new AppConfig().TransferUrl}");
       }
       else{

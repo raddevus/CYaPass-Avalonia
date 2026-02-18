@@ -22,16 +22,20 @@ public class AppConfig{
    public string LastSelectedKey {get;set;} = string.Empty;
    public bool MultiHashIsOn{get;set;}
    public int MultiHashCount {get;set;}
-   
-   public AppConfig(string configPath = "", string transferUrl = ""){
-      Console.WriteLine("extra ctor is running...");
-      if (configPath != string.Empty){
-        ConfigFile = configPath;
+   public AppConfig() {}
+  public AppConfig(string configFile ="", string transferUrl="",string lastSelectedKey="",
+        bool multiHashIsOn = false, int multiHashCount=0){
+
+      if (configFile != string.Empty){
+        ConfigFile = configFile;
       }
       if (transferUrl != string.Empty){
          TransferUrl = transferUrl;
       }
-   }
+     LastSelectedKey = lastSelectedKey;
+     MultiHashIsOn = multiHashIsOn;
+     MultiHashCount = multiHashCount;
+  } 
 
    async public Task<bool> Save(){
       File.Delete(ConfigFile);

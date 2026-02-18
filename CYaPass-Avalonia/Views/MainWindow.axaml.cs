@@ -172,9 +172,6 @@ public partial class MainWindow : Window
      Console.WriteLine($"{SiteKeys.SelectedItem}");
      bool isDeleted = vm.allSiteKeys.Remove($"{SiteKeys.SelectedItem}");
      Console.WriteLine($"isDeleted: ${isDeleted}");
-     LoadAppConfig();
-     // SiteKeys.ItemsSource = vm.allSiteKeys.Items; 
-
    }
 
    private async void OnAddSiteKeyClick(object? sender, RoutedEventArgs e){

@@ -31,14 +31,12 @@ public partial class MainWindow : Window
       var vm = (MainWindowViewModel)DataContext;
       if (File.Exists(cfile)){
          try{
-         var configJson = await File.ReadAllTextAsync(cfile);
-         Console.WriteLine($" got it!!!!! => {configJson}");
-         var lc = JsonSerializer.Deserialize<AppConfig>(configJson);
-         Console.WriteLine($"last key: {lc.LastSelectedKey} transferUrl: {lc.TransferUrl}"); 
-         MultiHashCB?.IsChecked = lc.MultiHashIsOn;
-         MultiHashUD?.Value = lc.MultiHashCount;
-         MultiHashCB.InvalidateVisual();
-         MultiHashUD.InvalidateVisual();
+            var configJson = await File.ReadAllTextAsync(cfile);
+            Console.WriteLine($" got it!!!!! => {configJson}");
+            var lc = JsonSerializer.Deserialize<AppConfig>(configJson);
+            Console.WriteLine($"last key: {lc.LastSelectedKey} transferUrl: {lc.TransferUrl}"); 
+            MultiHashCB?.IsChecked = lc.MultiHashIsOn;
+            MultiHashUD?.Value = lc.MultiHashCount;
          }
          catch (Exception ex){
             Console.WriteLine($"Coudn't read config file:{cfile} - {ex.Message}");

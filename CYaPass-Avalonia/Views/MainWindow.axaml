@@ -7,7 +7,7 @@
         x:Class="CYaPass_Avalonia.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         xmlns:local="clr-namespace:CYaPass_Avalonia.Models"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/cyapass.ico"
         Title="CYaPass"
         Padding="20"
         Background="WhiteSmoke">

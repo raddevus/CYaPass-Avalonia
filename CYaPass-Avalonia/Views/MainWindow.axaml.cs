@@ -22,7 +22,17 @@ public partial class MainWindow : Window
         this.Closing += (s,e) => { 
            SaveConfig();
         };
+        
         LoadAppConfig();
+    }
+
+    protected override void OnOpened(EventArgs e){
+       base.OnOpened(e);
+/*       var vm = (MainWindowViewModel)DataContext;
+
+         vm.allSiteKeys.Add("abc");
+         vm.allSiteKeys.Add("zippy");
+         vm.allSiteKeys.Add("supersite"); */
     }
 
     async public void LoadAppConfig(){
@@ -36,6 +46,7 @@ public partial class MainWindow : Window
             var lc = JsonSerializer.Deserialize<AppConfig>(configJson);
             Console.WriteLine($"last key: {lc.LastSelectedKey} transferUrl: {lc.TransferUrl}"); 
             MultiHashCB?.IsChecked = lc.MultiHashIsOn;
+            SiteKeys.SelectedItem = lc.LastSelectedKey;
             MultiHashUD?.Value = lc.MultiHashCount;
          }
          catch (Exception ex){
@@ -54,7 +65,7 @@ public partial class MainWindow : Window
      Console.WriteLine($"CyaConfig : {vm.CyaConfig == null}");
      vm.CyaConfig?.MultiHashIsOn = MultiHashCB?.IsChecked ?? false;
      vm.CyaConfig?.MultiHashCount = (int)MultiHashUD?.Value;
-     vm.CyaConfig?.LastSelectedKey = "Rad-Test";
+     vm.CyaConfig?.LastSelectedKey = SiteKeys.SelectedItem.ToString();
      Console.WriteLine(AppConfig.ConfigFile);
      Console.WriteLine("going to save...");
      

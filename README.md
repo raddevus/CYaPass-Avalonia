@@ -31,10 +31,13 @@
 -  [ - ] Clean up UI - various padding, margins etc.
 -  [ - ] Implement Edit (SiteKey) button
 -  [ - ] Implement Delete (SiteKey) button
--  [ - ] App Config 
-   - [ - ] `multiHashIsOn`   `multiHashCount` Save Multi-hash value to config when user changes it - keep track of value for user
-   - [ - ] `lastSelectedKey` Insure that the last selected SiteKey is always saved so that when user starts app again it is selected
-   - [ - ] `transferUrl` Insure the transfer URL that is used is saved for next time
+-  [ X ] App Config - 2026-02-18
+   - [ X ] `multiHashIsOn`   `multiHashCount` Save Multi-hash value to config when user changes it - keep track of value for user 2026-02-18
+   - [ X ] `lastSelectedKey` Insure that the last selected SiteKey is always saved so that when user starts app again it is selected - 2026-02-17
+   - [ X ] `transferUrl` Insure the transfer URL that is used is saved for next time 2026-02-18
 -  [ - ] TextCopy - Install on various Linux systems (via VirtualBox) test how it behaves (Fedora, Ubuntu, Debian, Manjaro, OMarchy)
 -  [ X ] Need to insure that if MultiHash is turned on that the value is used when the grid is drawn (segments added)
    -  [ X ] 2026-02-13 This issue is resovled by moving properties to PwdGrid class
+- [ - ] Clean up all build warnings
+- [ X ] Add cyapass icon - 2026-02-18
+- [ - ] 

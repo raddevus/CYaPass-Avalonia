@@ -99,11 +99,11 @@ public partial class MainWindow : Window
       vm?.CyaConfig.MultiHashIsOn = MultiHashCB?.IsChecked ?? false;
       vm?.CyaConfig.MultiHashCount = (int)MultiHashUD?.Value ;
 
-      vm?.CyaConfig.LastSelectedKey = SiteKeys.SelectedItem?.ToString();
+      vm?.CyaConfig.LastSelectedKey = SiteKeys?.SelectedItem?.ToString();
 
      Console.WriteLine(AppConfig.ConfigFile);
    
-     bool result = await vm.CyaConfig?.Save();
+     bool result = await vm?.CyaConfig?.Save();
      Console.WriteLine($"result: {result}");
      return true;
     }
@@ -116,20 +116,20 @@ public partial class MainWindow : Window
     
     public void SetHidePattern(object? sender, RoutedEventArgs e){
       Console.WriteLine("Setting Hide Pattern bool");
-      PwdGrid.IsPatternHidden = (sender as CheckBox).IsChecked ?? false;
+      PwdGrid.IsPatternHidden = (sender as CheckBox)?.IsChecked ?? false;
       System.Console.WriteLine($"isPatternHidden: {PwdGrid.IsPatternHidden}");
       PwdGrid.ForceRender();
     }
 
    private async void AddUppercaseChanged(object? sender, RoutedEventArgs e){
       
-      PwdGrid.IsUppercase = (sender as CheckBox).IsChecked ?? false;
+      PwdGrid.IsUppercase = (sender as CheckBox)?.IsChecked ?? false;
       PwdGrid.UpdatePassword();
    }
 
    private async void MultiHashCheckChanged(object? sender, RoutedEventArgs e){
       if (MultiHashCB.IsChecked ?? false){
-         PwdGrid.MultiHash = (int)MultiHashUD.Value;
+         PwdGrid.MultiHash = (int)MultiHashUD?.Value;
       }
       else{
          PwdGrid.MultiHash = 0;
@@ -177,7 +177,7 @@ public partial class MainWindow : Window
 
    private async void PasswordTextChanged(object? sender, RoutedEventArgs e){
          try{
-            ClipboardService.SetText(PwdTextBox.Text);
+            ClipboardService.SetText(PwdTextBox?.Text ?? string.Empty);
          }
          catch (Exception ex){
             Console.WriteLine("Couldn't copy to clipboard.");
@@ -218,7 +218,7 @@ public partial class MainWindow : Window
    }
 
    private async void OnAddSiteKeyClick(object? sender, RoutedEventArgs e){
-      var vm = (MainWindowViewModel)DataContext;
+      MainWindowViewModel vm = (MainWindowViewModel)DataContext;
       var msg = new SiteKeyMsgBox("Please type the SiteKey you'd like to add.");
        bool result =  await msg.ShowDialog<bool>(this);
        if (result)
@@ -231,9 +231,9 @@ public partial class MainWindow : Window
             SiteKeys.SelectedItem = msg.SiteKey;
             // initial value gets set
             if (!string.IsNullOrEmpty(SiteKeys.SelectedItem?.ToString())){
-               PwdGrid.SiteKey = SiteKeys.SelectedItem.ToString();
+               PwdGrid.SiteKey = SiteKeys.SelectedItem?.ToString();
                if (MultiHashCB.IsChecked ?? false){
-                  PwdGrid.MultiHash = (int)MultiHashUD.Value;
+                  PwdGrid.MultiHash = (int)MultiHashUD?.Value;
                  }
                  else{
                     PwdGrid.MultiHash = 0;

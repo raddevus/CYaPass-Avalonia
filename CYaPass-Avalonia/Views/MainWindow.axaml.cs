@@ -57,6 +57,7 @@ public partial class MainWindow : Window
     }
 
     private void InitThemeChangeHandler(){
+       if (Application.Current == null){return;}
           Application.Current.ActualThemeVariantChanged += (s, e) =>
          {
                 Console.WriteLine($"ThemeVariant: {Application.Current.ActualThemeVariant}"); 
@@ -74,16 +75,15 @@ public partial class MainWindow : Window
     async public void LoadAppConfig(){
       
       var cfile = AppConfig.ConfigFile;  
-      var vm = (MainWindowViewModel)DataContext;
       if (File.Exists(cfile)){
          try{
             var configJson = await File.ReadAllTextAsync(cfile);
             Console.WriteLine($" got it!!!!! => {configJson}");
             var lc = JsonSerializer.Deserialize<AppConfig>(configJson);
-            Console.WriteLine($"last key: {lc.LastSelectedKey} transferUrl: {lc.TransferUrl}"); 
-            MultiHashCB?.IsChecked = lc.MultiHashIsOn;
-            SiteKeys.SelectedItem = lc.LastSelectedKey;
-            MultiHashUD?.Value = lc.MultiHashCount;
+            Console.WriteLine($"last key: {lc?.LastSelectedKey} transferUrl: {lc?.TransferUrl}"); 
+            MultiHashCB?.IsChecked = lc?.MultiHashIsOn;
+            SiteKeys.SelectedItem = lc?.LastSelectedKey;
+            MultiHashUD?.Value = lc?.MultiHashCount;
          }
          catch (Exception ex){
             Console.WriteLine($"Coudn't read config file:{cfile} - {ex.Message}");
@@ -95,11 +95,11 @@ public partial class MainWindow : Window
     }
     async private Task<bool> SaveConfig(){
 
-      var vm = (MainWindowViewModel)DataContext;
-      vm.CyaConfig.MultiHashIsOn = MultiHashCB?.IsChecked ?? false;
-      vm.CyaConfig.MultiHashCount = (int)MultiHashUD?.Value;
+      MainWindowViewModel? vm = DataContext as MainWindowViewModel;
+      vm?.CyaConfig.MultiHashIsOn = MultiHashCB?.IsChecked ?? false;
+      vm?.CyaConfig.MultiHashCount = (int)MultiHashUD?.Value ;
 
-      vm.CyaConfig.LastSelectedKey = SiteKeys.SelectedItem?.ToString();
+      vm?.CyaConfig.LastSelectedKey = SiteKeys.SelectedItem?.ToString();
 
      Console.WriteLine(AppConfig.ConfigFile);
    

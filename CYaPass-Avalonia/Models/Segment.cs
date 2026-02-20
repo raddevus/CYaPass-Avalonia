@@ -17,14 +17,12 @@ public class Segment
       PointValue = pointValue;
   }
 
-  public override bool Equals(object obj)
+  public override bool Equals(object? obj)
   {
+      if (obj == null){ return false; }
       var incoming = obj as Segment;
+      if (incoming == null){ return false; }
 
-      if (incoming == null)
-      {
-          return false;
-      }
 
       bool a = ((this.Begin.X == incoming.Begin.X) && (this.Begin.Y == incoming.Begin.Y)) &&
               ((this.End.X == incoming.End.X) && (this.End.Y == incoming.End.Y));

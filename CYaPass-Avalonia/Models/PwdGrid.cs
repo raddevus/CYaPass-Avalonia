@@ -17,7 +17,7 @@ public class PwdGrid : Control
     private const int PostRadius = 6;
     private int pointTrack = 0;
     private HashSet<int> postIndexes = new();
-    public String SiteKey{get;set;}
+    public String SiteKey{get;set;} = string.Empty;
     public bool IsUppercase {get;set;}
     public int MultiHash{get;set;}
     public bool IsSpecialChars{get;set;}

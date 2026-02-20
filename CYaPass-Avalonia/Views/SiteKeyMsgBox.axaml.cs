@@ -5,7 +5,7 @@ namespace CYaPass_Avalonia.Views;
 
 public partial class SiteKeyMsgBox : Window
 {
-   public string SiteKey {get;set;}
+   public string SiteKey {get;set;} = string.Empty;
    public SiteKeyMsgBox(): this("default message") {
    }
     public SiteKeyMsgBox(string message)
@@ -18,8 +18,8 @@ public partial class SiteKeyMsgBox : Window
 
     private void Ok_Click(object? sender, RoutedEventArgs e)
     {
-       SiteKey = SiteKeyText.Text.Replace(" ", ""); // replace all white-space anywhere in string
-       //SiteKey = System.IO.Path.GetRandomFileName();
+       // replace all white-space anywhere in string
+       SiteKey = SiteKeyText?.Text?.Replace(" ", "") ?? string.Empty;
 
        Close(true);
     }

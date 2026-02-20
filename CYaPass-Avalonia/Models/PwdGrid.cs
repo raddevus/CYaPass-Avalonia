@@ -15,13 +15,12 @@ public class PwdGrid : Control
     private const int NumCells = 6;
     private const int CellSize = 50;
     private const int PostRadius = 6;
-    private int pointTrack = 0;
     private HashSet<int> postIndexes = new();
     public String SiteKey{get;set;} = string.Empty;
     public bool IsUppercase {get;set;}
     public int MultiHash{get;set;}
     public bool IsSpecialChars{get;set;}
-    public string SpecialChars{get;set;}
+    public string SpecialChars{get;set;} = string.Empty;
     public bool IsMaxLength{get;set;}
     public int MaxLength{get;set;}
     private Point? firstPoint = null;
@@ -257,6 +256,8 @@ public class PwdGrid : Control
     }
 
    private string AddSpecialChars(string source){
+      // If there are no specialchars then just return the source string
+      if (string.IsNullOrEmpty(SpecialChars)){return source;}
       int offset = 2;
       var target = source.Substring(0,offset);
       target += SpecialChars;
@@ -317,7 +318,6 @@ public class PwdGrid : Control
     {
        IsPatternHidden = false;
        up = new();
-       pointTrack = 0;
        postIndexes = new();
         firstPoint = null; 
         _userPoints.Clear();

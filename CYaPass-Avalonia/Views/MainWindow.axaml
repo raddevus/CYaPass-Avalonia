@@ -25,7 +25,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- Left column -->
-        <StackPanel Grid.Column="0" Background="LightBlue"
+        <StackPanel Name="LeftSide" Grid.Column="0" Background="LightBlue"
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch">
 
@@ -70,7 +70,7 @@
         </StackPanel>
 
         <!-- Right column -->
-        <StackPanel Grid.Column="1" Background="LightYellow"
+        <StackPanel Name="RightSide" Grid.Column="1" Background="LightYellow"
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch">
             

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Avalonia;           // For Application
+using Avalonia.Styling;   // For ThemeVariant
+using Avalonia.Media;     // For Brushes
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using TextCopy;
@@ -22,8 +25,8 @@ public partial class MainWindow : Window
         this.Closing += async (s,e)  =>  { 
            await SaveConfig();
         };
-        
         LoadAppConfig();
+        InitThemeChangeHandler();
     }
 
     protected override void OnOpened(EventArgs e){
@@ -33,7 +36,40 @@ public partial class MainWindow : Window
          vm.allSiteKeys.Add("abc");
          vm.allSiteKeys.Add("zippy");
          vm.allSiteKeys.Add("supersite"); */
+
+        CheckThemeVariant(); 
     }
+
+    private void CheckThemeVariant(){
+       Console.WriteLine($"theme: {ActualThemeVariant}"); 
+      if (ActualThemeVariant == ThemeVariant.Dark)
+      {
+          // Apply dark mode background color
+          LeftSide.Background = Brushes.DarkBlue;
+          RightSide.Background = Brushes.DarkGreen;
+      }
+      else
+      {
+          // Apply light mode background color
+          LeftSide.Background = Brushes.LightBlue;
+          RightSide.Background = Brushes.LightYellow;
+      }
+    }
+
+    private void InitThemeChangeHandler(){
+          Application.Current.ActualThemeVariantChanged += (s, e) =>
+         {
+                Console.WriteLine($"ThemeVariant: {Application.Current.ActualThemeVariant}"); 
+                CheckThemeVariant();
+             if (Application.Current.ActualThemeVariant == ThemeVariant.Dark)
+             {
+             }
+             else
+             {
+                 // Switched to light mode
+             }
+         };
+   }
 
     async public void LoadAppConfig(){
       

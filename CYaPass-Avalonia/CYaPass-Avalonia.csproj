@@ -1,16 +1,34 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <MacOSIcon>Assets/cyapass.icns</MacOSIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
   </PropertyGroup>
-
+<PropertyGroup>
+  <UseAppHost>true</UseAppHost>
+</PropertyGroup>
+<PropertyGroup>
+    <CFBundleName>CYaPass</CFBundleName> <!-- Also defines .app file name -->
+    <CFBundleDisplayName>CYaPass</CFBundleDisplayName>
+    <CFBundleIdentifier>com.cyapass</CFBundleIdentifier>
+    <CFBundleVersion>1.0.0</CFBundleVersion>
+    <CFBundlePackageType>APPL</CFBundlePackageType>
+    <CFBundleSignature>????</CFBundleSignature>
+    <CFBundleExecutable>CYaPass</CFBundleExecutable>
+    <CFBundleIconFile>cyapass.icns</CFBundleIconFile> <!-- Will be copied from output directory -->
+    <NSPrincipalClass>NSApplication</NSPrincipalClass>
+    <NSHighResolutionCapable>true</NSHighResolutionCapable>
+</PropertyGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
+   <ItemGroup>
+     <BundleResource Include="Assets/cyapass.icns" />
+   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.3.10" />
@@ -23,6 +41,7 @@
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+    <PackageReference Include="Dotnet.Bundle" Version="*" />
     <Reference Include="TextCopy">
       <HintPath>.\External\TextCopy.dll</HintPath>
     </Reference>

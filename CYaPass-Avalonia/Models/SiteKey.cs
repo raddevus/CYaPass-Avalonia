@@ -2,7 +2,7 @@ using System;
 
 namespace CYaPass_Avalonia.Models;
 
-public class SiteKey{
+public class SiteKey : IComparable{
    // MaxLength = 0 - means no max length is set (64 is default) 
    public int MaxLength{get;set;}
    public bool HasSpecialChars{get;set;}
@@ -12,4 +12,22 @@ public class SiteKey{
    public override string ToString(){
       return this.Key;
    }
+
+    public int CompareTo(Object? other)
+    {
+        if (other == null) return 1;
+        return string.Compare(this.ToString(), other.ToString(), StringComparison.Ordinal);
+    }
+
+    public override bool Equals(object obj)
+    {
+        return obj is SiteKey other &&
+               string.Equals(this.Key, other.Key, StringComparison.Ordinal);
+    }
+
+    public override int GetHashCode()
+    {
+        return Key?.GetHashCode(StringComparison.Ordinal) ?? 0;
+    }
+
 }

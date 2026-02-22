@@ -12,14 +12,12 @@ public class SiteKeySet<SiteKey>
     public bool Add(SiteKey item)
     {
        Console.WriteLine($"Add : {item}");
-        if (_set.Add(item))
+       
+        if (!Contains(item))
         {
+           _set.Add(item);
            // Find the correct insertion index 
-           int index = 0; 
-            while (index < Items.Count &&
-                string.Compare(Items[index], item.ToString(), StringComparison.Ordinal) < 0){
-             index++;
-         }
+            var index = GetItemIndex(item);
            
             Items.Insert(index, item.ToString());
             return true;
@@ -27,9 +25,20 @@ public class SiteKeySet<SiteKey>
         return false;
     }
 
+   private int GetItemIndex(SiteKey item ){
+        int index = 0; 
+         while (index < Items.Count &&
+             string.Compare(Items[index], item.ToString(),
+                StringComparison.Ordinal) < 0){
+            index++;
+         }
+         return index;
+   }
+
     public bool Remove(SiteKey item)
     {
        Console.WriteLine($"Remove: {item}");
+
         if (_set.Remove(item))
         {
             Items.Remove(item.ToString());
@@ -39,6 +48,9 @@ public class SiteKeySet<SiteKey>
         return false;
     }
 
-    public bool Contains(SiteKey item) => _set.Contains(item);
+    public bool Contains (SiteKey item) {
+       Console.WriteLine($"contains: {item} - {item.ToString()}");
+       return Items.Contains(item.ToString());
+    }
 }
 

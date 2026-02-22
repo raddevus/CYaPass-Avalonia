@@ -4,38 +4,41 @@ using System;
 
 namespace CYaPass_Avalonia.Models;
 
-public class SiteKeySet<T>
+public class SiteKeySet<SiteKey>
 {
-    private readonly HashSet<T> _set = new();
-    public ObservableCollection<T> Items{get;}  = new();
+    private readonly HashSet<SiteKey> _set = new();
+    public ObservableCollection<string> Items{get;}  = new();
     
-    public bool Add(T item)
+    public bool Add(SiteKey item)
     {
+       Console.WriteLine($"Add : {item}");
         if (_set.Add(item))
         {
            // Find the correct insertion index 
            int index = 0; 
-           while (index < Items.Count && 
-                 Comparer<T>.Default.Compare(Items[index], item) < 0){
-              index++;
-           }
-            Items.Insert(index, item);
+            while (index < Items.Count &&
+                string.Compare(Items[index], item.ToString(), StringComparison.Ordinal) < 0){
+             index++;
+         }
+           
+            Items.Insert(index, item.ToString());
             return true;
         }
         return false;
     }
 
-    public bool Remove(T item)
+    public bool Remove(SiteKey item)
     {
+       Console.WriteLine($"Remove: {item}");
         if (_set.Remove(item))
         {
-            Items.Remove(item);
+            Items.Remove(item.ToString());
             Console.WriteLine($"Items.Count: {Items.Count}");
             return true;
         }
         return false;
     }
 
-    public bool Contains(T item) => _set.Contains(item);
+    public bool Contains(SiteKey item) => _set.Contains(item);
 }
 

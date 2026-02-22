@@ -205,15 +205,15 @@ public partial class MainWindow : Window
 
     private async void AddTestSiteKeys(object? sender, RoutedEventArgs e){
          var vm = (MainWindowViewModel)DataContext;
-        vm.allSiteKeys.Add("test1");
-        vm.allSiteKeys.Add("test2");
-        vm.allSiteKeys.Add("test3");
+        vm.allSiteKeys.Add(new SiteKey{Key="test1"});
+        vm.allSiteKeys.Add(new SiteKey{Key="test2"});
+        vm.allSiteKeys.Add(new SiteKey{Key="test3"});
     }
 
    private async void DeleteSiteKey(object? sender, RoutedEventArgs e){
       var vm = (MainWindowViewModel)DataContext;
      Console.WriteLine($"{SiteKeys.SelectedItem}");
-     bool isDeleted = vm.allSiteKeys.Remove($"{SiteKeys.SelectedItem}");
+     bool isDeleted = vm.allSiteKeys.Remove(new SiteKey{Key=SiteKeys.SelectedItem.ToString()});
      Console.WriteLine($"isDeleted: ${isDeleted}");
    }
 
@@ -226,7 +226,7 @@ public partial class MainWindow : Window
            // User clicked OK
             Console.WriteLine($"User selected OK: {msg.SiteKey}");
             if (!string.IsNullOrEmpty(msg.SiteKey.Key)){
-               vm.allSiteKeys.Add(msg.SiteKey.Key);
+               vm.allSiteKeys.Add(new SiteKey{Key = msg.SiteKey.Key});
             }
             SiteKeys.SelectedItem = msg.SiteKey;
             // initial value gets set

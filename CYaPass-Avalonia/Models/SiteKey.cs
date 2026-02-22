@@ -1,3 +1,4 @@
+using System;
 
 namespace CYaPass_Avalonia.Models;
 
@@ -7,4 +8,8 @@ public class SiteKey{
    public bool HasSpecialChars{get;set;}
    public bool HasUpperCase{get;set;}
    public string Key{get;set;} = string.Empty;
+
+   public override string ToString(){
+      return this.Key;
+   }
 }

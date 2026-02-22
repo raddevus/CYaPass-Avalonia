@@ -200,7 +200,6 @@ public partial class MainWindow : Window
       else{
          Console.WriteLine("The data couldn't be decrypted. You may have used an incorrect password key or the data may be corrupted.");
       }
-      
     }
 
     private async void AddTestSiteKeys(object? sender, RoutedEventArgs e){
@@ -211,6 +210,7 @@ public partial class MainWindow : Window
     }
 
    private async void DeleteSiteKey(object? sender, RoutedEventArgs e){
+      if (SiteKeys.SelectedItem == null){return;}
       var vm = (MainWindowViewModel)DataContext;
      Console.WriteLine($"{SiteKeys.SelectedItem}");
      bool isDeleted = vm.allSiteKeys.Remove(new SiteKey{Key=SiteKeys.SelectedItem.ToString()});

@@ -2,7 +2,9 @@
 namespace CYaPass_Avalonia.Models;
 
 public class SiteKey{
-   // notes about structure from JSON
-   // [{"MaxLength":0,"HasSpecialChars":false,"HasUpperCase":false,"Key":"QHRyYW5zZmVyS2V5"}
-   //
+   // MaxLength = 0 - means no max length is set (64 is default) 
+   public int MaxLength{get;set;}
+   public bool HasSpecialChars{get;set;}
+   public bool HasUpperCase{get;set;}
+   public string Key{get;set;} = string.Empty;
 }

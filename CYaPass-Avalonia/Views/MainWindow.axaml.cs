@@ -225,8 +225,8 @@ public partial class MainWindow : Window
        {
            // User clicked OK
             Console.WriteLine($"User selected OK: {msg.SiteKey}");
-            if (!string.IsNullOrEmpty(msg.SiteKey)){
-               vm.allSiteKeys.Add(msg.SiteKey);
+            if (!string.IsNullOrEmpty(msg.SiteKey.Key)){
+               vm.allSiteKeys.Add(msg.SiteKey.Key);
             }
             SiteKeys.SelectedItem = msg.SiteKey;
             // initial value gets set

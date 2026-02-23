@@ -129,7 +129,7 @@ public partial class MainWindow : Window
 
    private async void MultiHashCheckChanged(object? sender, RoutedEventArgs e){
       if (MultiHashCB.IsChecked ?? false){
-         PwdGrid.MultiHash = (int)MultiHashUD?.Value;
+         PwdGrid.MultiHash = (int)(MultiHashUD?.Value ?? 0);
       }
       else{
          PwdGrid.MultiHash = 0;
@@ -139,7 +139,7 @@ public partial class MainWindow : Window
 
    private async void MultiHashChanged(object? sender, RoutedEventArgs e){
       if (MultiHashCB?.IsChecked ?? false){
-         PwdGrid.MultiHash = (int)MultiHashUD.Value;
+         PwdGrid.MultiHash = (int)(MultiHashUD.Value ?? 0);
          PwdGrid.UpdatePassword();
       }
    }
@@ -236,7 +236,7 @@ public partial class MainWindow : Window
             if (!string.IsNullOrEmpty(SiteKeys.SelectedItem?.ToString())){
                PwdGrid.SiteKey = SiteKeys.SelectedItem?.ToString();
                if (MultiHashCB.IsChecked ?? false){
-                  PwdGrid.MultiHash = (int)MultiHashUD?.Value;
+                  PwdGrid.MultiHash = (int)(MultiHashUD?.Value ?? 0);
                  }
                  else{
                     PwdGrid.MultiHash = 0;

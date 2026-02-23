@@ -10,6 +10,7 @@ public class SiteKey : IComparable{
    public int MaxLength{get;set;}
    public bool HasSpecialChars{get;set;}
    public bool HasUpperCase{get;set;}
+   [JsonConverter(typeof(Base64ToStringConverter))]
    public string Key{get;set;} = string.Empty;
 
    public override string ToString(){

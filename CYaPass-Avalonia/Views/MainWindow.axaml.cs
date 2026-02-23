@@ -159,10 +159,11 @@ public partial class MainWindow : Window
    }
 
    private async void SiteKeyChanged(object? sender, RoutedEventArgs e){
-      //PwdGrid.SiteKey = (sender as ListBox).Text;
       Console.WriteLine($"{sender}  {(e as SelectionChangedEventArgs)}");
+      var vm = (MainWindowViewModel)DataContext;
        if (sender is ListBox lb && lb.SelectedItem is string text)
        {
+          Console.WriteLine($"{vm.allSiteKeys.GetItemByKey(lb.SelectedItem.ToString()).MaxLength}");
            Console.WriteLine($"Selected text: {text}");
            PwdGrid.SiteKey = text;
            if (MultiHashCB.IsChecked ?? false){

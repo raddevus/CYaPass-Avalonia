@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace CYaPass_Avalonia.Models;
 
@@ -24,6 +25,18 @@ public class SiteKeySet<SiteKey>
         }
         return false;
     }
+
+   public SiteKey GetItemByKey(String key){
+      int index = 0;
+      var allHashes = _set.ToList();
+      while (index < Items.Count){
+         if (allHashes[index].ToString() == key){
+            return allHashes[index];
+         }
+         index++;
+      }
+      return default(SiteKey);
+   }
 
    private int GetItemIndex(SiteKey item ){
         int index = 0; 

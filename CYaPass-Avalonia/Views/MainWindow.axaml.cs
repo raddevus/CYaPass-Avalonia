@@ -163,8 +163,12 @@ public partial class MainWindow : Window
       var vm = (MainWindowViewModel)DataContext;
        if (sender is ListBox lb && lb.SelectedItem is string text)
        {
-          Console.WriteLine($"{vm.allSiteKeys.GetItemByKey(lb.SelectedItem.ToString()).MaxLength}");
+          SiteKey currentKey = vm.allSiteKeys.GetItemByKey(lb.SelectedItem.ToString());
            Console.WriteLine($"Selected text: {text}");
+           MaxLengthCB.IsChecked = currentKey.MaxLength > 0;
+           MaxLengthUD.Value = currentKey.MaxLength;
+           AddUppercaseCB.IsChecked = currentKey.HasUpperCase;
+           SpecialCharsCB.IsChecked = currentKey.HasSpecialChars;
            PwdGrid.SiteKey = text;
            if (MultiHashCB.IsChecked ?? false){
               PwdGrid.MultiHash = (int)(MultiHashUD.Value ?? 0);

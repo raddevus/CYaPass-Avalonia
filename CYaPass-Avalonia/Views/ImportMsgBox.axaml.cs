@@ -4,12 +4,12 @@ using CYaPass_Avalonia.Models;
 
 namespace CYaPass_Avalonia.Views;
 
-public partial class ExportMsgBox : Window
+public partial class ImportMsgBox : Window
 {
    public string MainToken {get;set;}
-   public ExportMsgBox(): this("default message") {
+   public ImportMsgBox(): this("default message") {
    }
-    public ExportMsgBox(string message)
+    public ImportMsgBox(string message)
     {
         InitializeComponent();
         MessageText.Text = message;

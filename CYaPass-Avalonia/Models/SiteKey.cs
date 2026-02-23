@@ -1,9 +1,12 @@
 using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace CYaPass_Avalonia.Models;
 
 public class SiteKey : IComparable{
    // MaxLength = 0 - means no max length is set (64 is default) 
+   [JsonConverter(typeof(FlexibleIntConverter))]
    public int MaxLength{get;set;}
    public bool HasSpecialChars{get;set;}
    public bool HasUpperCase{get;set;}

@@ -196,6 +196,9 @@ public partial class MainWindow : Window
       var isSuccessDecrypt = c.Decrypt(encryptedSiteKeys, PwdTextBox.Text, iv, out decryptedData);
       if (isSuccessDecrypt){
          Console.WriteLine($"{decryptedData}"); 
+         var vm = (MainWindowViewModel)DataContext;
+         var downloadedSiteKeys = JsonSerializer.Deserialize<List<SiteKey>>(decryptedData);
+         foreach (SiteKey s in downloadedSiteKeys){ vm.allSiteKeys.Add(s);} 
       }
       else{
          Console.WriteLine("The data couldn't be decrypted. You may have used an incorrect password key or the data may be corrupted.");

@@ -97,7 +97,7 @@ public partial class MainWindow : Window
 
       MainWindowViewModel? vm = DataContext as MainWindowViewModel;
       vm?.CyaConfig.MultiHashIsOn = MultiHashCB?.IsChecked ?? false;
-      vm?.CyaConfig.MultiHashCount = (int)MultiHashUD?.Value ;
+      vm?.CyaConfig.MultiHashCount = (int)(MultiHashUD?.Value ?? 0);
 
       vm?.CyaConfig.LastSelectedKey = SiteKeys?.SelectedItem?.ToString();
 
@@ -153,7 +153,7 @@ public partial class MainWindow : Window
    }
    private async void MaxLengthChanged(object? sender, RoutedEventArgs e){
       PwdGrid.IsMaxLength = MaxLengthCB?.IsChecked ?? false;
-      PwdGrid.MaxLength = (int)MaxLengthUD.Value;
+      PwdGrid.MaxLength = (int)(MaxLengthUD.Value ?? 64);
       PwdGrid.UpdatePassword();
       Console.WriteLine($"maxlength: {MaxLengthUD.Value}");
    }
@@ -166,7 +166,7 @@ public partial class MainWindow : Window
            Console.WriteLine($"Selected text: {text}");
            PwdGrid.SiteKey = text;
            if (MultiHashCB.IsChecked ?? false){
-              PwdGrid.MultiHash = (int)MultiHashUD.Value;
+              PwdGrid.MultiHash = (int)(MultiHashUD.Value ?? 0);
            }
            else{
               PwdGrid.MultiHash = 0;

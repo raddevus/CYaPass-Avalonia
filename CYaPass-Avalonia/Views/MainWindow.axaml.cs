@@ -236,7 +236,7 @@ public partial class MainWindow : Window
             if (!string.IsNullOrEmpty(msg.SiteKey.Key)){
                vm.allSiteKeys.Add(new SiteKey{Key = msg.SiteKey.Key});
             }
-            SiteKeys.SelectedItem = msg.SiteKey;
+            SiteKeys.SelectedItem = msg.SiteKey.Key;
             // initial value gets set
             if (!string.IsNullOrEmpty(SiteKeys.SelectedItem?.ToString())){
                PwdGrid.SiteKey = SiteKeys.SelectedItem?.ToString();

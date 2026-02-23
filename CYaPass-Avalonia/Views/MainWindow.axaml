@@ -59,7 +59,7 @@
                Minimum="0" ParsingNumberStyle="Integer" FormatString="0"></NumericUpDown>
             </StackPanel>
             <StackPanel Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Left">
-              <Button>Export SiteKeys</Button>
+              <Button Click="ExportSiteKeys">Export SiteKeys</Button>
               <Button Click="ImportSiteKeys">Import SiteKeys</Button>
             </StackPanel>
             <StackPanel Grid.Column="0" Grid.Row="12" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Left">

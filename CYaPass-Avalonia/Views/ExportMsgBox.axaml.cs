@@ -4,25 +4,28 @@ using CYaPass_Avalonia.Models;
 
 namespace CYaPass_Avalonia.Views;
 
-public partial class SiteKeyMsgBox : Window
+public partial class ExportMsgBox : Window
 {
-   public SiteKey SiteKey {get;set;}
-   public SiteKeyMsgBox(): this("default message") {
+   public string MainToken {get;set;}
+   public ExportMsgBox(): this("default message") {
    }
-    public SiteKeyMsgBox(string message)
+    public ExportMsgBox(string message)
     {
         InitializeComponent();
         MessageText.Text = message;
         // Sets Focus to the SiteKey text box
-        this.Opened += (_, __) => { SiteKeyText.Focus(); };
+        this.Opened += (_, __) => {MainTokenText.Focus(); };
     }
 
     private void Ok_Click(object? sender, RoutedEventArgs e)
     {
-       SiteKey = new();
        // replace all white-space anywhere in string
-       SiteKey.Key = SiteKeyText?.Text?.Replace(" ", "") ?? string.Empty;
-
+       MainToken = MainTokenText?.Text?.Replace(" ", "") ?? string.Empty;
+       if (string.IsNullOrEmpty(MainToken) || MainToken.Length < 10){
+          MessageText.Text = "The string must be at least 10 characters and not contain any spaces.";
+          MainTokenText.Focus();
+          return;
+       }
        Close(true);
     }
 

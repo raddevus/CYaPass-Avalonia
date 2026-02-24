@@ -7,12 +7,13 @@ namespace CYaPass_Avalonia.Views;
 public partial class SetUrlMsgBox : Window
 {
    public string TransferUrl {get;set;}
-   public SetUrlMsgBox(): this("default message") {
+   public SetUrlMsgBox(): this(string.Empty,"default message") {
    }
-    public SetUrlMsgBox(string message)
+    public SetUrlMsgBox(string transferUrl, string message)
     {
         InitializeComponent();
         MessageText.Text = message;
+        TransferUrl = TransferUrlText?.Text = transferUrl;
         // Sets Focus to the SiteKey text box
         this.Opened += (_, __) => {TransferUrlText.Focus(); };
     }
@@ -21,6 +22,7 @@ public partial class SetUrlMsgBox : Window
     {
        // replace all white-space anywhere in string
        TransferUrl = TransferUrlText?.Text?.Replace(" ", "") ?? string.Empty;
+       System.Console.WriteLine($"url in msg textbox: {TransferUrl}");
        if (string.IsNullOrEmpty(TransferUrl) || !TransferUrl.Contains("http") || !TransferUrl.Contains("://")){
           MessageText.Text = "The string must not contain any spaces and must be a valid URL.";
           TransferUrlText.Focus();

@@ -201,6 +201,24 @@ public partial class MainWindow : Window
        }
     }
     
+    async public void SetTransferUrl(object? sender, RoutedEventArgs e){
+
+        var vm = (MainWindowViewModel)DataContext;
+        // Sends in the current value of the TransferUrl
+        // so it can be displayed in the dialog
+       var msg = new SetUrlMsgBox(vm.CyaConfig.TransferUrl, "Please type your MainToken Key that will be used to store your data.");
+       bool result =  await msg.ShowDialog<bool>(this);
+       var transferUrl = msg.TransferUrl;
+
+       Console.WriteLine($" from msgbox: {transferUrl}");
+       if (result)
+       {
+          vm.CyaConfig.TransferUrl = transferUrl;
+          Console.WriteLine($"new URL: {vm.CyaConfig.TransferUrl}");
+       }
+
+    }
+
     async public void ImportSiteKeys(object? sender, RoutedEventArgs e){
       var msg = new ImportMsgBox("Please type your MainToken Key that will be used to store your data.");
        var mainToken = msg.MainToken;

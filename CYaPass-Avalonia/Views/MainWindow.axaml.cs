@@ -199,24 +199,33 @@ public partial class MainWindow : Window
     }
     
     async public void ImportSiteKeys(object? sender, RoutedEventArgs e){
-      Console.WriteLine("Importing SiteKeys...");
-      var cyasvc = new CyaService("demoKeys2022","https://newlibre.com/LibreStore/");
-      var result = await cyasvc.GetCyaData();
-      var encryptedSiteKeys = result.CyaBucket.Data;
-      var iv = result.CyaBucket.Iv;
-      Console.WriteLine($"{encryptedSiteKeys}");
-      Crypton c = new();
-      string decryptedData = string.Empty;
-      var isSuccessDecrypt = c.Decrypt(encryptedSiteKeys, PwdTextBox.Text, iv, out decryptedData);
-      if (isSuccessDecrypt){
-         Console.WriteLine($"{decryptedData}"); 
-         var vm = (MainWindowViewModel)DataContext;
-         var downloadedSiteKeys = JsonSerializer.Deserialize<List<SiteKey>>(decryptedData);
-         foreach (SiteKey s in downloadedSiteKeys){ vm.allSiteKeys.Add(s);} 
-      }
-      else{
-         Console.WriteLine("The data couldn't be decrypted. You may have used an incorrect password key or the data may be corrupted.");
-      }
+      var msg = new ImportMsgBox("Please type your MainToken Key that will be used to store your data.");
+       var mainToken = msg.MainToken;
+
+       bool dialogResult =  await msg.ShowDialog<bool>(this);
+       if (dialogResult)
+       {
+         if (!string.IsNullOrEmpty(mainToken)){ return;}
+         Console.WriteLine("Importing SiteKeys...");
+         
+         var cyasvc = new CyaService(msg.MainToken,"https://newlibre.com/LibreStore/");
+         var result = await cyasvc.GetCyaData();
+         var encryptedSiteKeys = result.CyaBucket.Data;
+         var iv = result.CyaBucket.Iv;
+         Console.WriteLine($"{encryptedSiteKeys}");
+         Crypton c = new();
+         string decryptedData = string.Empty;
+         var isSuccessDecrypt = c.Decrypt(encryptedSiteKeys, PwdTextBox.Text, iv, out decryptedData);
+         if (isSuccessDecrypt){
+            Console.WriteLine($"{decryptedData}"); 
+            var vm = (MainWindowViewModel)DataContext;
+            var downloadedSiteKeys = JsonSerializer.Deserialize<List<SiteKey>>(decryptedData);
+            foreach (SiteKey s in downloadedSiteKeys){ vm.allSiteKeys.Add(s);} 
+         }
+         else{
+            Console.WriteLine("The data couldn't be decrypted. You may have used an incorrect password key or the data may be corrupted.");
+         }
+       }
     }
 
     private async void AddTestSiteKeys(object? sender, RoutedEventArgs e){

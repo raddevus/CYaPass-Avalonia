@@ -13,5 +13,6 @@
             <Button Content="OK" IsDefault="True" Click="Ok_Click"/>
             <Button Content="Cancel" IsCancel="True" Click="Cancel_Click"/>
         </StackPanel>
+        <Button Click="SetDefault">Set Default URL</Button>
     </StackPanel>
 </Window>

@@ -31,6 +31,11 @@ public partial class SetUrlMsgBox : Window
        Close(true);
     }
 
+    private void SetDefault(object? sender, RoutedEventArgs e){
+       // Default value is to NewLibre/LibreStore
+      TransferUrl = TransferUrlText.Text = "https://newlibre.com/LibreStore/";
+    }
+    
     private void Cancel_Click(object? sender, RoutedEventArgs e)
     {
         Close(false);

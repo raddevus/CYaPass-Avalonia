@@ -42,7 +42,7 @@ public class SiteKeySet<SiteKey>
         int index = 0; 
          while (index < Items.Count &&
              string.Compare(Items[index], item.ToString(),
-                StringComparison.Ordinal) < 0){
+                StringComparison.CurrentCultureIgnoreCase) < 0){
             index++;
          }
          return index;

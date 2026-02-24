@@ -80,6 +80,9 @@ public partial class MainWindow : Window
             var configJson = await File.ReadAllTextAsync(cfile);
             Console.WriteLine($" got it!!!!! => {configJson}");
             var lc = JsonSerializer.Deserialize<AppConfig>(configJson);
+           var vm = (MainWindowViewModel)DataContext;
+           // Sets ViewModel CyaConfig so we can get values later
+           vm.CyaConfig = lc;
             Console.WriteLine($"last key: {lc?.LastSelectedKey} transferUrl: {lc?.TransferUrl}"); 
             MultiHashCB?.IsChecked = lc?.MultiHashIsOn;
             SiteKeys.SelectedItem = lc?.LastSelectedKey;
@@ -201,14 +204,14 @@ public partial class MainWindow : Window
     async public void ImportSiteKeys(object? sender, RoutedEventArgs e){
       var msg = new ImportMsgBox("Please type your MainToken Key that will be used to store your data.");
        var mainToken = msg.MainToken;
-
+       var vm = (MainWindowViewModel)DataContext;
        bool dialogResult =  await msg.ShowDialog<bool>(this);
        if (dialogResult)
        {
          if (!string.IsNullOrEmpty(mainToken)){ return;}
          Console.WriteLine("Importing SiteKeys...");
          
-         var cyasvc = new CyaService(msg.MainToken,"https://newlibre.com/LibreStore/");
+         var cyasvc = new CyaService(msg.MainToken,vm.CyaConfig.TransferUrl);
          var result = await cyasvc.GetCyaData();
          var encryptedSiteKeys = result.CyaBucket.Data;
          var iv = result.CyaBucket.Iv;
@@ -218,7 +221,6 @@ public partial class MainWindow : Window
          var isSuccessDecrypt = c.Decrypt(encryptedSiteKeys, PwdTextBox.Text, iv, out decryptedData);
          if (isSuccessDecrypt){
             Console.WriteLine($"{decryptedData}"); 
-            var vm = (MainWindowViewModel)DataContext;
             var downloadedSiteKeys = JsonSerializer.Deserialize<List<SiteKey>>(decryptedData);
             foreach (SiteKey s in downloadedSiteKeys){ vm.allSiteKeys.Add(s);} 
          }

@@ -1,3 +1,5 @@
+<img width="1411" height="787" alt="image" src="https://github.com/user-attachments/assets/c91b12a7-9d47-45b8-9d87-de5dcf6f458d" />
+
 ### Notes For Building
 ##### Requires (custom) TextCopy Library
 1. There is now a dependency upon the (custom) TextCopy library which I've forked [here on github](https://github.com/raddevus/TextCopy).

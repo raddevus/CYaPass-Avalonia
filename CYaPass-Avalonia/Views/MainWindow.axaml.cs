@@ -9,11 +9,11 @@ using Avalonia.Styling;   // For ThemeVariant
 using Avalonia.Media;     // For Brushes
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using TextCopy;
 using NewLibre.Services;
 using NewLibre.Models;
 using CYaPass_Avalonia.ViewModels;
 using CYaPass_Avalonia.Models;
+using AppHelpers;
 
 namespace CYaPass_Avalonia.Views;
 
@@ -185,7 +185,10 @@ public partial class MainWindow : Window
 
    private async void PasswordTextChanged(object? sender, RoutedEventArgs e){
          try{
-            ClipboardService.SetText(PwdTextBox?.Text ?? string.Empty);
+            var clipboard = AppHelpers.Clipboard.Get();
+            if (clipboard != null) {
+               clipboard.SetTextAsync(PwdTextBox?.Text ?? string.Empty);
+            }
          }
          catch (Exception ex){
             Console.WriteLine("Couldn't copy to clipboard.");

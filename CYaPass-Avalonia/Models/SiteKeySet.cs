@@ -2,6 +2,11 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using System.Text;
+using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace CYaPass_Avalonia.Models;
 
@@ -9,6 +14,10 @@ public class SiteKeySet<SiteKey>
 {
     private readonly HashSet<SiteKey> _set = new();
     public ObservableCollection<string> Items{get;}  = new();
+
+   [JsonIgnore]
+   public string SiteKeyPath{get; set;} = Path.GetDirectoryName(Environment.ProcessPath);
+    private string SiteKeyFile = "sitekeys.json";
     
     public bool Add(SiteKey item)
     {
@@ -65,5 +74,17 @@ public class SiteKeySet<SiteKey>
        Console.WriteLine($"contains: {item} - {item.ToString()}");
        return Items.Contains(item.ToString());
     }
+
+    async public Task<bool> Save(){
+      var targetFile = Path.Combine(SiteKeyPath,SiteKeyFile);
+      File.Delete(targetFile);
+      var output = JsonSerializer.Serialize(_set);
+      await File.AppendAllTextAsync(targetFile, output);
+     if (File.Exists(targetFile)){
+        Console.WriteLine("Success! Wrote SiteKey file.");
+        return true;
+     }
+     return false;
+   }
 }
 

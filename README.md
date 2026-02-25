@@ -1,13 +1,6 @@
 <img width="1411" height="787" alt="image" src="https://github.com/user-attachments/assets/c91b12a7-9d47-45b8-9d87-de5dcf6f458d" />
 
 ### Notes For Building
-##### Requires (custom) TextCopy Library
-1. There is now a dependency upon the (custom) TextCopy library which I've forked [here on github](https://github.com/raddevus/TextCopy).
-2. The forked TextCopy project is updated to .NET 9.x but you can really only build the TextCopy.dll (TextCopy project) located under `/src/TextCopy`
-   - I don't care about the blazor project or any of that other stuff - I had to fix it to work on other Linux distros
-3. After you build the TextCopy project you need to A) create a directory named `/external` in the CYaPass_Avalonia project (in the same directory where CYaPass_Avalonia.csproj is found
-4. That project simply allows CYaPass to copy the password to the clipboard.
-
 ##### Requires AES_Complete Library
 1. There is now a dependency on the AES_Complete library which allows SiteKeys to be Encrypted/Decrypted and sent to WebAPI for storage
    - That project is located [here on github](https://github.com/raddevus/AES_Complete).
@@ -43,3 +36,12 @@
 - [ - ] Clean up all build warnings
 - [ X ] Add cyapass icon - 2026-02-18
 - [ - ] 
+
+#### No Longer Requires TextCopy DLL - Now Uses Avalonia for Copy To Clipboard 
+- Tested across multiple OSes (OpenMandriva, Fedora, Win11, macOS(Sequoia) and it works great
+##### ~~Requires (custom) TextCopy Library~~
+~~1. There is now a dependency upon the (custom) TextCopy library which I've forked [here on github](https://github.com/raddevus/TextCopy).~~
+~~2. The forked TextCopy project is updated to .NET 9.x but you can really only build the TextCopy.dll (TextCopy project) located under `/src/TextCopy`~~
+   ~~- I don't care about the blazor project or any of that other stuff - I had to fix it to work on other Linux distros
+3. After you build the TextCopy project you need to A) create a directory named `/external` in the CYaPass_Avalonia project (in the same directory where CYaPass_Avalonia.csproj is found
+4. That project simply allows CYaPass to copy the password to the clipboard.~~

@@ -31,13 +31,14 @@ public partial class MainWindow : Window
 
     protected override void OnOpened(EventArgs e){
        base.OnOpened(e);
-/*       var vm = (MainWindowViewModel)DataContext;
-
+       var vm = (MainWindowViewModel)DataContext;
+/*
          vm.allSiteKeys.Add("abc");
          vm.allSiteKeys.Add("zippy");
          vm.allSiteKeys.Add("supersite"); */
 
         CheckThemeVariant(); 
+         vm.allSiteKeys.LoadFromFile();
     }
 
     private void CheckThemeVariant(){
@@ -253,6 +254,7 @@ public partial class MainWindow : Window
 
     private async void AddTestSiteKeys(object? sender, RoutedEventArgs e){
          var vm = (MainWindowViewModel)DataContext;
+        vm.allSiteKeys.Save();
         vm.allSiteKeys.Add(new SiteKey{Key="test1"});
         vm.allSiteKeys.Add(new SiteKey{Key="test2"});
         vm.allSiteKeys.Add(new SiteKey{Key="test3"});

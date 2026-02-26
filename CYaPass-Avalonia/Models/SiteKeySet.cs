@@ -81,10 +81,22 @@ public class SiteKeySet<SiteKey>
       var output = JsonSerializer.Serialize(_set);
       await File.AppendAllTextAsync(targetFile, output);
      if (File.Exists(targetFile)){
-        Console.WriteLine("Success! Wrote SiteKey file.");
+        Console.WriteLine($"Success! Wrote SiteKey file. {targetFile}");
         return true;
      }
      return false;
+   }
+
+   async public Task<bool> LoadFromFile(){
+      
+      var targetFile = Path.Combine(SiteKeyPath,SiteKeyFile);
+      Console.WriteLine($"targetFile : {targetFile}");
+      var allKeys = await File.ReadAllTextAsync(targetFile);
+      Console.WriteLine("deserializing...");
+      var keys =  JsonSerializer.Deserialize<List<SiteKey>>(allKeys);
+      Console.WriteLine($"keys: {keys}");
+      foreach (SiteKey k in keys){ Add(k);} 
+      return true;
    }
 }
 

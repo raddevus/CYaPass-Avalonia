@@ -7,6 +7,8 @@
 2. CYaPass only uses the DLL assembly from that project (though it does produce an EXE used for driving functionality / testing
 
 ## Backlog Items
+- [ - ] **Fix the issue that occurs when User Removes All SiteKeys and then adds one new SiteKey** -- the listbox doesn't display it.<br>
+But, if user closes the app the sitekey is saved on close and then starts again the sitekey is displayed in listbox. 
 -  [ - ] Remove hard-coded values, in ImportSiteKey method & read them from the user
      -  [ - ] demoKeys2022 - read maintoken from user
      -  [ - ] base url to LibreStore api (add config stored with the app)

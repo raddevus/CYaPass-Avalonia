@@ -302,6 +302,8 @@ public partial class MainWindow : Window
          // Remove all Items from ListBox
          vm.allSiteKeys.Items.Clear();
          vm.allSiteKeys = new();
+         SiteKeys.ItemsSource = null;
+         SiteKeys.ItemsSource = vm.allSiteKeys.Items;
          // Delete the file so it no longer exists
          vm.allSiteKeys.DeleteSiteKeyFile();
    }

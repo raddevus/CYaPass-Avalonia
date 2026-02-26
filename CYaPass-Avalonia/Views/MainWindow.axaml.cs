@@ -232,20 +232,25 @@ public partial class MainWindow : Window
          Console.WriteLine("Importing SiteKeys...");
          
          var cyasvc = new CyaService(msg.MainToken,vm.CyaConfig.TransferUrl);
-         var result = await cyasvc.GetCyaData();
-         var encryptedSiteKeys = result.CyaBucket.Data;
-         var iv = result.CyaBucket.Iv;
-         Console.WriteLine($"{encryptedSiteKeys}");
-         Crypton c = new();
-         string decryptedData = string.Empty;
-         var isSuccessDecrypt = c.Decrypt(encryptedSiteKeys, PwdTextBox.Text, iv, out decryptedData);
-         if (isSuccessDecrypt){
-            Console.WriteLine($"{decryptedData}"); 
-            var downloadedSiteKeys = JsonSerializer.Deserialize<List<SiteKey>>(decryptedData);
-            foreach (SiteKey s in downloadedSiteKeys){ vm.allSiteKeys.Add(s);} 
-         }
-         else{
-            Console.WriteLine("The data couldn't be decrypted. You may have used an incorrect password key or the data may be corrupted.");
+         try {
+            var result = await cyasvc.GetCyaData();
+            var encryptedSiteKeys = result.CyaBucket.Data;
+            var iv = result.CyaBucket.Iv;
+            Console.WriteLine($"{encryptedSiteKeys}");
+            Crypton c = new();
+            string decryptedData = string.Empty;
+            var isSuccessDecrypt = c.Decrypt(encryptedSiteKeys, PwdTextBox.Text, iv, out decryptedData);
+            if (isSuccessDecrypt){
+               Console.WriteLine($"{decryptedData}"); 
+               var downloadedSiteKeys = JsonSerializer.Deserialize<List<SiteKey>>(decryptedData);
+               foreach (SiteKey s in downloadedSiteKeys){ vm.allSiteKeys.Add(s);} 
+            }
+            else{
+               Console.WriteLine("The data couldn't be decrypted. You may have used an incorrect password key or the data may be corrupted.");
+            }
+         } // try
+         catch (Exception ex){
+            Console.WriteLine($"The import failed. {ex.Message}");
          }
        }
     }

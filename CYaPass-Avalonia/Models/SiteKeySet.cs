@@ -98,5 +98,12 @@ public class SiteKeySet<SiteKey>
       foreach (SiteKey k in keys){ Add(k);} 
       return true;
    }
+
+   public void DeleteSiteKeyFile(){
+      var targetFile = Path.Combine(SiteKeyPath,SiteKeyFile);
+      Console.WriteLine($"Deleting: {targetFile}");
+      File.Delete(targetFile);
+
+   }
 }
 

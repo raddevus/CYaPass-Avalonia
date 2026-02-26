@@ -64,7 +64,7 @@
             </StackPanel>
             <StackPanel Grid.Column="0" Grid.Row="12" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Left">
               <Button Click="SetTransferUrl">Set Transfer URL</Button>
-              <Button>Remove All SiteKeys</Button>
+              <Button Click="RemoveAllSiteKeys">Remove All SiteKeys</Button>
             </StackPanel>
           </Grid>
         </StackPanel>

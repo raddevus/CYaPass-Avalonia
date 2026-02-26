@@ -25,20 +25,16 @@ public partial class MainWindow : Window
         this.Closing += async (s,e)  =>  { 
            await SaveConfig();
         };
-        LoadAppConfig();
         InitThemeChangeHandler();
     }
 
     protected override void OnOpened(EventArgs e){
        base.OnOpened(e);
        var vm = (MainWindowViewModel)DataContext;
-/*
-         vm.allSiteKeys.Add("abc");
-         vm.allSiteKeys.Add("zippy");
-         vm.allSiteKeys.Add("supersite"); */
 
         CheckThemeVariant(); 
          vm.allSiteKeys.LoadFromFile();
+        LoadAppConfig();
     }
 
     private void CheckThemeVariant(){
@@ -100,6 +96,8 @@ public partial class MainWindow : Window
     async private Task<bool> SaveConfig(){
 
       MainWindowViewModel? vm = DataContext as MainWindowViewModel;
+       // First save the SiteKeys
+      vm?.allSiteKeys.Save();
       vm?.CyaConfig.MultiHashIsOn = MultiHashCB?.IsChecked ?? false;
       vm?.CyaConfig.MultiHashCount = (int)(MultiHashUD?.Value ?? 0);
 
@@ -299,4 +297,12 @@ public partial class MainWindow : Window
        }
     }
 
+   private async void RemoveAllSiteKeys(object? sender, RoutedEventArgs e){
+         var vm = (MainWindowViewModel)DataContext;
+         // Remove all Items rom ListBox
+         vm.allSiteKeys.Items.Clear();
+         vm.allSiteKeys = new();
+         // Delete the file so it no longer exists
+         vm.allSiteKeys.DeleteSiteKeyFile();
+   }
 }

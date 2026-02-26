@@ -299,7 +299,7 @@ public partial class MainWindow : Window
 
    private async void RemoveAllSiteKeys(object? sender, RoutedEventArgs e){
          var vm = (MainWindowViewModel)DataContext;
-         // Remove all Items rom ListBox
+         // Remove all Items from ListBox
          vm.allSiteKeys.Items.Clear();
          vm.allSiteKeys = new();
          // Delete the file so it no longer exists

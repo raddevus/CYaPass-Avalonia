@@ -33,7 +33,7 @@
          RowDefinitions="Auto,Auto,Auto,Auto,300,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" 
          ColumnDefinitions="" Width="500">
             <Label Target="siteKeyLabel" Grid.Row="0" Grid.Column="0">1. Select (or Add) Site/Key</Label>
-            <ListBox MaxHeight="300" SelectionChanged="SiteKeyChanged" SelectionMode="AlwaysSelected" Name="SiteKeys" Grid.Row="1" Grid.Column="0" Grid.RowSpan="4"
+            <ListBox MaxHeight="300" SelectionChanged="SiteKeyChanged" SelectionMode="AlwaysSelected" Name="SiteKeys" Grid.Row="1" Grid.Column="0" Grid.RowSpan="4" ScrollViewer.AllowAutoHide="False" 
             ItemsSource="{Binding allSiteKeys.Items}" />
             
             

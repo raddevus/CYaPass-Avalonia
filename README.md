@@ -7,8 +7,10 @@
 2. CYaPass only uses the DLL assembly from that project (though it does produce an EXE used for driving functionality / testing
 
 ## Backlog Items
-- [ - ] Fix issue with import URL related to trailing slash - figure out how that has to be formatted
+- [ X ] Fix issue with import URL related to trailing slash - figure out how that has to be formatted 2026-02-27 <br>
+      - This issue was resolved int the AES_Complete project by using a call to URI() to build the URL properly.
 - [ - ] Handle all errors on Import & provide message to user when errors occur.
+- [ - ] Make sure the SiteKeys are saved to file every time they change (instead of when program closes).
 - [ - ] Implement Export SiteKeys button
 - [ - ] After Delete of SiteKey - set the selected item to one that is next to the one that was deleted
 - [ - ] Implement fast find to SiteKey - legacy app allows user to press letter that matches first letter of sitkey & iterates over them.

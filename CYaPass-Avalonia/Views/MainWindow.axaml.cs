@@ -216,13 +216,14 @@ public partial class MainWindow : Window
        if (result)
        {
           vm.CyaConfig.TransferUrl = transferUrl;
+          vm.CyaConfig.Save();
           Console.WriteLine($"new URL: {vm.CyaConfig.TransferUrl}");
        }
 
     }
 
     async public void ImportSiteKeys(object? sender, RoutedEventArgs e){
-      var msg = new ImportMsgBox("Please type your MainToken Key that will be used to store your data.");
+      var msg = new ImportMsgBox("Please type your MainToken Key that will be used to retrieve your data.");
        var mainToken = msg.MainToken;
        var vm = (MainWindowViewModel)DataContext;
        bool dialogResult =  await msg.ShowDialog<bool>(this);
@@ -230,7 +231,7 @@ public partial class MainWindow : Window
        {
          if (!string.IsNullOrEmpty(mainToken)){ return;}
          Console.WriteLine("Importing SiteKeys...");
-         
+         Console.WriteLine($"{msg.MainToken} : {vm.CyaConfig.TransferUrl}");         
          var cyasvc = new CyaService(msg.MainToken,vm.CyaConfig.TransferUrl);
          try {
             var result = await cyasvc.GetCyaData();
@@ -244,6 +245,8 @@ public partial class MainWindow : Window
                Console.WriteLine($"{decryptedData}"); 
                var downloadedSiteKeys = JsonSerializer.Deserialize<List<SiteKey>>(decryptedData);
                foreach (SiteKey s in downloadedSiteKeys){ vm.allSiteKeys.Add(s);} 
+               // Imported SiteKeys so lets save the local file
+               vm.allSiteKeys.Save();
             }
             else{
                Console.WriteLine("The data couldn't be decrypted. You may have used an incorrect password key or the data may be corrupted.");
@@ -257,7 +260,6 @@ public partial class MainWindow : Window
 
     private async void AddTestSiteKeys(object? sender, RoutedEventArgs e){
          var vm = (MainWindowViewModel)DataContext;
-        vm.allSiteKeys.Save();
         vm.allSiteKeys.Add(new SiteKey{Key="test1"});
         vm.allSiteKeys.Add(new SiteKey{Key="test2"});
         vm.allSiteKeys.Add(new SiteKey{Key="test3"});
@@ -268,6 +270,10 @@ public partial class MainWindow : Window
       var vm = (MainWindowViewModel)DataContext;
      Console.WriteLine($"{SiteKeys.SelectedItem}");
      bool isDeleted = vm.allSiteKeys.Remove(new SiteKey{Key=SiteKeys.SelectedItem.ToString()});
+     if (isDeleted){
+        // removed the item, so save sitekeys to file
+        vm.allSiteKeys.Save();
+     }
      Console.WriteLine($"isDeleted: ${isDeleted}");
    }
 
@@ -281,6 +287,8 @@ public partial class MainWindow : Window
             Console.WriteLine($"User selected OK: {msg.SiteKey}");
             if (!string.IsNullOrEmpty(msg.SiteKey.Key)){
                vm.allSiteKeys.Add(new SiteKey{Key = msg.SiteKey.Key});
+               // New SiteKey was added so save all to file
+               vm.allSiteKeys.Save();
             }
             SiteKeys.SelectedItem = msg.SiteKey.Key;
             // initial value gets set

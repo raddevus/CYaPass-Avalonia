@@ -195,18 +195,27 @@ public partial class MainWindow : Window
    }
 
     async public void ExportSiteKeys(object? sender, RoutedEventArgs e){
+
+       // Insure that the user has a password generated otherwise exit
+       var currentPwd = PwdTextBox.Text;
        
       var msg = new ExportMsgBox("Please type your MainToken Key that will be used to store your data.");
        bool dialogResult =  await msg.ShowDialog<bool>(this);
        var mainToken = msg.MainToken;
+       // Make sure the pwd does not contain the mainToken, otherwise exit
+       // Need to provide message to user so she knows why we exited.
        var vm = (MainWindowViewModel)DataContext;
        if (dialogResult)
        {
          if (!string.IsNullOrEmpty(mainToken)){ return;}
          Console.WriteLine("Importing SiteKeys...");
          Console.WriteLine($"{msg.MainToken} : {vm.CyaConfig.TransferUrl}");         
-         var cyasvc = new CyaService(msg.MainToken,vm.CyaConfig.TransferUrl);
+         Crypton c = new();
          try {
+               string ivFromEncrypt;
+               // 1. read all text from sitekey.json so we can encrypt it
+               // 2. 
+               var encryptedBase64 = c.Encrypt("abc",currentPwd, out ivFromEncrypt);
 
          }
          catch (Exception ex){

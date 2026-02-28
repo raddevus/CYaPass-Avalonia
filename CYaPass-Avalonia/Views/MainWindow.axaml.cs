@@ -197,9 +197,20 @@ public partial class MainWindow : Window
     async public void ExportSiteKeys(object? sender, RoutedEventArgs e){
        
       var msg = new ExportMsgBox("Please type your MainToken Key that will be used to store your data.");
-       bool result =  await msg.ShowDialog<bool>(this);
-       if (result)
+       bool dialogResult =  await msg.ShowDialog<bool>(this);
+       var mainToken = msg.MainToken;
+       var vm = (MainWindowViewModel)DataContext;
+       if (dialogResult)
        {
+         if (!string.IsNullOrEmpty(mainToken)){ return;}
+         Console.WriteLine("Importing SiteKeys...");
+         Console.WriteLine($"{msg.MainToken} : {vm.CyaConfig.TransferUrl}");         
+         var cyasvc = new CyaService(msg.MainToken,vm.CyaConfig.TransferUrl);
+         try {
+
+         }
+         catch (Exception ex){
+         }
        }
     }
     

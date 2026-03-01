@@ -198,7 +198,10 @@ public partial class MainWindow : Window
 
        // Insure that the user has a password generated otherwise exit
        var currentPwd = PwdTextBox.Text;
-       
+       if (string.IsNullOrEmpty(currentPwd)){ 
+          new MsgBox("You must select a SiteKey & draw a pattern (generate a password) to export your SiteKeys.\nPlease try again.").ShowDialog<bool>(this);
+          return;
+       }       
       var msg = new ExportMsgBox("Please type your MainToken Key that will be used to store your data.");
        bool dialogResult =  await msg.ShowDialog<bool>(this);
        var mainToken = msg.MainToken;
@@ -206,12 +209,12 @@ public partial class MainWindow : Window
        // Need to provide message to user so she knows why we exited.
        if (currentPwd.Contains(mainToken)){ 
           // display problem & exit
-          // "Your MainToken cannot include any portion of your password.\nPlease try again.";
+          new MsgBox("Your MainToken cannot include any portion of your password.\nPlease try again.").ShowDialog<bool>(this);
           return;
        }
        if (mainToken.Contains(SiteKeys.SelectedItem.ToString())){
           // display problem & exit
-          // "Your MainToken cannot include any portion of the SiteKey that you are using to encrypt your data.\nPlease try again."
+          new MsgBox( "Your MainToken cannot include any portion of the SiteKey that you are using to encrypt your data.\nPlease try again.").ShowDialog<bool>(this);
           return;
        }
 

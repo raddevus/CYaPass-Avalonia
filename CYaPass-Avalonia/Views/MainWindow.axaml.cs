@@ -202,21 +202,9 @@ public partial class MainWindow : Window
           new MsgBox("You must select a SiteKey & draw a pattern (generate a password) to export your SiteKeys.\nPlease try again.").ShowDialog<bool>(this);
           return;
        }       
-      var msg = new ExportMsgBox("Please type your MainToken Key that will be used to store your data.");
+      var msg = new ExportMsgBox("Please type your MainToken Key that will be used to store your data.", currentPwd, SiteKeys.SelectedItem.ToString());
        bool dialogResult =  await msg.ShowDialog<bool>(this);
        var mainToken = msg.MainToken;
-       // Make sure the pwd does not contain the mainToken, otherwise exit
-       // Need to provide message to user so she knows why we exited.
-       if (currentPwd.Contains(mainToken)){ 
-          // display problem & exit
-          new MsgBox("Your MainToken cannot include any portion of your password.\nPlease try again.").ShowDialog<bool>(this);
-          return;
-       }
-       if (mainToken.Contains(SiteKeys.SelectedItem.ToString())){
-          // display problem & exit
-          new MsgBox( "Your MainToken cannot include any portion of the SiteKey that you are using to encrypt your data.\nPlease try again.").ShowDialog<bool>(this);
-          return;
-       }
 
        var vm = (MainWindowViewModel)DataContext;
        if (dialogResult)

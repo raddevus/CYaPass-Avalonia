@@ -205,17 +205,17 @@ public partial class MainWindow : Window
       var msg = new ExportMsgBox("Please type your MainToken Key that will be used to store your data.", currentPwd, SiteKeys.SelectedItem.ToString());
        bool dialogResult =  await msg.ShowDialog<bool>(this);
        var mainToken = msg.MainToken;
-
+       Console.WriteLine($"mainToken: {mainToken}  : result {dialogResult}");
        var vm = (MainWindowViewModel)DataContext;
        if (dialogResult)
        {
-         if (!string.IsNullOrEmpty(mainToken)){ return;}
+         if (string.IsNullOrEmpty(mainToken)){ return;}
          Console.WriteLine("Exporting SiteKeys...");
          Console.WriteLine($"{msg.MainToken} : {vm.CyaConfig.TransferUrl}");         
          try {
                string ivFromEncrypt;
                // 1. Call EncryptSiteKeys - get encrypted & encoded data back 
-               var encryptedBase64 = await vm.allSiteKeys.EncryptSiteKeys("abc"); 
+               var encryptedBase64 = await vm.allSiteKeys.EncryptSiteKeys(currentPwd); 
                Console.WriteLine(encryptedBase64);
                // 2. generate HMAC from data & iv
                // 3. post maintoken, data, hmac, iv to SaveData

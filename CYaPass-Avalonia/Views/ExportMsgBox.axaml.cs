@@ -48,7 +48,8 @@ public partial class ExportMsgBox : Window
           MainTokenText.Focus();
           return;
        }
-
+      // If it passes all the guard clauses then you have a good MainToken to
+      // use to store the data so close the dialog box
        Close(true);
     }
 

@@ -91,11 +91,14 @@ public class SiteKeySet<SiteKey>
 
     async public Task<string> EncryptSiteKeys(string pwd){
       var targetFile = Path.Combine(SiteKeyPath,SiteKeyFile);
+      Console.WriteLine($"targetFile: {targetFile}");
       var allKeys = await File.ReadAllTextAsync(targetFile);
+      Console.WriteLine("read file.");
       Crypton c = new();
-      string iv = null;
-      return c.Encrypt(allKeys, pwd, out iv); 
-      
+      string iv = string.Empty;
+      var encData =  c.Encrypt(allKeys, pwd, out iv); 
+      Console.WriteLine($"encData: {encData}");
+      return encData; 
     }
 
    async public Task<bool> LoadFromFile(){

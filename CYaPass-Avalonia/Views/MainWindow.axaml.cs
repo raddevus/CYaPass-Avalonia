@@ -231,7 +231,7 @@ public partial class MainWindow : Window
         var vm = (MainWindowViewModel)DataContext;
         // Sends in the current value of the TransferUrl
         // so it can be displayed in the dialog
-       var msg = new SetUrlMsgBox(vm.CyaConfig.TransferUrl, "Please type your MainToken Key that will be used to store your data.");
+       var msg = new SetUrlMsgBox(vm.CyaConfig.TransferUrl, "Please set the URL to the location where you have LibreStore running.\nOr set to default to store on public LibreStore.");
        bool result =  await msg.ShowDialog<bool>(this);
        var transferUrl = msg.TransferUrl;
 
@@ -263,7 +263,7 @@ public partial class MainWindow : Window
             Console.WriteLine($"{encryptedSiteKeys}");
             Crypton c = new();
             string decryptedData = string.Empty;
-            var isSuccessDecrypt = c.Decrypt(encryptedSiteKeys, PwdTextBox.Text, iv, out decryptedData);
+            var isSuccessDecrypt = c.Decrypt(encryptedSiteKeys, PwdGrid.FullLengthPassword, iv, out decryptedData);
             if (isSuccessDecrypt){
                Console.WriteLine($"{decryptedData}"); 
                var downloadedSiteKeys = JsonSerializer.Deserialize<List<SiteKey>>(decryptedData);

@@ -30,7 +30,18 @@ public class PwdGrid : Control
     private readonly List<Point> _userPoints = new();
     private readonly HashSet<string> _usedSegments = new();   // prevent duplicates
     private readonly List<(Point A, Point B)> _segments = new();
-
+    
+    // FullLengthPassword has all items applied except maxlength
+    // & is for special use with Import & Export functionality
+   public string FullLengthPassword{
+      get{ return fullLengthPassword;}
+      private set;
+   }
+   private string fullLengthPassword{ get;
+      set{
+            FullLengthPassword = value;
+      }
+   }
     public static readonly DirectProperty<PwdGrid, string?> GeneratedPasswordProperty =
         AvaloniaProperty.RegisterDirect<PwdGrid, string?>(
             nameof(GeneratedPassword),
@@ -247,6 +258,11 @@ public class PwdGrid : Control
         if (IsSpecialChars){
            hashResult = AddSpecialChars(hashResult);
         }
+        
+        // FullLengthPassword has all items applied except maxlength
+        // & is for special use with Import & Export functionality
+        fullLengthPassword = hashResult;
+        
         if (IsMaxLength){
            // TODO: this is a quick fix & probably needs
            // to disallow strings less than X length

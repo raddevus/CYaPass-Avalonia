@@ -204,6 +204,17 @@ public partial class MainWindow : Window
        var mainToken = msg.MainToken;
        // Make sure the pwd does not contain the mainToken, otherwise exit
        // Need to provide message to user so she knows why we exited.
+       if (currentPwd.Contains(mainToken)){ 
+          // display problem & exit
+          // "Your MainToken cannot include any portion of your password.\nPlease try again.";
+          return;
+       }
+       if (mainToken.Contains(SiteKeys.SelectedItem.ToString())){
+          // display problem & exit
+          // "Your MainToken cannot include any portion of the SiteKey that you are using to encrypt your data.\nPlease try again."
+          return;
+       }
+
        var vm = (MainWindowViewModel)DataContext;
        if (dialogResult)
        {

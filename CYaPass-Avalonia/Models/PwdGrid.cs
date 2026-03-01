@@ -34,13 +34,8 @@ public class PwdGrid : Control
     // FullLengthPassword has all items applied except maxlength
     // & is for special use with Import & Export functionality
    public string FullLengthPassword{
-      get{ return fullLengthPassword;}
+      get;
       private set;
-   }
-   private string fullLengthPassword{ get;
-      set{
-            FullLengthPassword = value;
-      }
    }
     public static readonly DirectProperty<PwdGrid, string?> GeneratedPasswordProperty =
         AvaloniaProperty.RegisterDirect<PwdGrid, string?>(
@@ -261,8 +256,8 @@ public class PwdGrid : Control
         
         // FullLengthPassword has all items applied except maxlength
         // & is for special use with Import & Export functionality
-        fullLengthPassword = hashResult;
-        
+        FullLengthPassword = hashResult;
+        System.Console.WriteLine($"full length: {FullLengthPassword}"); 
         if (IsMaxLength){
            // TODO: this is a quick fix & probably needs
            // to disallow strings less than X length

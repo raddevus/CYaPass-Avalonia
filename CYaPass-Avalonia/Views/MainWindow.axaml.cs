@@ -197,7 +197,7 @@ public partial class MainWindow : Window
     async public void ExportSiteKeys(object? sender, RoutedEventArgs e){
 
        // Insure that the user has a password generated otherwise exit
-       var currentPwd = PwdTextBox.Text;
+       var currentPwd = PwdGrid.FullLengthPassword;
        if (string.IsNullOrEmpty(currentPwd)){ 
           new MsgBox("You must select a SiteKey & draw a pattern (generate a password) to export your SiteKeys.\nPlease try again.").ShowDialog<bool>(this);
           return;

@@ -210,14 +210,15 @@ public partial class MainWindow : Window
        if (dialogResult)
        {
          if (!string.IsNullOrEmpty(mainToken)){ return;}
-         Console.WriteLine("Importing SiteKeys...");
+         Console.WriteLine("Exporting SiteKeys...");
          Console.WriteLine($"{msg.MainToken} : {vm.CyaConfig.TransferUrl}");         
-         Crypton c = new();
          try {
                string ivFromEncrypt;
-               // 1. read all text from sitekey.json so we can encrypt it
-               // 2. 
-               var encryptedBase64 = c.Encrypt("abc",currentPwd, out ivFromEncrypt);
+               // 1. Call EncryptSiteKeys - get encrypted & encoded data back 
+               var encryptedBase64 = await vm.allSiteKeys.EncryptSiteKeys("abc"); 
+               Console.WriteLine(encryptedBase64);
+               // 2. generate HMAC from data & iv
+               // 3. post maintoken, data, hmac, iv to SaveData
 
          }
          catch (Exception ex){

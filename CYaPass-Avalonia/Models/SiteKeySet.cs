@@ -7,6 +7,8 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using NewLibre.Services;
+using NewLibre.Models;
 
 namespace CYaPass_Avalonia.Models;
 
@@ -86,6 +88,15 @@ public class SiteKeySet<SiteKey>
      }
      return false;
    }
+
+    async public Task<string> EncryptSiteKeys(string pwd){
+      var targetFile = Path.Combine(SiteKeyPath,SiteKeyFile);
+      var allKeys = await File.ReadAllTextAsync(targetFile);
+      Crypton c = new();
+      string iv = null;
+      return c.Encrypt(allKeys, pwd, out iv); 
+      
+    }
 
    async public Task<bool> LoadFromFile(){
       

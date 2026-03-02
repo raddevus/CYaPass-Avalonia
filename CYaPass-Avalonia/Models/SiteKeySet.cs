@@ -98,7 +98,8 @@ public class SiteKeySet<SiteKey>
       string iv = string.Empty;
       var encData =  c.Encrypt(allKeys, pwd, out iv); 
       var outData = new EncryptDto(encData, iv);
-      Console.WriteLine($"encData: {encData}");
+      Console.WriteLine($"encData: {outData.data}  --> {outData.iv}");
+
       return outData; 
     }
 
@@ -121,4 +122,4 @@ public class SiteKeySet<SiteKey>
 
    }
 }
-public record EncryptDto (string encryptedData, string iv);
+public record EncryptDto (string data, string iv);

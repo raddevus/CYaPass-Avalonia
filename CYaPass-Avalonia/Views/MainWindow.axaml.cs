@@ -218,6 +218,9 @@ public partial class MainWindow : Window
                var encryptDto = await vm.allSiteKeys.EncryptSiteKeys(currentPwd); 
                // Console.WriteLine($"dto: {encryptDto}");
                // 2. generate HMAC from data & iv
+               Crypton c = new();
+               var hmac = c.GenerateHmac(currentPwd,$"{encryptDto.iv}:{encryptDto.data}");
+               Console.WriteLine($"hmac: {hmac}");
                // 3. post maintoken, data, hmac, iv to SaveData
 
          }

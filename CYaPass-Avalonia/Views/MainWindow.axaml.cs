@@ -215,8 +215,8 @@ public partial class MainWindow : Window
          try {
                string ivFromEncrypt;
                // 1. Call EncryptSiteKeys - get encrypted & encoded data back 
-               var encryptedBase64 = await vm.allSiteKeys.EncryptSiteKeys(currentPwd); 
-               Console.WriteLine(encryptedBase64);
+               var encryptDto = await vm.allSiteKeys.EncryptSiteKeys(currentPwd); 
+               // Console.WriteLine($"dto: {encryptDto}");
                // 2. generate HMAC from data & iv
                // 3. post maintoken, data, hmac, iv to SaveData
 

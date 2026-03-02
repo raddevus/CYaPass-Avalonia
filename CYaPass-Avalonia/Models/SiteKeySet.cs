@@ -89,7 +89,7 @@ public class SiteKeySet<SiteKey>
      return false;
    }
 
-    async public Task<string> EncryptSiteKeys(string pwd){
+    async public Task<EncryptDto> EncryptSiteKeys(string pwd){
       var targetFile = Path.Combine(SiteKeyPath,SiteKeyFile);
       Console.WriteLine($"targetFile: {targetFile}");
       var allKeys = await File.ReadAllTextAsync(targetFile);
@@ -97,8 +97,9 @@ public class SiteKeySet<SiteKey>
       Crypton c = new();
       string iv = string.Empty;
       var encData =  c.Encrypt(allKeys, pwd, out iv); 
+      var outData = new EncryptDto(encData, iv);
       Console.WriteLine($"encData: {encData}");
-      return encData; 
+      return outData; 
     }
 
    async public Task<bool> LoadFromFile(){
@@ -120,4 +121,4 @@ public class SiteKeySet<SiteKey>
 
    }
 }
-
+public record EncryptDto (string encryptedData, string iv);

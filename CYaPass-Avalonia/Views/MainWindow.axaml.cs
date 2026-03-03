@@ -283,7 +283,7 @@ public partial class MainWindow : Window
                vm.allSiteKeys.Save();
             }
             else{
-               Console.WriteLine("The data couldn't be decrypted. You may have used an incorrect password key or the data may be corrupted.");
+               new MsgBox("The data couldn't be decrypted. You may have used an incorrect password key or the data may be corrupted.").ShowDialog<bool>(this);
             }
          } // try
          catch (Exception ex){

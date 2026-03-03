@@ -278,9 +278,16 @@ public partial class MainWindow : Window
             if (isSuccessDecrypt){
                Console.WriteLine($"{decryptedData}"); 
                var downloadedSiteKeys = JsonSerializer.Deserialize<List<SiteKey>>(decryptedData);
-               foreach (SiteKey s in downloadedSiteKeys){ vm.allSiteKeys.Add(s);} 
+               int importKeyCount = 0;
+               foreach (SiteKey s in downloadedSiteKeys){ 
+                 if(vm.allSiteKeys.Add(s)){
+                  // only increment if the key was added
+                  importKeyCount++;
+                 }
+               } 
                // Imported SiteKeys so lets save the local file
                vm.allSiteKeys.Save();
+               new MsgBox($"Imported {importKeyCount} new SiteKey(s)").ShowDialog<bool>(this);
             }
             else{
                new MsgBox("The data couldn't be decrypted. You may have used an incorrect password key or the data may be corrupted.").ShowDialog<bool>(this);

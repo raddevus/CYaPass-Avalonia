@@ -294,7 +294,7 @@ public partial class MainWindow : Window
             }
          } // try
          catch (Exception ex){
-            Console.WriteLine($"The import failed. {ex.Message}");
+            new MsgBox($"The import failed. Could not find the MainToken.\nCheck the value you are using & try again.\n {ex.Message}").ShowDialog<bool>(this);
          }
        }
     }

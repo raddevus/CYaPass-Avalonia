@@ -273,6 +273,10 @@ public partial class MainWindow : Window
             var iv = result.CyaBucket.Iv;
             Console.WriteLine($"{encryptedSiteKeys}");
             Crypton c = new();
+            if (!c.ValidateHmac(PwdGrid.FullLengthPassword, $"{iv}:{encryptedSiteKeys}", result.CyaBucket.Hmac)){
+               new MsgBox("The hmac did not match! Data is corrupted or hacked. Cannot decrypt. \n Make sure you're using correct MainToken & Password & try again.").ShowDialog<bool>(this);
+               return;
+            }
             string decryptedData = string.Empty;
             var isSuccessDecrypt = c.Decrypt(encryptedSiteKeys, PwdGrid.FullLengthPassword, iv, out decryptedData);
             if (isSuccessDecrypt){

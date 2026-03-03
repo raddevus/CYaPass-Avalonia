@@ -314,6 +314,9 @@ public partial class MainWindow : Window
       if (SiteKeys.SelectedItem == null){return;}
       var vm = (MainWindowViewModel)DataContext;
      Console.WriteLine($"{SiteKeys.SelectedItem}");
+     var removeMsgBox = new MsgBox("Are you sure you want to delete the SiteKey?", true);
+     var result = await removeMsgBox.ShowDialog<bool>(this);
+     if (!result){ return;}
      bool isDeleted = vm.allSiteKeys.Remove(new SiteKey{Key=SiteKeys.SelectedItem.ToString()});
      if (isDeleted){
         // removed the item, so save sitekeys to file

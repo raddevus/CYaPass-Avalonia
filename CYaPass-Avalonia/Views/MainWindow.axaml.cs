@@ -360,6 +360,9 @@ public partial class MainWindow : Window
 
    private async void RemoveAllSiteKeys(object? sender, RoutedEventArgs e){
          var vm = (MainWindowViewModel)DataContext;
+         var removeMsgBox = new MsgBox("Are you sure you want to Remove all SiteKeys from this system?\n\nIf you continue (click the [OK] button) all of the SiteKeys will be removed and the file where they exist will be deleted.\n\nMake sure you have a way to restore them before continuing.", true);
+         var result = await removeMsgBox.ShowDialog<bool>(this);
+         if (!result){ return;}
          // Remove all Items from ListBox
          vm.allSiteKeys.Items.Clear();
          vm.allSiteKeys = new();

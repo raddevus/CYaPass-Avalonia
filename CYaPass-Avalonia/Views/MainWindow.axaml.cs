@@ -222,6 +222,14 @@ public partial class MainWindow : Window
                var hmac = c.GenerateHmac(currentPwd,$"{encryptDto.iv}:{encryptDto.data}");
                Console.WriteLine($"hmac: {hmac}");
                // 3. post maintoken, data, hmac, iv to SaveData
+               CyaService cyasvc = new(mainToken, vm.CyaConfig.TransferUrl);
+               var result = await cyasvc.SaveCyaData(encryptDto.data, hmac, encryptDto.iv);
+
+               if (result){
+                  new MsgBox("Successfully exported keys.");
+                  return;
+               }
+            new MsgBox("Couldn't export keys.\nTry again.");
 
          }
          catch (Exception ex){

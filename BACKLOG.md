@@ -9,7 +9,7 @@
 -  [ - ] Clean up UI - various padding, margins etc.
 -  [ - ] Implement Edit (SiteKey) button
 - [ - ] Clean up dailog boxes controls & set sizes to they display properly
-- [ - ] Provide alert dialog when user attempts to delete a sitekey
+- [ X ] Provide alert dialog when user attempts to delete a sitekey 2026-03-03
 - [ - ] Provide alert dialog when user attemps to delete **all** sitekeys
 - [ - ] Clean up all build warnings
 - [ X ] **Fix the issue that occurs when User Removes All SiteKeys and then adds one new SiteKey** -- the listbox doesn't display it.<br>

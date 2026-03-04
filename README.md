@@ -3,7 +3,7 @@
 
 
 ##### Requires AES_Complete Library
-CYaPass does depend on `AES_Complete` library but I've just published it as a Nuget package (see [this](https://www.nuget.org/packages/AES_Complete/) so there is no longer any challenge to the build.<br>
+CYaPass does depend on `AES_Complete` library but I've just published it as a Nuget package (see [this](https://www.nuget.org/packages/AES_Complete/)) so there is no longer any challenge to the build.<br>
 Now you can just 
 1. clone this project (`git clone <url>`)
 2. build and run `dotnet run`

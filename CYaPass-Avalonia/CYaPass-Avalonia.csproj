@@ -41,9 +41,6 @@
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
-    <PackageReference Include="Dotnet.Bundle" Version="*" />
-    <Reference Include="AES_Complete">
-      <HintPath>.\External\AES_Complete.dll</HintPath>
-    </Reference>
+    <PackageReference Include="AES_Complete" Version="1.0.0" />
   </ItemGroup>
 </Project>

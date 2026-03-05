@@ -10,6 +10,9 @@
         Icon="/Assets/cyapass.ico"
         Title="CYaPass"
         Padding="20"
+        Height="625"
+    Width="1100"
+    MaxWidth="1100"
         Background="WhiteSmoke">
 
     <Design.DataContext>

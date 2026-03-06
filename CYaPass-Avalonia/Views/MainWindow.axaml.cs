@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Avalonia;           // For Application
 using Avalonia.Styling;   // For ThemeVariant
 using Avalonia.Media;     // For Brushes
+using Avalonia.Input;     // For KeyEventArgs
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using NewLibre.Services;
@@ -180,6 +181,10 @@ public partial class MainWindow : Window
            }
            PwdGrid.UpdatePassword();
        }
+   }
+
+   private void SiteKeys_KeyDown(object? sender, KeyEventArgs e){
+      Console.WriteLine($"key: {e.Key}");
    }
 
    private async void PasswordTextChanged(object? sender, RoutedEventArgs e){

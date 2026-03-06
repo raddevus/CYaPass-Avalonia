@@ -9,7 +9,6 @@
         xmlns:local="clr-namespace:CYaPass_Avalonia.Models"
         Icon="/Assets/cyapass.ico"
         Title="CYaPass"
-        Padding="20"
         Height="625"
     Width="1100"
     MaxWidth="1100"
@@ -26,9 +25,9 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-
+        <Border Name="LeftBorder" Padding="8" Background="LightBlue">
         <!-- Left column -->
-        <StackPanel Name="LeftSide" Grid.Column="0" Background="LightBlue"
+        <StackPanel Name="LeftSide" Grid.Column="0"
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch">
 
@@ -71,9 +70,10 @@
             </StackPanel>
           </Grid>
         </StackPanel>
-
+ </Border>
+ <Border Name="RightBorder" Padding="8" Grid.Column="1" Background="LightYellow">
         <!-- Right column -->
-        <StackPanel Name="RightSide" Grid.Column="1" Background="LightYellow"
+        <StackPanel Name="RightSide" Grid.Column="1"
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch">
             
@@ -91,5 +91,6 @@
             TextChanged="PasswordTextChanged"/>
          </Grid>
         </StackPanel>
+        </Border>
     </Grid>
 </Window>

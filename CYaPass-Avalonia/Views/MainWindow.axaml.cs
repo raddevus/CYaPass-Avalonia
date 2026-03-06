@@ -42,14 +42,14 @@ public partial class MainWindow : Window
       if (ActualThemeVariant == ThemeVariant.Dark)
       {
           // Apply dark mode background color
-          LeftSide.Background = Brushes.DarkBlue;
-          RightSide.Background = Brushes.DarkGreen;
+          LeftBorder.Background = Brushes.DarkBlue;
+          RightBorder.Background = Brushes.DarkGreen;
       }
       else
       {
           // Apply light mode background color
-          LeftSide.Background = Brushes.LightBlue;
-          RightSide.Background = Brushes.LightYellow;
+          LeftBorder.Background = Brushes.LightBlue;
+          RightBorder.Background = Brushes.LightYellow;
       }
     }
 

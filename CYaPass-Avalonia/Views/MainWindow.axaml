@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:CYaPass_Avalonia.Models"
         Icon="/Assets/cyapass.ico"
         Title="CYaPass"
-        Height="625"
+        Height="570"
     Width="1100"
     MaxWidth="1100"
         Background="WhiteSmoke">

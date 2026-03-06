@@ -288,9 +288,9 @@ public partial class MainWindow : Window
                // 3. post maintoken, data, hmac, iv to SaveData
                CyaService cyasvc = new(mainToken, vm.CyaConfig.TransferUrl);
                var result = await cyasvc.SaveCyaData(encryptDto.data, hmac, encryptDto.iv);
-
                if (result){
-                  new MsgBox("Successfully exported keys.");
+                  new MsgBox($"Successfully exported {vm.allSiteKeys.Items.Count} keys.")
+                     .ShowDialog<bool>(this);
                   return;
                }
             new MsgBox("Couldn't export keys.\nTry again.");

@@ -2,12 +2,14 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Avalonia;           // For Application
 using Avalonia.Styling;   // For ThemeVariant
 using Avalonia.Media;     // For Brushes
 using Avalonia.Input;     // For KeyEventArgs
+using Avalonia.Utilities; // For Scrollview on ListBox
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using NewLibre.Services;
@@ -36,6 +38,24 @@ public partial class MainWindow : Window
         CheckThemeVariant(); 
          vm.allSiteKeys.LoadFromFile();
         LoadAppConfig();
+        // Sets SiteKeys ListBox so keyboard will move
+        // thru the List items easily
+      SiteKeys.GetObservable(ListBox.ScrollProperty)
+          .OfType<ScrollViewer>()
+          .Take(1)
+          .Subscribe(scrollViewer =>
+          {
+              scrollViewer.GetObservable(ScrollViewer.ScrollChangedEvent)
+                  .Subscribe(_ =>
+                  {
+                  if (SiteKeys != null){
+                      if (SiteKeys.SelectedIndex >= 0)
+                      {
+                          var item = (ListBoxItem)SiteKeys.ContainerFromIndex(SiteKeys.SelectedIndex)!;
+                          item?.Focus(NavigationMethod.Directional);
+                      }
+                      }});
+          });   
     }
 
     private void CheckThemeVariant(){
@@ -181,10 +201,46 @@ public partial class MainWindow : Window
            }
            PwdGrid.UpdatePassword();
        }
+       if (SiteKeys != null){
+          if (IsVisible && SiteKeys.SelectedIndex >= 0)
+          {
+           var selectedListBoxItem = (ListBoxItem)SiteKeys.ContainerFromIndex(SiteKeys.SelectedIndex)!;
+           selectedListBoxItem?.Focus(NavigationMethod.Directional);
+           }
+        }
    }
 
+   Avalonia.Input.Key currentKey;
+   int startItem = 0;
    private void SiteKeys_KeyDown(object? sender, KeyEventArgs e){
+
       Console.WriteLine($"key: {e.Key}");
+      Console.WriteLine($"startItem: {startItem}");
+      if (currentKey != e.Key){startItem = 0;}
+      currentKey = e.Key;
+      
+      Console.WriteLine($"key: {currentKey}");
+      
+
+      var vm = (MainWindowViewModel)DataContext;
+      for (int i = startItem; i < vm.allSiteKeys.Items.Count; i++){
+        var currentItem = vm.allSiteKeys.Items[i] as string ?? "";
+        if (currentItem.StartsWith(e.Key.ToString(), StringComparison.OrdinalIgnoreCase)){
+           SiteKeys.ScrollIntoView(i-1);
+           SiteKeys.Focus();
+           SiteKeys.SelectedIndex = i;
+           SiteKeys.Focus();
+           startItem = i+1;
+
+           SiteKeys.SelectedIndex = i;
+
+
+           var selectedListBoxItem = (ListBoxItem)SiteKeys.ContainerFromIndex(SiteKeys.SelectedIndex)!;
+           selectedListBoxItem?.Focus(NavigationMethod.Directional);
+           break;
+        }
+        else{ startItem = 0;} // didn't find
+      }
    }
 
    private async void PasswordTextChanged(object? sender, RoutedEventArgs e){

@@ -214,37 +214,36 @@ public partial class MainWindow : Window
         }
    }
 
-   Avalonia.Input.Key currentKey;
+   char currentKey;
    int startItem = 0;
-   private void SiteKeys_KeyDown(object? sender, KeyEventArgs e){
 
-      Console.WriteLine($"key: {e.Key}");
-      Console.WriteLine($"startItem: {startItem}");
-      if (currentKey != e.Key){startItem = 0;}
-      currentKey = e.Key;
-      
-      Console.WriteLine($"key: {currentKey}");
-      
+   private void SiteKeys_TextInput(object? sender, TextInputEventArgs e)
+   {
+      Console.WriteLine($"got: {e.Text}");
 
-      var vm = (MainWindowViewModel)DataContext;
-      for (int i = startItem; i < vm.allSiteKeys.Items.Count; i++){
-        var currentItem = vm.allSiteKeys.Items[i] as string ?? "";
-        if (currentItem.StartsWith(e.Key.ToString(), StringComparison.OrdinalIgnoreCase)){
-           SiteKeys.ScrollIntoView(i-1);
-           SiteKeys.Focus();
-           SiteKeys.SelectedIndex = i;
-           SiteKeys.Focus();
-           startItem = i+1;
+         var vm = (MainWindowViewModel)DataContext;
 
-           SiteKeys.SelectedIndex = i;
+         if (currentKey != e.Text[0]){startItem = 0;}
+         currentKey = e.Text[0];
+
+         for (int i = startItem; i < vm.allSiteKeys.Items.Count; i++){
+           var currentItem = vm.allSiteKeys.Items[i] as string ?? "";
+           if (currentItem.StartsWith(e.Text, StringComparison.OrdinalIgnoreCase)){
+              SiteKeys.ScrollIntoView(i-1);
+              SiteKeys.Focus();
+              SiteKeys.SelectedIndex = i;
+              SiteKeys.Focus();
+              startItem = i+1;
+
+              SiteKeys.SelectedIndex = i;
 
 
-           var selectedListBoxItem = (ListBoxItem)SiteKeys.ContainerFromIndex(SiteKeys.SelectedIndex)!;
-           selectedListBoxItem?.Focus(NavigationMethod.Directional);
-           break;
-        }
-        else{ startItem = 0;} // didn't find
-      }
+              var selectedListBoxItem = (ListBoxItem)SiteKeys.ContainerFromIndex(SiteKeys.SelectedIndex)!;
+              selectedListBoxItem?.Focus(NavigationMethod.Directional);
+              break;
+           }
+           else{ startItem = 0;} // didn't find
+         }
    }
 
    private async void PasswordTextChanged(object? sender, RoutedEventArgs e){

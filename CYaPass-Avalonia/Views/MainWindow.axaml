@@ -36,7 +36,7 @@
          ColumnDefinitions="" Width="500">
             <Label Target="siteKeyLabel" Grid.Row="0" Grid.Column="0">1. Select (or Add) Site/Key</Label>
             <ListBox MaxHeight="300" SelectionChanged="SiteKeyChanged" SelectionMode="AlwaysSelected" Name="SiteKeys"
-            KeyDown="SiteKeys_KeyDown"
+            TextInput="SiteKeys_TextInput"
             Grid.Row="1" Grid.Column="0" 
             Grid.RowSpan="4" ScrollViewer.AllowAutoHide="False" 
             ItemsSource="{Binding allSiteKeys.Items}" />

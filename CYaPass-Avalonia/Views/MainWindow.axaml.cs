@@ -38,24 +38,7 @@ public partial class MainWindow : Window
         CheckThemeVariant(); 
          vm.allSiteKeys.LoadFromFile();
         LoadAppConfig();
-        // Sets SiteKeys ListBox so keyboard will move
-        // thru the List items easily
-      SiteKeys.GetObservable(ListBox.ScrollProperty)
-          .OfType<ScrollViewer>()
-          .Take(1)
-          .Subscribe(scrollViewer =>
-          {
-              scrollViewer.GetObservable(ScrollViewer.ScrollChangedEvent)
-                  .Subscribe(_ =>
-                  {
-                  if (SiteKeys != null){
-                      if (SiteKeys.SelectedIndex >= 0)
-                      {
-                          var item = (ListBoxItem)SiteKeys.ContainerFromIndex(SiteKeys.SelectedIndex)!;
-                          item?.Focus(NavigationMethod.Directional);
-                      }
-                      }});
-          });   
+        InitSiteKeysScroll();
     }
 
     private void CheckThemeVariant(){
@@ -90,6 +73,27 @@ public partial class MainWindow : Window
          };
    }
 
+   private void InitSiteKeysScroll(){
+
+        // Sets SiteKeys ListBox so keyboard will move
+        // thru the List items easily
+      SiteKeys.GetObservable(ListBox.ScrollProperty)
+          .OfType<ScrollViewer>()
+          .Take(1)
+          .Subscribe(scrollViewer =>
+          {
+              scrollViewer.GetObservable(ScrollViewer.ScrollChangedEvent)
+                  .Subscribe(_ =>
+                  {
+                  if (SiteKeys != null){
+                      if (SiteKeys.SelectedIndex >= 0)
+                      {
+                          var item = (ListBoxItem)SiteKeys.ContainerFromIndex(SiteKeys.SelectedIndex)!;
+                          item?.Focus(NavigationMethod.Directional);
+                      }
+                      }});
+          });   
+   }
     async public void LoadAppConfig(){
       
       var cfile = AppConfig.ConfigFile;  

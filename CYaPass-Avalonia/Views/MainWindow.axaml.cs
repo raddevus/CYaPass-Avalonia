@@ -367,11 +367,18 @@ public partial class MainWindow : Window
        }
     }
 
-    private async void AddTestSiteKeys(object? sender, RoutedEventArgs e){
-         var vm = (MainWindowViewModel)DataContext;
-        vm.allSiteKeys.Add(new SiteKey{Key="test1"});
-        vm.allSiteKeys.Add(new SiteKey{Key="test2"});
-        vm.allSiteKeys.Add(new SiteKey{Key="test3"});
+    private async void EditSiteKey(object? sender, RoutedEventArgs e){
+//        vm.allSiteKeys.Add(new SiteKey{Key="test3"});
+
+      var msg = new ExportMsgBox("Please type your MainToken Key that will be used to store your data.", "test", SiteKeys.SelectedItem.ToString());
+       bool dialogResult =  await msg.ShowDialog<bool>(this);
+       var mainToken = msg.MainToken;
+       Console.WriteLine($"mainToken: {mainToken}  : result {dialogResult}");
+       var vm = (MainWindowViewModel)DataContext;
+       if (dialogResult)
+       {
+         if (string.IsNullOrEmpty(mainToken)){ return;}
+       }
     }
 
    private async void DeleteSiteKey(object? sender, RoutedEventArgs e){

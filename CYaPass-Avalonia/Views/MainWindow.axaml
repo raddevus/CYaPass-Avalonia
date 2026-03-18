@@ -44,7 +44,7 @@
             
             <StackPanel Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right">
               <Button Click="OnAddSiteKeyClick" IsDefault="True" >Add</Button>
-              <Button Click="AddTestSiteKeys" >Edit</Button>
+              <Button Click="EditSiteKey">Edit</Button>
               <Button Click="DeleteSiteKey">Delete</Button>
             </StackPanel>
             

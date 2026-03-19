@@ -6,10 +6,12 @@
         CanResize="False">
     <StackPanel Margin="10">
         <TextBlock x:Name="MessageText" TextWrapping="Wrap" Margin="0,0,0,10"/>
-         <StackPanel Orientation="Horizontal">
+        <Grid ColumnDefinitions="Auto,*" Margin="0 5">
             <TextBlock Margin="10">SiteKey</TextBlock>
-            <TextBox Name="SiteKeyText" Margin="0 5" Text=""/>
-         </StackPanel>
+            <TextBox Name="SiteKeyText" Margin="0 5" Text=""
+            HorizontalAlignment="Stretch"
+            Grid.Column="1"/>
+         </Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10">
             <Button Content="OK" IsDefault="True" Click="Ok_Click"/>
             <Button Content="Cancel" IsCancel="True" Click="Cancel_Click"/>

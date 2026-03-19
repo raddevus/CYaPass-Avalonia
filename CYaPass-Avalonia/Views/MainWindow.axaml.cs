@@ -370,14 +370,13 @@ public partial class MainWindow : Window
     private async void EditSiteKey(object? sender, RoutedEventArgs e){
 //        vm.allSiteKeys.Add(new SiteKey{Key="test3"});
 
-      var msg = new ExportMsgBox("Please type your MainToken Key that will be used to store your data.", "test", SiteKeys.SelectedItem.ToString());
+      var msg = new SiteKeyMsgBox("Make changes to the SiteKey & click the OK button.", SiteKeys.SelectedItem as SiteKey);
        bool dialogResult =  await msg.ShowDialog<bool>(this);
-       var mainToken = msg.MainToken;
-       Console.WriteLine($"mainToken: {mainToken}  : result {dialogResult}");
+       var  alteredSiteKey = msg.SiteKey;
+       Console.WriteLine($"siteKey: {msg.SiteKey}  : result {dialogResult}");
        var vm = (MainWindowViewModel)DataContext;
        if (dialogResult)
        {
-         if (string.IsNullOrEmpty(mainToken)){ return;}
        }
     }
 

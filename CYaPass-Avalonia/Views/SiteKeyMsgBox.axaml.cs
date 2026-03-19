@@ -9,10 +9,13 @@ public partial class SiteKeyMsgBox : Window
    public SiteKey SiteKey {get;set;}
    public SiteKeyMsgBox(): this("default message") {
    }
-    public SiteKeyMsgBox(string message)
+    public SiteKeyMsgBox(string message, SiteKey siteKey = null)
     {
         InitializeComponent();
         MessageText.Text = message;
+        if (siteKey != null){
+           SiteKey = siteKey;
+        }
         // Sets Focus to the SiteKey text box
         this.Opened += (_, __) => { SiteKeyText.Focus(); };
     }

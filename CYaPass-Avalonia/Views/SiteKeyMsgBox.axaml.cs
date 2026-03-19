@@ -14,10 +14,12 @@ public partial class SiteKeyMsgBox : Window
         InitializeComponent();
         MessageText.Text = message;
         if (siteKey != null){
+           System.Console.WriteLine("siteKey is valid!!!");
            SiteKey = siteKey;
         }
         // Sets Focus to the SiteKey text box
         this.Opened += (_, __) => { SiteKeyText.Focus(); };
+         SiteKeyText.Text = SiteKey?.ToString();
     }
 
     private void Ok_Click(object? sender, RoutedEventArgs e)

@@ -369,12 +369,12 @@ public partial class MainWindow : Window
 
     private async void EditSiteKey(object? sender, RoutedEventArgs e){
 //        vm.allSiteKeys.Add(new SiteKey{Key="test3"});
-
+      var vm = (MainWindowViewModel)DataContext;
+      Console.WriteLine($"get type: {(vm.allSiteKeys.GetItemByKey(SiteKeys.SelectedItem.ToString()))?.GetType()}");
       var msg = new SiteKeyMsgBox("Make changes to the SiteKey & click the OK button.", SiteKeys.SelectedItem as SiteKey);
        bool dialogResult =  await msg.ShowDialog<bool>(this);
        var  alteredSiteKey = msg.SiteKey;
        Console.WriteLine($"siteKey: {msg.SiteKey}  : result {dialogResult}");
-       var vm = (MainWindowViewModel)DataContext;
        if (dialogResult)
        {
        }

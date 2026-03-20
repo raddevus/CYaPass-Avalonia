@@ -3,6 +3,7 @@
       x:Class="CYaPass_Avalonia.Views.ImportMsgBox"
         Width="300" Height="180"
         WindowStartupLocation="CenterOwner"
+        Title="Import SiteKeys"
         CanResize="False">
     <StackPanel Margin="10">
         <TextBlock x:Name="MessageText" TextWrapping="Wrap" Margin="0,0,0,10"/>

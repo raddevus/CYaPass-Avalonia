@@ -1,7 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       x:Class="CYaPass_Avalonia.Views.SiteKeyMsgBox"
-        Width="300" Height="300"
+        Width="375" Height="300"
         WindowStartupLocation="CenterOwner"
         Title="SiteKey"
         CanResize="False">
@@ -35,12 +35,15 @@
                  Name="HasSpecialChars"
                  Content="Add Special Chars"
                  Margin="10,5,0,0"/>
-       <CheckBox Grid.Row="3"
+       <CheckBox Grid.Row="3" Grid.Column="0"
                  Grid.ColumnSpan="1"
                  IsThreeState="False"
                  Name="HasMaxLength"
                  Content="Max Length"
+                 VerticalAlignment="Center"
                  Margin="10,5,0,0"/>
+      <NumericUpDown Name="MaxLengthUD" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="1" VerticalAlignment="Center" 
+         Width="200" Maximum="64" Value="0" Minimum="0" ParsingNumberStyle="Integer" FormatString="0" />
    </Grid>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10">

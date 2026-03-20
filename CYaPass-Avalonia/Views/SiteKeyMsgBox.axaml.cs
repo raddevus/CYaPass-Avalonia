@@ -28,8 +28,9 @@ public partial class SiteKeyMsgBox : Window
 
     protected override void OnOpened(EventArgs e){
        base.OnOpened(e);
-//      HasUppercase.Checked = SiteKey?.HasUpperCase;
-//      HasSpecialChars.Checked = SiteKey?.HasSpecialChars;
+      HasUppercase.IsChecked = SiteKey?.HasUpperCase;
+      HasSpecialChars.IsChecked = SiteKey?.HasSpecialChars;
+      HasMaxLength.IsChecked = SiteKey?.MaxLength >0;
       SiteKeyText.Text = SiteKey?.Key;
     }
 

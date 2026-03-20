@@ -8,7 +8,7 @@
     <StackPanel Margin="10">
         <TextBlock x:Name="MessageText" TextWrapping="Wrap" Margin="0,0,0,10"/>
         <Grid RowDefinitions="Auto,Auto,Auto,Auto"
-         ColumnDefinitions="Auto,*"
+         ColumnDefinitions="2*,3*"
          Margin="0 5">
 
        <!-- Row 0: Label + TextBox -->
@@ -29,11 +29,16 @@
                  Name="HasUppercase"
                  Content="Add Uppercase"
                  Margin="10,5,0,0"/>
-       <CheckBox Grid.Row="2"
+       <CheckBox Grid.Row="2" Grid.Column="0"
                  Grid.ColumnSpan="1"
                  IsThreeState="False"
                  Name="HasSpecialChars"
                  Content="Add Special Chars"
+                 Margin="10,5,0,0"/>
+       <TextBox Grid.Row="2" Grid.Column="1"
+                 Grid.ColumnSpan="1"
+                 Name="SpecialCharsTB"
+                 VerticalAlignment="Center"
                  Margin="10,5,0,0"/>
        <CheckBox Grid.Row="3" Grid.Column="0"
                  Grid.ColumnSpan="1"

@@ -24,14 +24,17 @@
        <!-- Row 1: Checkbox spanning both columns -->
        <CheckBox Grid.Row="1"
                  Grid.ColumnSpan="2"
+                 Name="HasUppercase"
                  Content="Add Uppercase"
                  Margin="10,5,0,0"/>
        <CheckBox Grid.Row="2"
                  Grid.ColumnSpan="1"
+                 Name="HasSpecialChars"
                  Content="Add Special Chars"
                  Margin="10,5,0,0"/>
        <CheckBox Grid.Row="3"
                  Grid.ColumnSpan="1"
+                 Name="HasMaxLength"
                  Content="Max Length"
                  Margin="10,5,0,0"/>
    </Grid>

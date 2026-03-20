@@ -6,7 +6,7 @@
         CanResize="False">
     <StackPanel Margin="10">
         <TextBlock x:Name="MessageText" TextWrapping="Wrap" Margin="0,0,0,10"/>
-        <Grid RowDefinitions="Auto,Auto,Auto"
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto"
          ColumnDefinitions="Auto,*"
          Margin="0 5">
 
@@ -24,11 +24,15 @@
        <!-- Row 1: Checkbox spanning both columns -->
        <CheckBox Grid.Row="1"
                  Grid.ColumnSpan="2"
-                 Content="Enable Uppercase"
+                 Content="Add Uppercase"
                  Margin="10,5,0,0"/>
        <CheckBox Grid.Row="2"
-                 Grid.ColumnSpan="2"
-                 Content="Enable Special Chars"
+                 Grid.ColumnSpan="1"
+                 Content="Add Special Chars"
+                 Margin="10,5,0,0"/>
+       <CheckBox Grid.Row="3"
+                 Grid.ColumnSpan="1"
+                 Content="Max Length"
                  Margin="10,5,0,0"/>
    </Grid>
 

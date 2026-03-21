@@ -31,6 +31,7 @@ public partial class SiteKeyMsgBox : Window
       HasUppercase.IsChecked = SiteKey?.HasUpperCase ?? false;
       HasSpecialChars.IsChecked = SiteKey?.HasSpecialChars ?? false;
       HasMaxLength.IsChecked = SiteKey?.MaxLength >0;
+      MaxLengthUD.Value = SiteKey?.MaxLength;
       SiteKeyText.Text = SiteKey?.Key ?? string.Empty;
     }
 

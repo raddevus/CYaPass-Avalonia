@@ -30,15 +30,10 @@
                  Content="Add Uppercase"
                  Margin="10,5,0,0"/>
        <CheckBox Grid.Row="2" Grid.Column="0"
-                 Grid.ColumnSpan="1"
+                 Grid.ColumnSpan="2"
                  IsThreeState="False"
                  Name="HasSpecialChars"
                  Content="Add Special Chars"
-                 Margin="10,5,0,0"/>
-       <TextBox Grid.Row="2" Grid.Column="1"
-                 Grid.ColumnSpan="1"
-                 Name="SpecialCharsTB"
-                 VerticalAlignment="Center"
                  Margin="10,5,0,0"/>
        <CheckBox Grid.Row="3" Grid.Column="0"
                  Grid.ColumnSpan="1"

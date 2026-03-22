@@ -379,6 +379,7 @@ public partial class MainWindow : Window
        if (dialogResult){
          vm.allSiteKeys.Remove(currentSiteKey);
          vm.allSiteKeys.Add(alteredSiteKey);
+         SiteKeys.SelectedItem = alteredSiteKey.Key;
        }
     }
 

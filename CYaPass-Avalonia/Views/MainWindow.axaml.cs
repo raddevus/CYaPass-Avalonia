@@ -376,8 +376,9 @@ public partial class MainWindow : Window
        bool dialogResult =  await msg.ShowDialog<bool>(this);
        var  alteredSiteKey = msg.SiteKey;
        Console.WriteLine($"siteKey: {msg.SiteKey}  : result {dialogResult}");
-       if (dialogResult)
-       {
+       if (dialogResult){
+         vm.allSiteKeys.Remove(currentSiteKey);
+         vm.allSiteKeys.Add(alteredSiteKey);
        }
     }
 

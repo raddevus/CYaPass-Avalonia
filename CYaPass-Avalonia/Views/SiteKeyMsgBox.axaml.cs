@@ -31,7 +31,7 @@ public partial class SiteKeyMsgBox : Window
       HasUppercase.IsChecked = SiteKey?.HasUpperCase ?? false;
       HasSpecialChars.IsChecked = SiteKey?.HasSpecialChars ?? false;
       HasMaxLength.IsChecked = SiteKey?.MaxLength >0;
-      MaxLengthUD.Value = SiteKey?.MaxLength;
+      MaxLengthUD.Value = SiteKey?.MaxLength ?? 0;
       SiteKeyText.Text = SiteKey?.Key ?? string.Empty;
     }
 
@@ -40,6 +40,12 @@ public partial class SiteKeyMsgBox : Window
        SiteKey = new();
        // replace all white-space anywhere in string
        SiteKey.Key = SiteKeyText?.Text?.Replace(" ", "") ?? string.Empty;
+       SiteKey.HasSpecialChars = HasSpecialChars.IsChecked ?? false;
+       SiteKey.HasUpperCase = HasUppercase.IsChecked ?? false;
+       if (HasMaxLength.IsChecked ?? false){
+         SiteKey.MaxLength = (int) MaxLengthUD.Value;
+       }
+       
 
        Close(true);
     }

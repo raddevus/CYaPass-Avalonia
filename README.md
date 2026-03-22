@@ -17,6 +17,8 @@ Now you can just
 
 ### Backlog
 Please see BACKLOG.md for list of items to be worked on and for resolved items.
+### Light Mode Sample (running on macOS Sequoia)
+<img width="2206" height="1198" alt="image" src="https://github.com/user-attachments/assets/b0c634f2-fad1-4f43-93ed-86480ef62c89" />
 
 ### Dark Mode Example 
 -- (rough for now, to get to MVP - Minimum Viable Product)<br>

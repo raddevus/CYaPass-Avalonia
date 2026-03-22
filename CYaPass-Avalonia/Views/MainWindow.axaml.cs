@@ -405,7 +405,7 @@ public partial class MainWindow : Window
            // User clicked OK
             Console.WriteLine($"User selected OK: {msg.SiteKey}");
             if (!string.IsNullOrEmpty(msg.SiteKey.Key)){
-               vm.allSiteKeys.Add(new SiteKey{Key = msg.SiteKey.Key});
+               vm.allSiteKeys.Add( msg.SiteKey);
                // New SiteKey was added so save all to file
                vm.allSiteKeys.Save();
             }

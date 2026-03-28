@@ -7,11 +7,11 @@
 - [ - ] After Delete of SiteKey - set the selected item to one that is next to the one that was deleted
 - [ X ] Implement fast find to SiteKey - legacy app allows user to press letter that matches first letter of sitkey & iterates over them.  2026-03-16
 -  [ - ] Clean up UI - various padding, margins etc.
--  [ - ] Implement Edit (SiteKey) button
+-  [ X ] Implement Edit (SiteKey) button 2026-03-18 - App is entirely functional now
 - [ X] Clean up dailog boxes controls & set sizes to they display properly 2026-03-16 
 - [ X ] Provide alert dialog when user attempts to delete a sitekey 2026-03-03
 - [ X ] Provide alert dialog when user attemps to delete **all** sitekeys 2026-03-16
-- [ - ] Clean up all build warnings
+- [ 0 ] Clean up all build warnings 2026-03-17 can't actually fix all of these due to compiler
 - [ X ] **Fix the issue that occurs when User Removes All SiteKeys and then adds one new SiteKey** -- the listbox doesn't display it.<br>
 But, if user closes the app the sitekey is saved on close and then starts again the sitekey is displayed in listbox. 2026-02-26
 -  [ X ] Remove hard-coded values, in ImportSiteKey method & read them from the user 2026-02-24

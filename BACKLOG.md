@@ -5,12 +5,12 @@
 - [ X ] Make sure the SiteKeys are saved to file every time they change (instead of when program closes). 2026-02-28
 - [ X ] Implement Export SiteKeys button 2026-03-02
 - [ - ] After Delete of SiteKey - set the selected item to one that is next to the one that was deleted
-- [ - ] Implement fast find to SiteKey - legacy app allows user to press letter that matches first letter of sitkey & iterates over them.
+- [ X ] Implement fast find to SiteKey - legacy app allows user to press letter that matches first letter of sitkey & iterates over them.  2026-03-16
 -  [ - ] Clean up UI - various padding, margins etc.
 -  [ - ] Implement Edit (SiteKey) button
-- [ - ] Clean up dailog boxes controls & set sizes to they display properly
+- [ X] Clean up dailog boxes controls & set sizes to they display properly 2026-03-16 
 - [ X ] Provide alert dialog when user attempts to delete a sitekey 2026-03-03
-- [ - ] Provide alert dialog when user attemps to delete **all** sitekeys
+- [ X ] Provide alert dialog when user attemps to delete **all** sitekeys 2026-03-16
 - [ - ] Clean up all build warnings
 - [ X ] **Fix the issue that occurs when User Removes All SiteKeys and then adds one new SiteKey** -- the listbox doesn't display it.<br>
 But, if user closes the app the sitekey is saved on close and then starts again the sitekey is displayed in listbox. 2026-02-26

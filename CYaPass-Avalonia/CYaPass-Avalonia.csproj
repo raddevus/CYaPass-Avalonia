@@ -6,6 +6,7 @@
     <MacOSIcon>Assets/cyapass.icns</MacOSIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <Version>1.1.0.0</Version>
   </PropertyGroup>
 <PropertyGroup>
   <UseAppHost>true</UseAppHost>
@@ -14,7 +15,7 @@
     <CFBundleName>CYaPass</CFBundleName> <!-- Also defines .app file name -->
     <CFBundleDisplayName>CYaPass</CFBundleDisplayName>
     <CFBundleIdentifier>com.cyapass</CFBundleIdentifier>
-    <CFBundleVersion>1.0.0</CFBundleVersion>
+    <CFBundleVersion>1.1.0</CFBundleVersion>
     <CFBundlePackageType>APPL</CFBundlePackageType>
     <CFBundleSignature>????</CFBundleSignature>
     <CFBundleExecutable>CYaPass</CFBundleExecutable>

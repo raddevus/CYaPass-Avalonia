@@ -15,7 +15,7 @@ public class Clipboard {
         }
         //Android (and iOS?)
         else if (Application.Current?.ApplicationLifetime is ISingleViewApplicationLifetime { MainView: { } mainView }) {
-            var visualRoot = mainView.GetVisualRoot();
+            var visualRoot = mainView.GetPresentationSource();
             if (visualRoot is TopLevel topLevel) {
                 return topLevel.Clipboard!;
             }

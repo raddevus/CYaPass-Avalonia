@@ -12,6 +12,7 @@ using Avalonia.Input;     // For KeyEventArgs
 using Avalonia.Utilities; // For Scrollview on ListBox
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Input.Platform;
 using NewLibre.Services;
 using NewLibre.Models;
 using CYaPass_Avalonia.ViewModels;
@@ -248,10 +249,12 @@ public partial class MainWindow : Window
 
    private async void PasswordTextChanged(object? sender, RoutedEventArgs e){
          try{
-            var clipboard = AppHelpers.Clipboard.Get();
-            if (clipboard != null) {
-               clipboard.SetTextAsync(PwdTextBox?.Text ?? string.Empty);
-            }
+            var topLevel = TopLevel.GetTopLevel((Control)sender!);
+
+             if (topLevel?.Clipboard is { } clipboard)
+             {
+                 await clipboard.SetTextAsync(PwdTextBox?.Text ?? string.Empty);
+             }
          }
          catch (Exception ex){
             Console.WriteLine("Couldn't copy to clipboard.");

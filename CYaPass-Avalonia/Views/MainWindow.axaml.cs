@@ -18,6 +18,7 @@ using NewLibre.Models;
 using CYaPass_Avalonia.ViewModels;
 using CYaPass_Avalonia.Models;
 using AppHelpers;
+using Avalonia.Platform.Storage;
 
 namespace CYaPass_Avalonia.Views;
 
@@ -40,6 +41,7 @@ public partial class MainWindow : Window
          vm.allSiteKeys.LoadFromFile();
         LoadAppConfig();
         InitSiteKeysScroll();
+        SaveFileAsync();
     }
 
     private void CheckThemeVariant(){
@@ -119,6 +121,33 @@ public partial class MainWindow : Window
          Console.WriteLine($"Couldn't do the work, because test file doesn't exist: {cfile}");
       }
     }
+
+    private async Task SaveFileAsync()
+   {
+    var file = await StorageProvider.SaveFilePickerAsync(
+        new FilePickerSaveOptions
+        {
+            Title = "Save Database",
+            SuggestedFileName = "",
+            DefaultExtension = "db",
+            FileTypeChoices =
+            [
+                new FilePickerFileType("Sqlite3")
+                {
+                    Patterns = ["*.db", "*.*"]
+                }
+            ]
+        });
+
+    if (file is null)
+        return; // User cancelled
+
+    await using var stream = await file.OpenWriteAsync();
+    await using var writer = new StreamWriter(stream);
+
+    await writer.WriteLineAsync("Hello from Avalonia!");
+   }
+
     async private Task<bool> SaveConfig(){
 
       MainWindowViewModel? vm = DataContext as MainWindowViewModel;
